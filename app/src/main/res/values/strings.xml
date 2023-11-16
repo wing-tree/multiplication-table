@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Multiplication Table</string>
+    <string name="grade">Grade</string>
+    <string name="quiz" translatable="false">QUIZ</string>
+    <string name="score" translatable="false">Score</string>
+    <string name="share_app">Share app</string>
+    <string name="solve_again">Practice again</string>
+    <string name="thank_you_for_your_valuable_review">Thank you for your valuable review</string>
+    <string name="times_table">%d times table</string>
+</resources>
