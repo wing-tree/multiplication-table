@@ -21,7 +21,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.Dp
 import kotlinx.collections.immutable.persistentListOf
 import wing.tree.multiplication.table.composable.noOperations
@@ -57,25 +56,29 @@ internal fun Content(
         val onKeyboardAction: (Action.Keyboard) -> Unit = remember(state) {
             { keyboardAction ->
                 when (keyboardAction) {
-                    Action.Keyboard.Done -> {
-                        focusManager.clearFocus()
-                        onAction(Action.Check)
-                    }
-
                     is Action.Keyboard.Next -> {
-                        var index = quiz.withIndex().indexOfFirst { indexedValue ->
-                            when {
-                                indexedValue.index <= keyboardAction.index -> false
-                                else -> indexedValue.value.unanswered
+                        val count = quiz.count {
+                            it.answered
+                        }
+
+                        if (count < NUMBER_OF_QUESTIONS) {
+                            var index = quiz.withIndex().indexOfFirst { indexedValue ->
+                                when {
+                                    indexedValue.index <= keyboardAction.index -> false
+                                    else -> indexedValue.value.unanswered
+                                }
                             }
-                        }
 
-                        if (index `is` INVALID_INDEX) {
-                            index = quiz.indexOfFirst(Question::unanswered)
-                        }
+                            if (index `is` INVALID_INDEX) {
+                                index = quiz.indexOfFirst(Question::unanswered)
+                            }
 
-                        if (index not INVALID_INDEX) {
-                            focusRequesters[index].requestFocus()
+                            if (index not INVALID_INDEX) {
+                                focusRequesters[index].requestFocus()
+                            }
+                        } else {
+                            focusManager.clearFocus()
+                            onAction(Action.Check)
                         }
                     }
                 }
@@ -89,16 +92,7 @@ internal fun Content(
             verticalArrangement = Arrangement.spacedBy(Dp.extraSmall),
             horizontalArrangement = Arrangement.spacedBy(Dp.extraSmall)
         ) {
-            val imeAction = quiz.count {
-                it.answered
-            }
-                .let {
-                    if (it < NUMBER_OF_QUESTIONS) {
-                        ImeAction.Next
-                    } else {
-                        ImeAction.Done
-                    }
-                }
+
 
             item(
                 span = {
@@ -127,7 +121,6 @@ internal fun Content(
                     question = question,
                     tag = state.tag,
                     focusRequester = focusRequesters[index],
-                    imeAction = imeAction,
                     onKeyboardAction = onKeyboardAction
                 )
             }

@@ -62,7 +62,6 @@ internal fun Question(
     question: Question,
     tag: QuizState.Tag,
     focusRequester: FocusRequester,
-    imeAction: ImeAction,
     onKeyboardAction: (Action.Keyboard) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -126,15 +125,12 @@ internal fun Question(
                             .copy(color = color),
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Decimal,
-                            imeAction = imeAction
+                            imeAction = ImeAction.Next
                         ),
                         keyboardActions = KeyboardActions(
-                            onDone = {
-                                onKeyboardAction(Action.Keyboard.Done)
-                            },
                             onNext = {
                                 onKeyboardAction(Action.Keyboard.Next(index))
-                            },
+                            }
                         ),
                         singleLine = true
                     )

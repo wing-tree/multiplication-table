@@ -10,6 +10,5 @@ sealed interface Action {
 
     sealed interface Keyboard : Action {
         data class Next(val index: Int) : Keyboard
-        data object Done : Keyboard
     }
 }
