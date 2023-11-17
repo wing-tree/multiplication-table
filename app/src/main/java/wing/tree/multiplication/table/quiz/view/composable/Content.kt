@@ -92,8 +92,6 @@ internal fun Content(
             verticalArrangement = Arrangement.spacedBy(Dp.extraSmall),
             horizontalArrangement = Arrangement.spacedBy(Dp.extraSmall)
         ) {
-
-
             item(
                 span = {
                     GridItemSpan(Int.two)
