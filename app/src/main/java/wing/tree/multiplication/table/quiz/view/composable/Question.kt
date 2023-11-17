@@ -2,10 +2,8 @@ package wing.tree.multiplication.table.quiz.view.composable
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -25,6 +23,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
@@ -38,7 +37,6 @@ import wing.tree.multiplication.table.extension.empty
 import wing.tree.multiplication.table.extension.extraExtraSmall
 import wing.tree.multiplication.table.extension.extraSmall
 import wing.tree.multiplication.table.extension.full
-import wing.tree.multiplication.table.extension.fullyOpaque
 import wing.tree.multiplication.table.extension.fullyTransparent
 import wing.tree.multiplication.table.extension.intOrNull
 import wing.tree.multiplication.table.extension.`is`
@@ -47,9 +45,9 @@ import wing.tree.multiplication.table.extension.not
 import wing.tree.multiplication.table.model.Action
 import wing.tree.multiplication.table.quiz.model.Question
 import wing.tree.multiplication.table.quiz.state.QuizState
-import wing.tree.multiplication.table.theme.vividBlue
 import wing.tree.multiplication.table.theme.pastelGreen
 import wing.tree.multiplication.table.theme.pastelRed
+import wing.tree.multiplication.table.theme.vividBlue
 import wing.tree.multiplication.table.top.level.containerColor
 
 private const val MAXIMUM_DIGIT_COUNT = 2
@@ -102,39 +100,37 @@ internal fun Question(
                     label = String.empty
                 )
 
-                with(question) {
-                    Text(text = "$timesTable $MULTIPLICATION_SIGN $multiplicand $EQUALS_SIGN ")
-                    BasicTextField(
-                        value = "${answer ?: String.empty}",
-                        onValueChange = { value ->
-                            if (value.matches(regex)) {
-                                answer = value.take(MAXIMUM_DIGIT_COUNT).intOrNull
-                            }
-                        },
-                        modifier = Modifier
-                            .weight(Float.full)
-                            .background(
-                                color = Color.White,
-                                shape = RoundedCornerShape(Dp.extraExtraSmall)
-                            )
-                            .focusRequester(focusRequester)
-                            .padding(Dp.extraExtraSmall),
-                        readOnly = tag not QuizState.Tag.IN_PROGRESS,
-                        textStyle = MaterialTheme.typography
-                            .bodyLarge
-                            .copy(color = color),
-                        keyboardOptions = KeyboardOptions(
-                            keyboardType = KeyboardType.Decimal,
-                            imeAction = ImeAction.Next
-                        ),
-                        keyboardActions = KeyboardActions(
-                            onNext = {
-                                onKeyboardAction(Action.Keyboard.Next(index))
-                            }
-                        ),
-                        singleLine = true
-                    )
-                }
+                Text(question = question)
+                BasicTextField(
+                    value = "${answer ?: String.empty}",
+                    onValueChange = { value ->
+                        if (value.matches(regex)) {
+                            answer = value.take(MAXIMUM_DIGIT_COUNT).intOrNull
+                        }
+                    },
+                    modifier = Modifier
+                        .weight(Float.full)
+                        .background(
+                            color = Color.White,
+                            shape = RoundedCornerShape(Dp.extraExtraSmall)
+                        )
+                        .focusRequester(focusRequester)
+                        .padding(Dp.extraExtraSmall),
+                    readOnly = tag not QuizState.Tag.IN_PROGRESS,
+                    textStyle = MaterialTheme.typography
+                        .bodyLarge
+                        .copy(color = color),
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Decimal,
+                        imeAction = ImeAction.Next
+                    ),
+                    keyboardActions = KeyboardActions(
+                        onNext = {
+                            onKeyboardAction(Action.Keyboard.Next(index))
+                        }
+                    ),
+                    singleLine = true
+                )
             }
 
             val visible = when {
@@ -146,31 +142,37 @@ internal fun Question(
                 visible = visible,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Box(
+                Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(
-                            top = Dp.extraExtraSmall,
-                            end = Dp.extraExtraSmall
-                        )
+                        .padding(top = Dp.extraExtraSmall)
                 ) {
-                    val alpha by animateFloatAsState(
-                        targetValue = if (visible) {
-                            Float.fullyOpaque
-                        } else {
-                            Float.fullyTransparent
-                        },
-                        label = String.empty
+                    Text(
+                        question = question,
+                        modifier = Modifier.alpha(Float.fullyTransparent)
                     )
 
                     Text(
                         text = "${question.product}",
-                        modifier = Modifier.align(Alignment.CenterEnd),
-                        color = vividBlue.copy(alpha = alpha),
+                        modifier = Modifier.padding(horizontal = Dp.extraExtraSmall),
+                        color = vividBlue,
                         style = MaterialTheme.typography.bodyLarge.copy(textAlign = TextAlign.End)
                     )
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun Text(
+    question: Question,
+    modifier: Modifier = Modifier
+) {
+    with(question) {
+        Text(
+            text = "$timesTable $MULTIPLICATION_SIGN $multiplicand $EQUALS_SIGN ",
+            modifier = modifier
+        )
     }
 }
