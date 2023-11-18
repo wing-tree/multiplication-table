@@ -77,7 +77,6 @@ fun Banner(
             factory = {
                 AdView(it).apply {
                     setAdSize(adSize)
-                    AdSize.FULL_WIDTH
 
                     adListener = object : AdListener() {
                         override fun onAdFailedToLoad(adError: LoadAdError) {
