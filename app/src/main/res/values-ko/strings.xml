@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">구구단</string>
-    <string name="grade">채점하기</string>
+    <string name="check">정답 확인</string>
     <string name="share_app">앱 공유하기</string>
     <string name="solve_again">다시 풀기</string>
     <string name="thank_you_for_your_valuable_review">소중한 리뷰 감사합니다</string>
