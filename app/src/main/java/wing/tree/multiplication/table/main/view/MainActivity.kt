@@ -10,17 +10,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.VerticalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -32,27 +28,21 @@ import androidx.window.layout.WindowInfoTracker
 import timber.log.Timber
 import wing.tree.multiplication.table.R
 import wing.tree.multiplication.table.ad.composable.Banner
-import wing.tree.multiplication.table.composable.HorizontalSpacer
-import wing.tree.multiplication.table.composable.Icon
-import wing.tree.multiplication.table.composable.MultiplicationTable
-import wing.tree.multiplication.table.composable.VerticalSpacer
 import wing.tree.multiplication.table.composable.noOperations
-import wing.tree.multiplication.table.constant.MINIMUM_TIMES_TABLE
 import wing.tree.multiplication.table.extension.extraSmall
 import wing.tree.multiplication.table.extension.full
-import wing.tree.multiplication.table.extension.incrementByTwo
 import wing.tree.multiplication.table.extension.isNavigationRailNotVisible
 import wing.tree.multiplication.table.extension.isNavigationRailVisible
 import wing.tree.multiplication.table.extension.launchGooglePlay
 import wing.tree.multiplication.table.extension.launchReviewFlow
 import wing.tree.multiplication.table.extension.marginValues
-import wing.tree.multiplication.table.extension.quadrupled
 import wing.tree.multiplication.table.extension.shareApp
 import wing.tree.multiplication.table.extension.two
+import wing.tree.multiplication.table.main.view.composable.BottomBar
 import wing.tree.multiplication.table.main.view.composable.NavigationRail
+import wing.tree.multiplication.table.main.view.composable.PageContent
 import wing.tree.multiplication.table.model.Action
 import wing.tree.multiplication.table.quiz.view.QuizActivity
-import wing.tree.multiplication.table.quiz.view.composable.FloatingActionButton
 import wing.tree.multiplication.table.theme.MultiplicationTableTheme
 
 class MainActivity : ComponentActivity() {
@@ -153,95 +143,5 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }
-}
-
-@Composable
-private fun BottomBar(
-    currentPage: Int,
-    onAction: (Action) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    BottomAppBar(
-        actions = {
-            IconButton(
-                onClick = {
-                    onAction(Action.RateReview)
-                }
-            ) {
-                Icon(id = R.drawable.round_rate_review_24)
-            }
-
-            IconButton(
-                onClick = {
-                    onAction(Action.Share)
-                }
-            ) {
-                Icon(id = R.drawable.round_share_24)
-            }
-
-            IconButton(
-                onClick = {
-                    onAction(Action.Store)
-                }
-            ) {
-                Icon(id = R.drawable.round_store_24)
-            }
-        },
-        modifier = modifier,
-        floatingActionButton = {
-            FloatingActionButton(
-                currentPage = currentPage,
-                onClick = {
-                    onAction(Action.Quiz)
-                }
-            )
-        }
-    )
-}
-
-@Composable
-private fun PageContent(
-    page: Int,
-    modifier: Modifier = Modifier
-) {
-    Column(modifier = modifier) {
-        val timesTable = MINIMUM_TIMES_TABLE.plus(page.quadrupled())
-
-        MultiplicationTableRow(
-            timesTable = timesTable,
-            modifier = Modifier.weight(Float.full)
-        )
-
-        VerticalSpacer(height = Dp.extraSmall)
-
-        MultiplicationTableRow(
-            timesTable = timesTable.incrementByTwo(),
-            modifier = Modifier.weight(Float.full)
-        )
-    }
-}
-
-@Composable
-private fun MultiplicationTableRow(
-    timesTable: Int,
-    modifier: Modifier = Modifier
-) {
-    Row(modifier = modifier) {
-        MultiplicationTable(
-            timesTable = timesTable,
-            modifier = Modifier
-                .weight(Float.full)
-                .fillMaxHeight()
-        )
-
-        HorizontalSpacer(width = Dp.extraSmall)
-
-        MultiplicationTable(
-            timesTable = timesTable.inc(),
-            modifier = Modifier
-                .weight(Float.full)
-                .fillMaxHeight()
-        )
     }
 }
