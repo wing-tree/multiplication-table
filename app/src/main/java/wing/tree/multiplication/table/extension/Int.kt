@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package wing.tree.multiplication.table.extension
 
 private const val FIVE = 5
@@ -7,6 +9,7 @@ private const val THREE = 3
 private const val TWO = 2
 private const val ZERO = 0
 
+val Int.Companion.fifthIndex: Int get() = FOUR
 val Int.Companion.five: Int get() = FIVE
 val Int.Companion.four: Int get() = FOUR
 val Int.Companion.fourthIndex: Int get() = THREE
