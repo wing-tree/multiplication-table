@@ -49,11 +49,13 @@ internal fun Content(
     Column(modifier = modifier) {
         val quiz = state.quiz
         val focusManager = LocalFocusManager.current
-        val focusRequesters = persistentListOf(
-            *Array(quiz.size) {
-                FocusRequester()
-            }
-        )
+        val focusRequesters = remember(state) {
+            persistentListOf(
+                *Array(quiz.size) {
+                    FocusRequester()
+                }
+            )
+        }
 
         val onKeyboardAction: (Action.Keyboard) -> Unit = remember(state) {
             { keyboardAction ->
