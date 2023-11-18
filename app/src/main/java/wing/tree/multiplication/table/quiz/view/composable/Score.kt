@@ -45,7 +45,7 @@ internal fun Score(
                 text = stringResource(id = R.string.score),
                 color = colorScheme.onSurfaceVariant,
                 fontWeight = FontWeight.Bold,
-                style = typography.titleSmall
+                style = typography.labelMedium
             )
 
             Text(

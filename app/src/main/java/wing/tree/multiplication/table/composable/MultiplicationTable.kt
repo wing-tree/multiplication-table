@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import wing.tree.multiplication.table.R
@@ -50,8 +51,9 @@ fun MultiplicationTable(
                     text = stringResource(id = R.string.times_table, timesTable),
                     modifier = Modifier.fillMaxWidth(),
                     color = colorScheme.onSurfaceVariant,
+                    fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center,
-                    style = typography.bodyMedium
+                    style = typography.titleSmall
                 )
 
                 VerticalSpacer(height = Dp.extraSmall)
