@@ -21,11 +21,14 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.Dp
 import androidx.core.view.WindowCompat
+import androidx.window.layout.WindowInfoTracker
 import timber.log.Timber
 import wing.tree.multiplication.table.R
 import wing.tree.multiplication.table.ad.composable.Banner
@@ -38,12 +41,15 @@ import wing.tree.multiplication.table.constant.MINIMUM_TIMES_TABLE
 import wing.tree.multiplication.table.extension.extraSmall
 import wing.tree.multiplication.table.extension.full
 import wing.tree.multiplication.table.extension.incrementByTwo
+import wing.tree.multiplication.table.extension.isNavigationRailNotVisible
+import wing.tree.multiplication.table.extension.isNavigationRailVisible
 import wing.tree.multiplication.table.extension.launchGooglePlay
 import wing.tree.multiplication.table.extension.launchReviewFlow
 import wing.tree.multiplication.table.extension.marginValues
 import wing.tree.multiplication.table.extension.quadrupled
 import wing.tree.multiplication.table.extension.shareApp
 import wing.tree.multiplication.table.extension.two
+import wing.tree.multiplication.table.main.view.composable.NavigationRail
 import wing.tree.multiplication.table.model.Action
 import wing.tree.multiplication.table.quiz.view.QuizActivity
 import wing.tree.multiplication.table.quiz.view.composable.FloatingActionButton
@@ -80,50 +86,69 @@ class MainActivity : ComponentActivity() {
         Timber.plant(Timber.DebugTree())
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
+        val windowInfoTracker = WindowInfoTracker.getOrCreate(this)
+
         setContent {
             MultiplicationTableTheme {
                 val state = rememberPagerState {
                     Int.two
                 }
 
+                val windowLayoutInfo by windowInfoTracker
+                    .windowLayoutInfo(this)
+                    .collectAsState(initial = null)
+
+                val windowSizeClass = calculateWindowSizeClass(this)
+                val widthSizeClass = windowSizeClass.widthSizeClass
+
                 Scaffold(
                     bottomBar = {
-                        BottomBar(
-                            currentPage = state.currentPage,
-                            onAction = onAction
-                        )
+                        if (widthSizeClass.isNavigationRailNotVisible(windowLayoutInfo)) {
+                            BottomBar(
+                                currentPage = state.currentPage,
+                                onAction = onAction
+                            )
+                        }
                     }
                 ) {
                     val layoutDirection = LocalLayoutDirection.current
-                    val widthSizeClass = calculateWindowSizeClass(this).widthSizeClass
                     val contentPadding = widthSizeClass
                         .marginValues
                         .copy(top = it.calculateTopPadding())
 
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(
-                                start = it.calculateStartPadding(layoutDirection),
-                                end = it.calculateEndPadding(layoutDirection),
-                                bottom = it.calculateBottomPadding()
-                            ),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        VerticalPager(
-                            state = state,
-                            modifier = Modifier.weight(Float.full),
-                            contentPadding = contentPadding
-                        ) { page ->
-                            PageContent(
-                                page = page,
-                                modifier = Modifier
-                                    .fillMaxSize()
-                                    .padding(vertical = Dp.extraSmall)
+                    Row(modifier = Modifier.fillMaxSize()) {
+                        if (widthSizeClass.isNavigationRailVisible(windowLayoutInfo)) {
+                            NavigationRail(
+                                currentPage = state.currentPage,
+                                onAction = onAction
                             )
                         }
 
-                        Banner(widthSizeClass = widthSizeClass)
+                        Column(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(
+                                    start = it.calculateStartPadding(layoutDirection),
+                                    end = it.calculateEndPadding(layoutDirection),
+                                    bottom = it.calculateBottomPadding()
+                                ),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            VerticalPager(
+                                state = state,
+                                modifier = Modifier.weight(Float.full),
+                                contentPadding = contentPadding
+                            ) { page ->
+                                PageContent(
+                                    page = page,
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                        .padding(vertical = Dp.extraSmall)
+                                )
+                            }
+
+                            Banner(widthSizeClass = widthSizeClass)
+                        }
                     }
                 }
             }
