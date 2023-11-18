@@ -17,6 +17,7 @@ val Int.Companion.none: Int get() = ZERO
 val Int.Companion.one: Int get() = ONE
 val Int.Companion.three: Int get() = THREE
 val Int.Companion.secondIndex: Int get() = ONE
+val Int.Companion.sixthIndex: Int get() = FIVE
 val Int.Companion.thirdIndex: Int get() = TWO
 val Int.Companion.two: Int get() = TWO
 val Int.Companion.zero: Int get() = ZERO
