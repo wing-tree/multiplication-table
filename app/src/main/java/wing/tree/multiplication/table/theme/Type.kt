@@ -17,7 +17,7 @@ private val fontFamily = FontFamily(
     )
 )
 
-val Typography = with(Typography()) {
+val typography = with(Typography()) {
     copy(
         displayLarge = displayLarge.copy(fontFamily = fontFamily),
         displayMedium = displayMedium.copy(fontFamily = fontFamily),

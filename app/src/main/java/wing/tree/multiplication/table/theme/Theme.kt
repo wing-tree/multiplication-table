@@ -30,7 +30,7 @@ fun MultiplicationTableTheme(
     }
 
     MaterialTheme(
-        typography = Typography,
+        typography = typography,
         content = content
     )
 }
