@@ -5,6 +5,7 @@ import wing.tree.multiplication.table.extension.five
 import wing.tree.multiplication.table.extension.four
 import wing.tree.multiplication.table.extension.half
 import wing.tree.multiplication.table.extension.`is`
+import wing.tree.multiplication.table.extension.isGreaterThanOrEqualTo
 import wing.tree.multiplication.table.extension.one
 import wing.tree.multiplication.table.extension.quarter
 import wing.tree.multiplication.table.extension.three
@@ -21,9 +22,9 @@ enum class StarRating(val value: Int) {
     companion object {
         fun get(score: Int) = when {
             score `is` PERFECT_SCORE -> PERFECT
-            score >= PERFECT_SCORE.threeQuarters -> OUTSTANDING
-            score >= PERFECT_SCORE.half -> EXCELLENT
-            score >= PERFECT_SCORE.quarter -> GREAT
+            score isGreaterThanOrEqualTo PERFECT_SCORE.threeQuarters -> OUTSTANDING
+            score isGreaterThanOrEqualTo PERFECT_SCORE.half -> EXCELLENT
+            score isGreaterThanOrEqualTo PERFECT_SCORE.quarter -> GREAT
             else -> GOOD
         }
     }

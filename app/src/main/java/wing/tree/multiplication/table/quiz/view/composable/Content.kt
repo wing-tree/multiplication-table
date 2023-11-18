@@ -31,6 +31,8 @@ import wing.tree.multiplication.table.extension.extraSmall
 import wing.tree.multiplication.table.extension.full
 import wing.tree.multiplication.table.extension.fullyTransparent
 import wing.tree.multiplication.table.extension.`is`
+import wing.tree.multiplication.table.extension.isLessThan
+import wing.tree.multiplication.table.extension.isLessThanOrEqualTo
 import wing.tree.multiplication.table.extension.medium
 import wing.tree.multiplication.table.extension.not
 import wing.tree.multiplication.table.extension.two
@@ -61,10 +63,10 @@ internal fun Content(
                             it.answered
                         }
 
-                        if (count < NUMBER_OF_QUESTIONS) {
+                        if (count isLessThan NUMBER_OF_QUESTIONS) {
                             var index = quiz.withIndex().indexOfFirst { indexedValue ->
                                 when {
-                                    indexedValue.index <= keyboardAction.index -> false
+                                    indexedValue.index isLessThanOrEqualTo keyboardAction.index -> false
                                     else -> indexedValue.value.unanswered
                                 }
                             }
