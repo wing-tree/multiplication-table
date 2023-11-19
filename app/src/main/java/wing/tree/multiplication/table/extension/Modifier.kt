@@ -19,21 +19,22 @@ import com.valentinilk.shimmer.defaultShimmerTheme
 import com.valentinilk.shimmer.rememberShimmer
 import com.valentinilk.shimmer.shimmer
 import kotlinx.collections.immutable.persistentListOf
+import wing.tree.multiplication.table.constant.LowContrastContentAlpha
 import kotlin.math.min
 
 private val shimmerTheme = defaultShimmerTheme.copy(
     animationSpec = infiniteRepeatable(
         animation = tween(
-            1_000,
+            durationMillis = Int.oneSecondInMilliseconds,
             easing = LinearEasing,
-            delayMillis = 1_000,
+            delayMillis = Int.oneSecondInMilliseconds
         ),
         repeatMode = RepeatMode.Restart,
     ),
     blendMode = BlendMode.DstOut,
     shaderColors = persistentListOf(
         Color.Unspecified.copy(alpha = Float.fullyTransparent),
-        Color.Unspecified.copy(alpha = 0.89F),
+        Color.Unspecified.copy(alpha = LowContrastContentAlpha.high),
         Color.Unspecified.copy(alpha = Float.fullyTransparent),
     )
 )
