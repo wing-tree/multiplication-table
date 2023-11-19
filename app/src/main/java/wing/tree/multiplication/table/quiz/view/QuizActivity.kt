@@ -17,7 +17,6 @@ import kotlinx.coroutines.launch
 import wing.tree.multiplication.table.ad.InterstitialAdLoader
 import wing.tree.multiplication.table.composable.noOperations
 import wing.tree.multiplication.table.extension.isNotFinishing
-import wing.tree.multiplication.table.extension.marginValues
 import wing.tree.multiplication.table.model.Action
 import wing.tree.multiplication.table.quiz.view.composable.Content
 import wing.tree.multiplication.table.quiz.view.composable.TopBar
@@ -77,10 +76,9 @@ class QuizActivity : ComponentActivity() {
 
                     Content(
                         state = state,
+                        widthSizeClass = widthSizeClass,
                         onAction = onAction,
-                        modifier = Modifier
-                            .padding(widthSizeClass.marginValues)
-                            .padding(it)
+                        modifier = Modifier.padding(it)
                     )
                 }
             }
