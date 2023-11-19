@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package wing.tree.multiplication.table.extension
 
 fun <T> List<T>.fifth() = get(Int.fifthIndex)
