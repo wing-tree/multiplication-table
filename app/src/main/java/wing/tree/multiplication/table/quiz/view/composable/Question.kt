@@ -171,7 +171,8 @@ private fun Text(
     with(question) {
         Text(
             text = "$timesTable $MULTIPLICATION_SIGN $multiplicand $EQUALS_SIGN ",
-            modifier = modifier
+            modifier = modifier,
+            color = colorScheme.onSurface
         )
     }
 }

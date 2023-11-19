@@ -8,11 +8,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
+import wing.tree.multiplication.table.extension.second
+import wing.tree.multiplication.table.extension.third
 
 private val lightColorScheme = lightColorScheme(
-    primary = purple40,
-    secondary = purpleGrey40,
-    tertiary = pink40
+    primary = palette.first(),
+    secondary = palette.second(),
+    tertiary = palette.third()
 )
 
 @Composable
