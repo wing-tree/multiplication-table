@@ -25,6 +25,7 @@ val Int.Companion.thirdIndex: Int get() = TWO
 val Int.Companion.two: Int get() = TWO
 val Int.Companion.zero: Int get() = ZERO
 
+val Int.float: Float get() = toFloat()
 val Int.half: Int get() = div(TWO)
 val Int.quarter get() = div(FOUR)
 val Int.threeQuarters: Int get() = div(Float.threeQuarters).roundedInt
