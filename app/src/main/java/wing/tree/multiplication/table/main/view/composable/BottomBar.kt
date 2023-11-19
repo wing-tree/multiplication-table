@@ -32,14 +32,6 @@ internal fun BottomBar(
             ) {
                 Icon(id = R.drawable.round_share_24)
             }
-
-            IconButton(
-                onClick = {
-                    onAction(Action.Store)
-                }
-            ) {
-                Icon(id = R.drawable.round_store_24)
-            }
         },
         modifier = modifier,
         floatingActionButton = {

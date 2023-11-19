@@ -61,16 +61,6 @@ internal fun NavigationRail(
                     onAction(Action.Share)
                 }
             )
-
-            NavigationRailItem(
-                selected = false,
-                icon = {
-                    Icon(id = R.drawable.round_store_24)
-                },
-                onClick = {
-                    onAction(Action.Store)
-                }
-            )
         }
     }
 }
