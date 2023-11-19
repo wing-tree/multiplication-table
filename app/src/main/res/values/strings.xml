@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Multiplication Table</string>
+    <string name="app_name">Gugudan</string>
     <string name="check">Check</string>
     <string name="quiz" translatable="false">QUIZ</string>
     <string name="score" translatable="false">Score</string>
