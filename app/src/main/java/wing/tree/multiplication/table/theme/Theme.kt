@@ -3,10 +3,17 @@ package wing.tree.multiplication.table.theme
 import android.app.Activity
 import android.view.View
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
+
+private val lightColorScheme = lightColorScheme(
+    primary = purple40,
+    secondary = purpleGrey40,
+    tertiary = pink40
+)
 
 @Composable
 fun MultiplicationTableTheme(
@@ -30,6 +37,7 @@ fun MultiplicationTableTheme(
     }
 
     MaterialTheme(
+        colorScheme = lightColorScheme,
         typography = typography,
         content = content
     )

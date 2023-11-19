@@ -36,8 +36,8 @@ internal fun Score(
     ElevatedCard(modifier = modifier) {
         Column(
             modifier = Modifier
-                .shimmer()
                 .fillMaxSize()
+                .shimmer()
                 .padding(vertical = Dp.small),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {

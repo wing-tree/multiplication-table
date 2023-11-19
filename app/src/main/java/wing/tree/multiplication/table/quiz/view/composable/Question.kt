@@ -47,7 +47,6 @@ import wing.tree.multiplication.table.quiz.model.Question
 import wing.tree.multiplication.table.quiz.state.QuizState
 import wing.tree.multiplication.table.theme.pastelGreen
 import wing.tree.multiplication.table.theme.pastelRed
-import wing.tree.multiplication.table.theme.vividBlue
 import wing.tree.multiplication.table.top.level.containerColor
 
 private const val MAXIMUM_DIGIT_COUNT = 2
@@ -155,7 +154,7 @@ internal fun Question(
                     Text(
                         text = "${question.product}",
                         modifier = Modifier.padding(horizontal = Dp.extraExtraSmall),
-                        color = vividBlue,
+                        color = colorScheme.onSurfaceVariant,
                         style = MaterialTheme.typography.bodyLarge.copy(textAlign = TextAlign.End)
                     )
                 }
