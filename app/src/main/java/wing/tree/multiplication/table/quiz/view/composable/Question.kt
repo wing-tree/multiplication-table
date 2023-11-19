@@ -154,7 +154,7 @@ internal fun Question(
                     Text(
                         text = "${question.product}",
                         modifier = Modifier.padding(horizontal = Dp.extraExtraSmall),
-                        color = colorScheme.onSurfaceVariant,
+                        color = Color.Blue,
                         style = MaterialTheme.typography.bodyLarge.copy(textAlign = TextAlign.End)
                     )
                 }

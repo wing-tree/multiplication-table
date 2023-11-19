@@ -22,7 +22,7 @@ import wing.tree.multiplication.table.extension.shimmer
 import wing.tree.multiplication.table.extension.small
 import wing.tree.multiplication.table.quiz.model.StarRating
 import wing.tree.multiplication.table.quiz.state.QuizState
-import wing.tree.multiplication.table.theme.blueTopaz
+import wing.tree.multiplication.table.theme.pastelGreen
 
 @Composable
 internal fun Score(
@@ -57,7 +57,7 @@ internal fun Score(
                 repeat(starRating.value) {
                     Icon(
                         id = R.drawable.round_grade_24,
-                        tint = blueTopaz
+                        tint = pastelGreen
                     )
                 }
             }
