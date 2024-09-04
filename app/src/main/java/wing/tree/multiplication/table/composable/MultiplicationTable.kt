@@ -2,9 +2,9 @@ package wing.tree.multiplication.table.composable
 
 import android.text.TextPaint
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -17,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -25,12 +26,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.core.content.res.ResourcesCompat
 import wing.tree.multiplication.table.R
 import wing.tree.multiplication.table.constant.EQUALS_SIGN
 import wing.tree.multiplication.table.constant.MAXIMUM_MULTIPLICAND
 import wing.tree.multiplication.table.constant.MINIMUM_MULTIPLICAND
 import wing.tree.multiplication.table.constant.MULTIPLICATION_SIGN
 import wing.tree.multiplication.table.extension.extraSmall
+import wing.tree.multiplication.table.extension.full
+import wing.tree.multiplication.table.extension.half
 import wing.tree.multiplication.table.extension.medium
 import wing.tree.multiplication.table.extension.property.digit
 import wing.tree.multiplication.table.extension.rememberMaxWidth
@@ -54,18 +59,19 @@ fun MultiplicationTable(
                 .padding(horizontal = Dp.extraSmall)
                 .padding(bottom = Dp.extraSmall)
         ) {
+            val maxWidth = maxWidth
             val density = LocalDensity.current
-            val height = maxHeight.div(other = MAXIMUM_MULTIPLICAND.inc())
+            val height = maxHeight.minus(16.dp).div(other = MAXIMUM_MULTIPLICAND.inc())
+            val hfs = height.calculateFontSizeFromTotalHeight()
             val fontSize = with(density) {
-                height.times(0.7535F).toSp()
+                realignFontSize(hfs, maxWidth - 8.dp)
             }
 
-            val style = LocalTextStyle.current.copy(fontSize = fontSize)
-            val width = rememberMultiplicationWidth(
-                timesTable = timesTable,
-                style = style
-            )
+            val noAligned = hfs.value == fontSize.value
 
+            val style = LocalTextStyle.current.copy(fontSize = fontSize)
+            val width = rememberMultiplicationWidth(style)
+            val rwidth = rememberMultiplicationWidth(timesTable, style)
             Column(
                 modifier = Modifier.width(width = width.plus(Dp.medium)),
                 horizontalAlignment = Alignment.CenterHorizontally
@@ -79,14 +85,17 @@ fun MultiplicationTable(
                     textAlign = TextAlign.Center
                 )
 
+                println("mmmm:$maxWidth,,, $width,,, $rwidth,, ${(width - rwidth).half},,${Char.digit.rememberMaxWidth(style)}")
+
                 Column(
                     modifier = Modifier
-                        .width(IntrinsicSize.Max)
-                        .background(
-                            color = colorScheme.surface,
-                            shape = shape
-                        )
+                        .width(width = maxWidth)
+                        .weight(weight = Float.full)
+                        .background(color = colorScheme.surface)
                         .padding(horizontal = Dp.extraSmall)
+                        .padding(start = (width - rwidth).half)
+                    ,
+                    verticalArrangement = Arrangement.Center
                 ) {
                     for (multiplicand in MINIMUM_MULTIPLICAND..MAXIMUM_MULTIPLICAND) {
                         Multiplication(
@@ -123,10 +132,13 @@ private fun Multiplication(
 
 @Composable
 fun Dp.calculateFontSizeFromTotalHeight(): TextUnit = with(LocalDensity.current) {
-    val textPaint = TextPaint()
+    val context = LocalContext.current
+    val textPaint = TextPaint().apply {
+        ResourcesCompat.getFont(context, R.font.y_clover_regular)
+    }
 
     // 임의의 초기 폰트 크기
-    var textSize = 20f
+    var textSize = 15f
     textPaint.textSize = textSize
 
     // FontMetrics를 사용해 top과 bottom 차이를 계산
@@ -143,4 +155,25 @@ fun Dp.calculateFontSizeFromTotalHeight(): TextUnit = with(LocalDensity.current)
     }
     println("aaaa:$textSize,,,::$totalHeight")
     return textSize.toSp()
+}
+
+@Composable
+fun realignFontSize(
+    origin: TextUnit,
+    constraintsWidth: Dp
+): TextUnit {
+    val ts = LocalTextStyle.current
+    var fs = origin
+
+    var w = rememberMultiplicationWidth(ts.copy(fontSize = fs))
+
+    while (true) {
+        if (constraintsWidth >= w) {
+            break
+        }
+        fs = fs.value.minus(1f).sp
+        w = rememberMultiplicationWidth(ts.copy(fontSize = fs))
+    }
+
+    return fs
 }
