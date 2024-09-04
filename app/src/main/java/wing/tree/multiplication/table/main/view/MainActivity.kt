@@ -24,7 +24,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.core.view.WindowCompat
 import timber.log.Timber
 import wing.tree.multiplication.table.R
-import wing.tree.multiplication.table.ad.composable.Banner
 import wing.tree.multiplication.table.composable.noOperations
 import wing.tree.multiplication.table.extension.extraSmall
 import wing.tree.multiplication.table.extension.full
@@ -127,8 +126,6 @@ class MainActivity : ComponentActivity() {
                                         .padding(vertical = Dp.extraSmall)
                                 )
                             }
-
-                            Banner(widthSizeClass = widthSizeClass)
                         }
                     }
                 }
