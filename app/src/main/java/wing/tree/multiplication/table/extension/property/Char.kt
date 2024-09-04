@@ -17,4 +17,6 @@ val Char.Companion.digit: List<Char>
     get() = List(size = Int.ten, init = Int::digitToChar)
 
 val Char.Companion.empty: Char get() = MIN_VALUE
+val Char.Companion.equalsSign: Char get() = '='
+val Char.Companion.multiplicationSign: Char get() = '×'
 val Char.Companion.zeroWidthSpace: Char get() = '\u200B'

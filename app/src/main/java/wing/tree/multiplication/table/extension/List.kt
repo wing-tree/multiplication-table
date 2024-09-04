@@ -10,12 +10,14 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
+import wing.tree.multiplication.table.extension.property.single
 
 @Composable
 fun List<Char>.rememberMaxHeight(
     style: TextStyle = LocalTextStyle.current,
     overflow: TextOverflow = TextOverflow.Clip,
-    softWrap: Boolean = true
+    softWrap: Boolean = true,
+    maxLines: Int = Int.single
 ): Dp {
     val density = LocalDensity.current
     val textMeasurer = rememberTextMeasurer()
@@ -27,7 +29,8 @@ fun List<Char>.rememberMaxHeight(
                     text = "$it",
                     style = style,
                     overflow = overflow,
-                    softWrap = softWrap
+                    softWrap = softWrap,
+                    maxLines = maxLines
                 )
                     .size
                     .height
@@ -41,7 +44,8 @@ fun List<Char>.rememberMaxHeight(
 fun List<Char>.rememberMaxWidth(
     style: TextStyle = LocalTextStyle.current,
     overflow: TextOverflow = TextOverflow.Clip,
-    softWrap: Boolean = true
+    softWrap: Boolean = true,
+    maxLines: Int = Int.single
 ): Dp {
     val density = LocalDensity.current
     val textMeasurer = rememberTextMeasurer()
@@ -53,7 +57,8 @@ fun List<Char>.rememberMaxWidth(
                     text = "$it",
                     style = style,
                     overflow = overflow,
-                    softWrap = softWrap
+                    softWrap = softWrap,
+                    maxLines = maxLines
                 )
                     .size
                     .width
