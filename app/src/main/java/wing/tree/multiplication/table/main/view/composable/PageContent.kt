@@ -2,6 +2,7 @@ package wing.tree.multiplication.table.main.view.composable
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import wing.tree.multiplication.table.composable.MultiplicationTableRow
@@ -17,7 +18,10 @@ internal fun PageContent(
     page: Int,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier = modifier) {
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         val timesTable = MINIMUM_TIMES_TABLE.plus(page.quadrupled())
 
         MultiplicationTableRow(

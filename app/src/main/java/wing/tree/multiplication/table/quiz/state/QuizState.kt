@@ -1,8 +1,10 @@
 package wing.tree.multiplication.table.quiz.state
 
+import androidx.compose.runtime.Stable
 import kotlinx.collections.immutable.ImmutableList
 import wing.tree.multiplication.table.quiz.model.Question
 
+@Stable
 sealed interface QuizState {
     val allAnswered: Boolean get() = quiz.all {
         it.answered

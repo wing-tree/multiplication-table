@@ -1,5 +1,6 @@
 package wing.tree.multiplication.table.composable
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.runtime.Composable
@@ -13,12 +14,15 @@ internal fun MultiplicationTableRow(
     timesTable: Int,
     modifier: Modifier = Modifier
 ) {
-    Row(modifier = modifier) {
+    Row(
+        modifier = modifier,
+        horizontalArrangement = Arrangement.Center
+    ) {
         MultiplicationTable(
             timesTable = timesTable,
             modifier = Modifier
-                .weight(Float.full)
                 .fillMaxHeight()
+                .weight(weight = Float.full, fill = false)
         )
 
         HorizontalSpacer(width = Dp.extraSmall)
@@ -26,8 +30,8 @@ internal fun MultiplicationTableRow(
         MultiplicationTable(
             timesTable = timesTable.inc(),
             modifier = Modifier
-                .weight(Float.full)
                 .fillMaxHeight()
+                .weight(weight = Float.full, fill = false)
         )
     }
 }
