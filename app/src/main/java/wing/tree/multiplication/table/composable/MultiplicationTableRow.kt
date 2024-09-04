@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import wing.tree.multiplication.table.extension.extraSmall
+import wing.tree.multiplication.table.extension.full
 
 @Composable
 internal fun MultiplicationTableRow(
@@ -19,14 +20,18 @@ internal fun MultiplicationTableRow(
     ) {
         MultiplicationTable(
             timesTable = timesTable,
-            modifier = Modifier.fillMaxHeight()
+            modifier = Modifier
+                .fillMaxHeight()
+                .weight(weight = Float.full, fill = false)
         )
 
         HorizontalSpacer(width = Dp.extraSmall)
 
         MultiplicationTable(
             timesTable = timesTable.inc(),
-            modifier = Modifier.fillMaxHeight()
+            modifier = Modifier
+                .fillMaxHeight()
+                .weight(weight = Float.full, fill = false)
         )
     }
 }
