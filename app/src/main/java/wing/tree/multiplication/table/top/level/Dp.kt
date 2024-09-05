@@ -12,13 +12,13 @@ import wing.tree.multiplication.table.extension.property.`4`
 import wing.tree.multiplication.table.extension.property.`6`
 import wing.tree.multiplication.table.extension.property.digit
 import wing.tree.multiplication.table.extension.property.space
-import wing.tree.multiplication.table.extension.rememberMaxWidth
+import wing.tree.multiplication.table.extension.maxWidth
 import wing.tree.multiplication.table.extension.rememberWidth
 import wing.tree.multiplication.table.extension.width
 
 @Composable
 fun multiplicationMaxWidth(style: TextStyle = LocalTextStyle.current): Dp {
-    val maxWidth = Char.digit.rememberMaxWidth(style = style)
+    val maxWidth = Char.digit.maxWidth(style = style)
     val width = buildString {
         append(EQUALS_SIGN)
         append(MULTIPLICATION_SIGN)
@@ -32,7 +32,7 @@ fun multiplicationMaxWidth(style: TextStyle = LocalTextStyle.current): Dp {
 
 @Composable
 fun rememberMultiplicationMaxWidth(style: TextStyle = LocalTextStyle.current): Dp {
-    val maxWidth = Char.digit.rememberMaxWidth(style = style)
+    val maxWidth = Char.digit.maxWidth(style = style)
     val width = buildString {
         append(EQUALS_SIGN)
         append(MULTIPLICATION_SIGN)
@@ -51,7 +51,7 @@ fun rememberMultiplicationWidth(
     timesTable: Int,
     style: TextStyle = LocalTextStyle.current
 ): Dp {
-    val maxWidth = Char.digit.rememberMaxWidth(style = style)
+    val maxWidth = Char.digit.maxWidth(style = style)
     val other = with("$timesTable") {
         val product = timesTable.times(MAXIMUM_MULTIPLICAND)
 

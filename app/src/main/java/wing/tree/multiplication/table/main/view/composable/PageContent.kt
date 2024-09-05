@@ -9,9 +9,9 @@ import wing.tree.multiplication.table.composable.MultiplicationTableRow
 import wing.tree.multiplication.table.composable.VerticalSpacer
 import wing.tree.multiplication.table.constant.MINIMUM_TIMES_TABLE
 import wing.tree.multiplication.table.extension.extraSmall
-import wing.tree.multiplication.table.extension.full
-import wing.tree.multiplication.table.extension.incrementByTwo
-import wing.tree.multiplication.table.extension.quadrupled
+import wing.tree.multiplication.table.extension.function.incrementByTwo
+import wing.tree.multiplication.table.extension.function.quadrupled
+import wing.tree.multiplication.table.extension.property.`1`
 
 @Composable
 internal fun PageContent(
@@ -26,14 +26,14 @@ internal fun PageContent(
 
         MultiplicationTableRow(
             timesTable = timesTable,
-            modifier = Modifier.weight(Float.full)
+            modifier = Modifier.weight(Float.`1`)
         )
 
         VerticalSpacer(height = Dp.extraSmall)
 
         MultiplicationTableRow(
             timesTable = timesTable.incrementByTwo(),
-            modifier = Modifier.weight(Float.full)
+            modifier = Modifier.weight(Float.`1`)
         )
     }
 }

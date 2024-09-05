@@ -47,16 +47,16 @@ import wing.tree.multiplication.table.constant.INVALID_INDEX
 import wing.tree.multiplication.table.constant.NUMBER_OF_QUESTIONS
 import wing.tree.multiplication.table.extension.empty
 import wing.tree.multiplication.table.extension.extraSmall
-import wing.tree.multiplication.table.extension.full
 import wing.tree.multiplication.table.extension.function.`is`
 import wing.tree.multiplication.table.extension.function.isLessThan
 import wing.tree.multiplication.table.extension.function.isLessThanOrEqualTo
-import wing.tree.multiplication.table.extension.property.marginValues
-import wing.tree.multiplication.table.extension.medium
 import wing.tree.multiplication.table.extension.function.not
-import wing.tree.multiplication.table.extension.pair
-import wing.tree.multiplication.table.extension.small
 import wing.tree.multiplication.table.extension.function.verticalFadingEdge
+import wing.tree.multiplication.table.extension.medium
+import wing.tree.multiplication.table.extension.property.`1`
+import wing.tree.multiplication.table.extension.property.marginValues
+import wing.tree.multiplication.table.extension.property.pair
+import wing.tree.multiplication.table.extension.small
 import wing.tree.multiplication.table.model.Action
 import wing.tree.multiplication.table.quiz.model.Question
 import wing.tree.multiplication.table.quiz.state.QuizState
@@ -151,7 +151,7 @@ internal fun Content(
                         tag = state.tag,
                         focusRequester = focusRequesters[index],
                         onKeyboardAction = onKeyboardAction,
-                        modifier = Modifier.weight(Float.full)
+                        modifier = Modifier.weight(Float.`1`)
                     )
                 }
             }

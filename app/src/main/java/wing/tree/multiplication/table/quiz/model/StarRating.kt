@@ -1,23 +1,23 @@
 package wing.tree.multiplication.table.quiz.model
 
 import wing.tree.multiplication.table.constant.PERFECT_SCORE
-import wing.tree.multiplication.table.extension.five
-import wing.tree.multiplication.table.extension.four
-import wing.tree.multiplication.table.extension.half
 import wing.tree.multiplication.table.extension.function.`is`
 import wing.tree.multiplication.table.extension.function.isGreaterThanOrEqualTo
-import wing.tree.multiplication.table.extension.one
-import wing.tree.multiplication.table.extension.quarter
-import wing.tree.multiplication.table.extension.three
-import wing.tree.multiplication.table.extension.threeQuarters
-import wing.tree.multiplication.table.extension.two
+import wing.tree.multiplication.table.extension.property.`1`
+import wing.tree.multiplication.table.extension.property.`2`
+import wing.tree.multiplication.table.extension.property.`3`
+import wing.tree.multiplication.table.extension.property.`4`
+import wing.tree.multiplication.table.extension.property.`5`
+import wing.tree.multiplication.table.extension.property.half
+import wing.tree.multiplication.table.extension.property.quarter
+import wing.tree.multiplication.table.extension.property.threeQuarters
 
 enum class StarRating(val value: Int) {
-    EXCELLENT(Int.three),
-    GOOD(Int.one),
-    GREAT(Int.two),
-    OUTSTANDING(Int.four),
-    PERFECT(Int.five);
+    EXCELLENT(Int.`3`),
+    GOOD(Int.`1`),
+    GREAT(Int.`2`),
+    OUTSTANDING(Int.`4`),
+    PERFECT(Int.`5`);
 
     companion object {
         fun get(score: Int) = when {

@@ -2,7 +2,6 @@
 
 package wing.tree.multiplication.table.extension
 
-import android.graphics.Rect
 import android.text.TextPaint
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.runtime.Composable
@@ -15,7 +14,43 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.core.content.res.ResourcesCompat
 import wing.tree.multiplication.table.R
+import wing.tree.multiplication.table.extension.property.`0`
+import wing.tree.multiplication.table.extension.property.`1`
+import wing.tree.multiplication.table.extension.property.`2`
+import wing.tree.multiplication.table.extension.property.`3`
+import wing.tree.multiplication.table.extension.property.`4`
+import wing.tree.multiplication.table.extension.property.`5`
+import wing.tree.multiplication.table.extension.property.`6`
 import wing.tree.multiplication.table.extension.property.single
+import kotlin.math.ceil
+
+@Composable
+fun List<Char>.maxWidth(style: TextStyle = LocalTextStyle.current): Dp {
+    val context = LocalContext.current
+    val density = LocalDensity.current
+    val floatArray = remember {
+        FloatArray(Int.`1`)
+    }
+
+    val textPaint = remember {
+        TextPaint().also {
+            it.typeface = ResourcesCompat.getFont(context, R.font.y_clover_regular)
+            it.letterSpacing = 0.05F
+        }
+    }
+
+    textPaint.textSize = with(density) {
+        style.fontSize.toPx()
+    }
+
+    return with(density) {
+        maxOf {
+            textPaint.getTextWidths(it.toString(), Int.`0`, Int.`1`, floatArray)
+            ceil(floatArray.single())
+        }
+            .toDp()
+    }
+}
 
 @Composable
 fun List<Char>.rememberMaxHeight(
@@ -45,56 +80,9 @@ fun List<Char>.rememberMaxHeight(
     }
 }
 
-@Composable
-fun List<Char>.rememberMaxWidth(
-    style: TextStyle = LocalTextStyle.current,
-    overflow: TextOverflow = TextOverflow.Clip,
-    softWrap: Boolean = true,
-    maxLines: Int = Int.single
-): Dp {
-    val context = LocalContext.current
-    val density = LocalDensity.current
-    val textMeasurer = rememberTextMeasurer()
-    val textPaint = remember(textMeasurer) {
-        TextPaint().also {
-            it.typeface = ResourcesCompat.getFont(context, R.font.y_clover_regular)
-            it.textSize = density.run { style.fontSize.toPx() }
-            val letterSpacingEm = style.letterSpacing.value  // letterSpacing의 em 값
-            val letterSpacingPx = letterSpacingEm * it.textSize  // letterSpacing을 px로 변환
-            it.letterSpacing = (letterSpacingPx / it.textSize).div(10f)  // px 단위를 em에 맞춰 설정
-        }
-    }
-
-println("wwwwwww333:${style.letterSpacing}}")
-//println("wwwwwwww00:${textPaint.letterSpacing}")
-    return remember(textMeasurer) {
-        with(density) {
-            maxOf {
-                val rect = floatArrayOf(0f)
-                textPaint.getTextWidths(it.toString(), 0, 1, rect)
-                rect.first().also {
-                    println("wwwwwww1:$it,,, ${it.roundedInt}")
-                }
-                textMeasurer.measure(
-                    text = "$it",
-                    style = style,
-                    overflow = overflow,
-                    softWrap = softWrap,
-                    maxLines = maxLines
-                )
-                    .size
-                    .width.also {
-                        println("wwwwwww2:$it")
-                    }
-            }
-                .toDp()
-        }
-    }
-}
-
-fun <T> List<T>.fifth() = get(Int.fifthIndex)
-fun <T> List<T>.fourth() = get(Int.fourthIndex)
-fun <T> List<T>.second() = get(Int.secondIndex)
-fun <T> List<T>.seventh() = get(Int.seventhIndex)
-fun <T> List<T>.sixth() = get(Int.sixthIndex)
-fun <T> List<T>.third() = get(Int.thirdIndex)
+fun <T> List<T>.fifth() = get(Int.`4`)
+fun <T> List<T>.fourth() = get(Int.`3`)
+fun <T> List<T>.second() = get(Int.`1`)
+fun <T> List<T>.seventh() = get(Int.`6`)
+fun <T> List<T>.sixth() = get(Int.`5`)
+fun <T> List<T>.third() = get(Int.`2`)

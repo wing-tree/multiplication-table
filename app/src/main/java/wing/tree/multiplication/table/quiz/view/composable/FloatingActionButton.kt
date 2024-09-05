@@ -23,15 +23,14 @@ import wing.tree.multiplication.table.R
 import wing.tree.multiplication.table.composable.noOperations
 import wing.tree.multiplication.table.extension.empty
 import wing.tree.multiplication.table.extension.extraExtraSmall
-import wing.tree.multiplication.table.extension.four
 import wing.tree.multiplication.table.extension.fourth
-import wing.tree.multiplication.table.extension.full
 import wing.tree.multiplication.table.extension.half
-import wing.tree.multiplication.table.extension.function.`is`
-import wing.tree.multiplication.table.extension.negated
+import wing.tree.multiplication.table.extension.property.`1`
+import wing.tree.multiplication.table.extension.property.`4`
+import wing.tree.multiplication.table.extension.property.isEven
+import wing.tree.multiplication.table.extension.property.negated
 import wing.tree.multiplication.table.extension.second
 import wing.tree.multiplication.table.extension.third
-import wing.tree.multiplication.table.extension.zero
 import wing.tree.multiplication.table.theme.palette
 
 @Composable
@@ -89,12 +88,11 @@ private fun Content(
         onClick = onClick,
         modifier = modifier
     ) {
-        val size = Int.four
+        val size = Int.`4`
         val colors = List(size) {
-            val targetState = if (currentPage `is` Int.zero) {
-                palette[it]
-            } else {
-                palette[it.plus(size)]
+            val targetState = when {
+                currentPage.isEven -> palette[it]
+                else -> palette[it.plus(size)]
             }
 
             animateColorAsState(
@@ -106,13 +104,13 @@ private fun Content(
 
         Column {
             Row(
-                modifier = Modifier.weight(Float.full),
+                modifier = Modifier.weight(Float.`1`),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Box(
                     modifier = Modifier
                         .fillMaxHeight()
-                        .weight(Float.full)
+                        .weight(Float.`1`)
                         .background(colors.first()),
                     contentAlignment = Alignment.Center
                 ) {
@@ -132,7 +130,7 @@ private fun Content(
                 Box(
                     modifier = Modifier
                         .fillMaxHeight()
-                        .weight(Float.full)
+                        .weight(Float.`1`)
                         .background(colors.second()),
                     contentAlignment = Alignment.Center
                 ) {
@@ -151,13 +149,13 @@ private fun Content(
             }
 
             Row(
-                modifier = Modifier.weight(Float.full),
+                modifier = Modifier.weight(Float.`1`),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Box(
                     modifier = Modifier
                         .fillMaxHeight()
-                        .weight(Float.full)
+                        .weight(Float.`1`)
                         .background(colors.third()),
                     contentAlignment = Alignment.Center
                 ) {
@@ -177,7 +175,7 @@ private fun Content(
                 Box(
                     modifier = Modifier
                         .fillMaxHeight()
-                        .weight(Float.full)
+                        .weight(Float.`1`)
                         .background(colors.fourth()),
                     contentAlignment = Alignment.Center
                 ) {

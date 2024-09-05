@@ -20,13 +20,13 @@ import com.valentinilk.shimmer.rememberShimmer
 import com.valentinilk.shimmer.shimmer
 import kotlinx.collections.immutable.persistentListOf
 import wing.tree.multiplication.table.constant.LowContrastContentAlpha
-import wing.tree.multiplication.table.extension.float
-import wing.tree.multiplication.table.extension.full
-import wing.tree.multiplication.table.extension.fullyTransparent
-import wing.tree.multiplication.table.extension.isNotZero
 import wing.tree.multiplication.table.extension.medium
-import wing.tree.multiplication.table.extension.onePercent
-import wing.tree.multiplication.table.extension.oneSecondInMilliseconds
+import wing.tree.multiplication.table.extension.property.`1`
+import wing.tree.multiplication.table.extension.property.float
+import wing.tree.multiplication.table.extension.property.fullyTransparent
+import wing.tree.multiplication.table.extension.property.isNotZero
+import wing.tree.multiplication.table.extension.property.onePercent
+import wing.tree.multiplication.table.extension.property.oneSecondInMilliseconds
 import kotlin.math.min
 
 private val shimmerTheme = defaultShimmerTheme.copy(
@@ -54,7 +54,7 @@ private fun ContentDrawScope.drawBottomFadingEdge(
     val fadingEdgeLength = min(length.toPx(), maxValue.minus(value).float)
     val startY = endY.minus(fadingEdgeLength)
 
-    if (fadingEdgeLength.isNotZero()) {
+    if (fadingEdgeLength.isNotZero) {
         drawRect(
             brush = Brush.verticalGradient(
                 colors = listOf(Color.Black, Color.Transparent),
@@ -99,7 +99,7 @@ fun Modifier.verticalFadingEdge(
     Modifier
         .graphicsLayer {
             alpha = with(Float) {
-                full.minus(onePercent)
+                `1`.minus(onePercent)
             }
         }.drawWithContent {
             drawContent()

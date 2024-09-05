@@ -7,6 +7,9 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.Dp
+import wing.tree.multiplication.table.extension.property.`2`
+import wing.tree.multiplication.table.extension.property.`3`
+import wing.tree.multiplication.table.extension.property.secondIndex
 
 private const val EMPTY = ""
 
@@ -14,7 +17,7 @@ val String.Companion.empty: String get() = EMPTY
 
 val String.intOrNull: Int? get() = toIntOrNull()
 
-fun String.fourth() = get(Int.fourthIndex)
+fun String.fourth() = get(Int.`3`)
 
 @Composable
 fun String.rememberWidth(style: TextStyle = LocalTextStyle.current): Dp {
@@ -50,4 +53,4 @@ fun String.width(style: TextStyle = LocalTextStyle.current): Dp {
 }
 
 fun String.second() = get(Int.secondIndex)
-fun String.third() = get(Int.thirdIndex)
+fun String.third() = get(Int.`2`)

@@ -26,15 +26,15 @@ import timber.log.Timber
 import wing.tree.multiplication.table.R
 import wing.tree.multiplication.table.composable.noOperations
 import wing.tree.multiplication.table.extension.extraSmall
-import wing.tree.multiplication.table.extension.full
-import wing.tree.multiplication.table.extension.property.isCompact
-import wing.tree.multiplication.table.extension.property.isNotCompact
 import wing.tree.multiplication.table.extension.function.launchGooglePlay
 import wing.tree.multiplication.table.extension.function.launchReviewFlow
-import wing.tree.multiplication.table.extension.property.marginValues
-import wing.tree.multiplication.table.extension.property.`2`
 import wing.tree.multiplication.table.extension.function.shareApp
-import wing.tree.multiplication.table.extension.two
+import wing.tree.multiplication.table.extension.property.`1`
+import wing.tree.multiplication.table.extension.property.`2`
+import wing.tree.multiplication.table.extension.property.`4`
+import wing.tree.multiplication.table.extension.property.isCompact
+import wing.tree.multiplication.table.extension.property.isNotCompact
+import wing.tree.multiplication.table.extension.property.marginValues
 import wing.tree.multiplication.table.main.view.composable.BottomBar
 import wing.tree.multiplication.table.main.view.composable.NavigationRail
 import wing.tree.multiplication.table.main.view.composable.PageContent
@@ -61,6 +61,7 @@ class MainActivity : ComponentActivity() {
                     launchGooglePlay()
                 }
             )
+
             Action.Share -> shareApp()
             else -> noOperations
         }
@@ -76,7 +77,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             MultiplicationTableTheme {
                 val state = rememberPagerState {
-                    Int.two
+                    Int.`4`
                 }
 
                 val windowSizeClass = calculateWindowSizeClass(this)
@@ -117,7 +118,7 @@ class MainActivity : ComponentActivity() {
                         ) {
                             VerticalPager(
                                 state = state,
-                                modifier = Modifier.weight(Float.full),
+                                modifier = Modifier.weight(Float.`1`),
                                 contentPadding = contentPadding,
                                 beyondBoundsPageCount = Int.`2`
                             ) { page ->

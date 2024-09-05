@@ -24,11 +24,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.core.content.res.ResourcesCompat
 import wing.tree.multiplication.table.R
 import wing.tree.multiplication.table.constant.EQUALS_SIGN
@@ -36,14 +34,12 @@ import wing.tree.multiplication.table.constant.MAXIMUM_MULTIPLICAND
 import wing.tree.multiplication.table.constant.MINIMUM_MULTIPLICAND
 import wing.tree.multiplication.table.constant.MULTIPLICATION_SIGN
 import wing.tree.multiplication.table.extension.extraSmall
-import wing.tree.multiplication.table.extension.full
+import wing.tree.multiplication.table.extension.function.isLessThan
+import wing.tree.multiplication.table.extension.function.isLessThanOrEqualTo
 import wing.tree.multiplication.table.extension.half
-import wing.tree.multiplication.table.extension.isLessThan
-import wing.tree.multiplication.table.extension.isLessThanOrEqualTo
 import wing.tree.multiplication.table.extension.medium
-import wing.tree.multiplication.table.extension.property.digit
+import wing.tree.multiplication.table.extension.property.`1`
 import wing.tree.multiplication.table.extension.property.height
-import wing.tree.multiplication.table.extension.rememberMaxWidth
 import wing.tree.multiplication.table.top.level.containerColor
 import wing.tree.multiplication.table.top.level.multiplicationMaxWidth
 import wing.tree.multiplication.table.top.level.rememberMultiplicationMaxWidth
@@ -89,11 +85,10 @@ fun MultiplicationTable(
                 Column(
                     modifier = Modifier
                         .width(width = maxWidth)
-                        .weight(weight = Float.full)
+                        .weight(weight = Float.`1`)
                         .background(color = colorScheme.surface)
                         .padding(horizontal = Dp.extraSmall)
-                        .padding(start = (width - rwidth).half)
-                    ,
+                        .padding(start = (width - rwidth).half),
                     verticalArrangement = Arrangement.Center
                 ) {
                     for (multiplicand in MINIMUM_MULTIPLICAND..MAXIMUM_MULTIPLICAND) {
@@ -129,21 +124,11 @@ private fun Multiplication(
     )
 }
 
-var goodTextSize: TextUnit? = null
-
 @Composable
 fun calculateFontSizeFromTotalHeight(
     maxHeight: Dp,
     maxWidth: Dp
 ): TextUnit = with(LocalDensity.current) {
-    println("aaaaa11")
-    goodTextSize?.let {
-        return it
-    }
-
-    var c1 = 0
-    var c2 = 0
-
     val context = LocalContext.current
     val textStyle = LocalTextStyle.current
 
@@ -162,7 +147,6 @@ fun calculateFontSizeFromTotalHeight(
         textPaint.textSize = textSize
 
         height = textPaint.fontMetrics.height
-        c1++
     }
     println("aaaaa11--11")
     var width = multiplicationMaxWidth(textStyle.copy(fontSize = textSize.toSp()))
@@ -171,13 +155,9 @@ fun calculateFontSizeFromTotalHeight(
         textSize -= 1f
 
         width = multiplicationMaxWidth(textStyle.copy(fontSize = textSize.toSp()))
-        c2++
     }
     println("aaaaa11--22")
-    return remember {
-        textSize.toSp().also {
-            goodTextSize = it
-            println("aaaaa22 $c1,$c2")
-        }
+    return remember(maxWidth, maxHeight) {
+        textSize.toSp()
     }
 }

@@ -4,6 +4,7 @@ package wing.tree.multiplication.table.extension
 
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import wing.tree.multiplication.table.extension.property.`2`
 
 private val EIGHT = 8.0.dp
 private val FOUR = 4.0.dp
@@ -21,4 +22,4 @@ val Dp.Companion.medium: Dp get() = SIXTEEN
 val Dp.Companion.small: Dp get() = TWELVE
 val Dp.Companion.zero: Dp get() = ZERO
 
-val Dp.half: Dp get() = div(Int.two)
+val Dp.half: Dp get() = div(Int.`2`)

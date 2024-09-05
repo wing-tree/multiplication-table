@@ -7,13 +7,13 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import wing.tree.multiplication.table.extension.property.`7`
 import wing.tree.multiplication.table.extension.property.hundreds
 import wing.tree.multiplication.table.extension.property.immutableList
-import wing.tree.multiplication.table.extension.property.milliseconds
-import wing.tree.multiplication.table.extension.property.`7`
 import wing.tree.multiplication.table.quiz.QuizGenerator
 import wing.tree.multiplication.table.quiz.model.Question
 import wing.tree.multiplication.table.quiz.state.QuizState
+import kotlin.time.Duration.Companion.milliseconds
 
 class QuizViewModel : ViewModel() {
     private val quiz = QuizGenerator.run().immutableList

@@ -28,8 +28,8 @@ import com.google.android.gms.ads.LoadAdError
 import wing.tree.multiplication.table.BuildConfig
 import wing.tree.multiplication.table.R
 import wing.tree.multiplication.table.extension.empty
-import wing.tree.multiplication.table.extension.fullyOpaque
-import wing.tree.multiplication.table.extension.fullyTransparent
+import wing.tree.multiplication.table.extension.property.fullyOpaque
+import wing.tree.multiplication.table.extension.property.fullyTransparent
 import wing.tree.multiplication.table.extension.zero
 
 @Composable

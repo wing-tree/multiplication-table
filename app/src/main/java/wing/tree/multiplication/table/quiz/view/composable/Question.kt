@@ -36,12 +36,12 @@ import wing.tree.multiplication.table.constant.MULTIPLICATION_SIGN
 import wing.tree.multiplication.table.extension.empty
 import wing.tree.multiplication.table.extension.extraExtraSmall
 import wing.tree.multiplication.table.extension.extraSmall
-import wing.tree.multiplication.table.extension.full
-import wing.tree.multiplication.table.extension.fullyTransparent
-import wing.tree.multiplication.table.extension.intOrNull
 import wing.tree.multiplication.table.extension.function.`is`
-import wing.tree.multiplication.table.extension.medium
 import wing.tree.multiplication.table.extension.function.not
+import wing.tree.multiplication.table.extension.intOrNull
+import wing.tree.multiplication.table.extension.medium
+import wing.tree.multiplication.table.extension.property.`1`
+import wing.tree.multiplication.table.extension.property.fullyTransparent
 import wing.tree.multiplication.table.model.Action
 import wing.tree.multiplication.table.quiz.model.Question
 import wing.tree.multiplication.table.quiz.state.QuizState
@@ -108,7 +108,7 @@ internal fun Question(
                         }
                     },
                     modifier = Modifier
-                        .weight(Float.full)
+                        .weight(Float.`1`)
                         .background(
                             color = Color.White,
                             shape = RoundedCornerShape(Dp.extraExtraSmall)
