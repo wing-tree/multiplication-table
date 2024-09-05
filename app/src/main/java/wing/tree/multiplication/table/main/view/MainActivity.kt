@@ -32,6 +32,7 @@ import wing.tree.multiplication.table.extension.isNotCompact
 import wing.tree.multiplication.table.extension.launchGooglePlay
 import wing.tree.multiplication.table.extension.launchReviewFlow
 import wing.tree.multiplication.table.extension.marginValues
+import wing.tree.multiplication.table.extension.property.`2`
 import wing.tree.multiplication.table.extension.shareApp
 import wing.tree.multiplication.table.extension.two
 import wing.tree.multiplication.table.main.view.composable.BottomBar
@@ -117,7 +118,8 @@ class MainActivity : ComponentActivity() {
                             VerticalPager(
                                 state = state,
                                 modifier = Modifier.weight(Float.full),
-                                contentPadding = contentPadding
+                                contentPadding = contentPadding,
+                                beyondBoundsPageCount = Int.`2`
                             ) { page ->
                                 PageContent(
                                     page = page,
