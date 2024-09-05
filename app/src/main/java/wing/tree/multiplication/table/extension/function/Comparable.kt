@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package wing.tree.multiplication.table.extension
+package wing.tree.multiplication.table.extension.function
 
 infix fun <T : Comparable<T>> T.isGreaterThan(other: T): Boolean = this > other
 infix fun <T : Comparable<T>> T.isGreaterThanOrEqualTo(other: T): Boolean = this >= other

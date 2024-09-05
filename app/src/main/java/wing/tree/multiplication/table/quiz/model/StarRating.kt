@@ -4,8 +4,8 @@ import wing.tree.multiplication.table.constant.PERFECT_SCORE
 import wing.tree.multiplication.table.extension.five
 import wing.tree.multiplication.table.extension.four
 import wing.tree.multiplication.table.extension.half
-import wing.tree.multiplication.table.extension.`is`
-import wing.tree.multiplication.table.extension.isGreaterThanOrEqualTo
+import wing.tree.multiplication.table.extension.function.`is`
+import wing.tree.multiplication.table.extension.function.isGreaterThanOrEqualTo
 import wing.tree.multiplication.table.extension.one
 import wing.tree.multiplication.table.extension.quarter
 import wing.tree.multiplication.table.extension.three

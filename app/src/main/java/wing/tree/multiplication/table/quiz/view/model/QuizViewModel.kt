@@ -7,10 +7,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import wing.tree.multiplication.table.extension.hundreds
-import wing.tree.multiplication.table.extension.immutableList
-import wing.tree.multiplication.table.extension.milliseconds
-import wing.tree.multiplication.table.extension.seven
+import wing.tree.multiplication.table.extension.property.hundreds
+import wing.tree.multiplication.table.extension.property.immutableList
+import wing.tree.multiplication.table.extension.property.milliseconds
+import wing.tree.multiplication.table.extension.property.`7`
 import wing.tree.multiplication.table.quiz.QuizGenerator
 import wing.tree.multiplication.table.quiz.model.Question
 import wing.tree.multiplication.table.quiz.state.QuizState
@@ -44,7 +44,7 @@ class QuizViewModel : ViewModel() {
         viewModelScope.launch {
             _quizState.value = QuizState.Clearing(quiz)
 
-            delay(Long.seven.hundreds.milliseconds)
+            delay(Long.`7`.hundreds.milliseconds)
 
             _quizState.update {
                 QuizState.InProgress(it.quiz.onEach(Question::clear))

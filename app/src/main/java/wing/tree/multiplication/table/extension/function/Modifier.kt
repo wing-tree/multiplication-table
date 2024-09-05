@@ -1,4 +1,4 @@
-package wing.tree.multiplication.table.extension
+package wing.tree.multiplication.table.extension.function
 
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
@@ -20,6 +20,13 @@ import com.valentinilk.shimmer.rememberShimmer
 import com.valentinilk.shimmer.shimmer
 import kotlinx.collections.immutable.persistentListOf
 import wing.tree.multiplication.table.constant.LowContrastContentAlpha
+import wing.tree.multiplication.table.extension.float
+import wing.tree.multiplication.table.extension.full
+import wing.tree.multiplication.table.extension.fullyTransparent
+import wing.tree.multiplication.table.extension.isNotZero
+import wing.tree.multiplication.table.extension.medium
+import wing.tree.multiplication.table.extension.onePercent
+import wing.tree.multiplication.table.extension.oneSecondInMilliseconds
 import kotlin.math.min
 
 private val shimmerTheme = defaultShimmerTheme.copy(

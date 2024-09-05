@@ -1,9 +1,9 @@
 package wing.tree.multiplication.table.quiz.model
 
 import androidx.compose.runtime.mutableStateOf
-import wing.tree.multiplication.table.extension.`is`
-import wing.tree.multiplication.table.extension.isNotNull
-import wing.tree.multiplication.table.extension.not
+import wing.tree.multiplication.table.extension.function.`is`
+import wing.tree.multiplication.table.extension.function.isNotNull
+import wing.tree.multiplication.table.extension.function.not
 
 data class Question(
     val timesTable: Int,

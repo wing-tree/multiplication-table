@@ -1,4 +1,4 @@
-package wing.tree.multiplication.table.extension
+package wing.tree.multiplication.table.extension.function
 
 import android.app.Activity
 import android.content.ActivityNotFoundException
@@ -7,8 +7,6 @@ import android.content.Intent
 import android.net.Uri
 import com.google.android.play.core.review.ReviewManagerFactory
 import wing.tree.multiplication.table.R
-
-val Activity.isNotFinishing: Boolean get() = isFinishing.not()
 
 fun Activity.launchGooglePlay() {
     try {

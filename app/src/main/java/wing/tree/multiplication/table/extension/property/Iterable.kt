@@ -1,4 +1,4 @@
-package wing.tree.multiplication.table.extension
+package wing.tree.multiplication.table.extension.property
 
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList

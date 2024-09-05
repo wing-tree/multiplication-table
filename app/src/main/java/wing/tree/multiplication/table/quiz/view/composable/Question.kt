@@ -39,9 +39,9 @@ import wing.tree.multiplication.table.extension.extraSmall
 import wing.tree.multiplication.table.extension.full
 import wing.tree.multiplication.table.extension.fullyTransparent
 import wing.tree.multiplication.table.extension.intOrNull
-import wing.tree.multiplication.table.extension.`is`
+import wing.tree.multiplication.table.extension.function.`is`
 import wing.tree.multiplication.table.extension.medium
-import wing.tree.multiplication.table.extension.not
+import wing.tree.multiplication.table.extension.function.not
 import wing.tree.multiplication.table.model.Action
 import wing.tree.multiplication.table.quiz.model.Question
 import wing.tree.multiplication.table.quiz.state.QuizState

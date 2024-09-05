@@ -18,7 +18,7 @@ import wing.tree.multiplication.table.R
 import wing.tree.multiplication.table.composable.Icon
 import wing.tree.multiplication.table.constant.NUMBER_OF_QUESTIONS
 import wing.tree.multiplication.table.constant.PERFECT_SCORE
-import wing.tree.multiplication.table.extension.shimmer
+import wing.tree.multiplication.table.extension.function.shimmer
 import wing.tree.multiplication.table.extension.small
 import wing.tree.multiplication.table.quiz.model.StarRating
 import wing.tree.multiplication.table.quiz.state.QuizState

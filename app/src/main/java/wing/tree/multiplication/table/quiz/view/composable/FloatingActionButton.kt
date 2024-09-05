@@ -27,7 +27,7 @@ import wing.tree.multiplication.table.extension.four
 import wing.tree.multiplication.table.extension.fourth
 import wing.tree.multiplication.table.extension.full
 import wing.tree.multiplication.table.extension.half
-import wing.tree.multiplication.table.extension.`is`
+import wing.tree.multiplication.table.extension.function.`is`
 import wing.tree.multiplication.table.extension.negated
 import wing.tree.multiplication.table.extension.second
 import wing.tree.multiplication.table.extension.third
