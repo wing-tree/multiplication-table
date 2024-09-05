@@ -34,5 +34,20 @@ fun String.rememberWidth(style: TextStyle = LocalTextStyle.current): Dp {
     }
 }
 
+@Composable
+fun String.width(style: TextStyle = LocalTextStyle.current): Dp {
+    val density = LocalDensity.current
+
+    val size = rememberTextMeasurer().measure(
+        text = this,
+        style = style
+    )
+        .size
+
+    return with(density) {
+        size.width.toDp()
+    }
+}
+
 fun String.second() = get(Int.secondIndex)
 fun String.third() = get(Int.thirdIndex)
