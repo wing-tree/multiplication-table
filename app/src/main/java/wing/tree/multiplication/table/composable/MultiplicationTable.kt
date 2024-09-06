@@ -165,7 +165,6 @@ fun calculateFontSize(
     val textStyle = LocalTextStyle.current
 
     var textSize = Float.`1`
-
     val textPaint = TextPaint().also {
         it.typeface = ResourcesCompat.getFont(context, R.font.y_clover_regular)
         it.textSize = textSize
