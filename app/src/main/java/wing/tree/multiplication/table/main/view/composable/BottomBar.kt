@@ -7,7 +7,7 @@ import androidx.compose.ui.Modifier
 import wing.tree.multiplication.table.R
 import wing.tree.multiplication.table.composable.Icon
 import wing.tree.multiplication.table.main.action.MainAction
-import wing.tree.multiplication.table.quiz.view.composable.FloatingActionButton
+import wing.tree.multiplication.table.test.view.composable.FloatingActionButton
 
 @Composable
 internal fun BottomBar(
