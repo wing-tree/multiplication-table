@@ -6,20 +6,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import wing.tree.multiplication.table.R
 import wing.tree.multiplication.table.composable.Icon
-import wing.tree.multiplication.table.model.Action
+import wing.tree.multiplication.table.main.action.MainAction
 import wing.tree.multiplication.table.quiz.view.composable.FloatingActionButton
 
 @Composable
 internal fun BottomBar(
     currentPage: Int,
-    onAction: (Action) -> Unit,
+    onAction: (MainAction) -> Unit,
     modifier: Modifier = Modifier
 ) {
     BottomAppBar(
         actions = {
             IconButton(
                 onClick = {
-                    onAction(Action.RateReview)
+                    onAction(MainAction.RateReview)
                 }
             ) {
                 Icon(id = R.drawable.round_rate_review_24)
@@ -27,7 +27,7 @@ internal fun BottomBar(
 
             IconButton(
                 onClick = {
-                    onAction(Action.Share)
+                    onAction(MainAction.Share)
                 }
             ) {
                 Icon(id = R.drawable.round_share_24)
@@ -38,7 +38,7 @@ internal fun BottomBar(
             FloatingActionButton(
                 currentPage = currentPage,
                 onClick = {
-                    onAction(Action.Quiz)
+                    onAction(MainAction.Quiz)
                 }
             )
         }

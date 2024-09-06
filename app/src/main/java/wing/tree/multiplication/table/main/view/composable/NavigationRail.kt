@@ -14,13 +14,13 @@ import wing.tree.multiplication.table.R
 import wing.tree.multiplication.table.composable.Icon
 import wing.tree.multiplication.table.extension.medium
 import wing.tree.multiplication.table.extension.small
-import wing.tree.multiplication.table.model.Action
+import wing.tree.multiplication.table.main.action.MainAction
 import wing.tree.multiplication.table.quiz.view.composable.FloatingActionButton
 
 @Composable
 internal fun NavigationRail(
     currentPage: Int,
-    onAction: (Action) -> Unit,
+    onAction: (MainAction) -> Unit,
     modifier: Modifier = Modifier
 ) {
     NavigationRail(
@@ -29,7 +29,7 @@ internal fun NavigationRail(
             FloatingActionButton(
                 currentPage = currentPage,
                 onClick = {
-                    onAction(Action.Quiz)
+                    onAction(MainAction.Quiz)
                 },
                 modifier = Modifier.padding(vertical = Dp.medium)
             )
@@ -48,7 +48,7 @@ internal fun NavigationRail(
                     Icon(id = R.drawable.round_rate_review_24)
                 },
                 onClick = {
-                    onAction(Action.RateReview)
+                    onAction(MainAction.RateReview)
                 }
             )
 
@@ -58,7 +58,7 @@ internal fun NavigationRail(
                     Icon(id = R.drawable.round_share_24)
                 },
                 onClick = {
-                    onAction(Action.Share)
+                    onAction(MainAction.Share)
                 }
             )
         }
