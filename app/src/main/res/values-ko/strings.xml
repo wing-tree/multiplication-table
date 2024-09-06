@@ -4,6 +4,8 @@
     <string name="check">정답 확인</string>
     <string name="share_app">앱 공유하기</string>
     <string name="solve_again">다시 풀기</string>
+    <string name="speed_quiz">스피드 퀴즈</string>
+    <string name="test">테스트</string>
     <string name="thank_you_for_your_valuable_review">소중한 리뷰 감사합니다</string>
     <string name="times_table">%d단</string>
 </resources>
