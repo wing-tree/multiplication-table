@@ -2,7 +2,7 @@ package wing.tree.multiplication.table.quiz.state
 
 import androidx.compose.runtime.Stable
 import kotlinx.collections.immutable.ImmutableList
-import wing.tree.multiplication.table.quiz.model.Question
+import wing.tree.multiplication.table.model.Question
 
 @Stable
 sealed interface QuizState {

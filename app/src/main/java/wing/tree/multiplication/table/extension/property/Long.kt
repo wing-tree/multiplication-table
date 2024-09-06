@@ -41,6 +41,7 @@ val Long.Companion.oneMinuteInSeconds: Long get() = `1`.toDuration(DurationUnit.
 val Long.Companion.oneSecondInMilliseconds: Long get() = oneThousand
 val Long.Companion.oneThousand: Long get() = 1000L
 val Long.Companion.none: Long get() = `0`
+val Long.Companion.thirtySecondsInMilliseconds: Long get() = `30`.toDuration(DurationUnit.SECONDS).inWholeMilliseconds
 val Long.Companion.threeMinutesInMilliseconds: Long get() = `3`.toDuration(DurationUnit.MINUTES).inWholeMilliseconds
 val Long.Companion.threeSecondsInMilliseconds: Long get() = `3`.toDuration(DurationUnit.SECONDS).inWholeMilliseconds
 val Long.Companion.twoSecondsInMilliseconds: Long get() = oneThousand.times(Long.`2`)

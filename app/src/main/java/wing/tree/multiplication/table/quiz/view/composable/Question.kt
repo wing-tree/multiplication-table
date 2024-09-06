@@ -43,13 +43,13 @@ import wing.tree.multiplication.table.extension.medium
 import wing.tree.multiplication.table.extension.property.`1`
 import wing.tree.multiplication.table.extension.property.fullyTransparent
 import wing.tree.multiplication.table.model.Action
-import wing.tree.multiplication.table.quiz.model.Question
+import wing.tree.multiplication.table.model.Question
 import wing.tree.multiplication.table.quiz.state.QuizState
 import wing.tree.multiplication.table.theme.pastelGreen
 import wing.tree.multiplication.table.theme.pastelRed
 import wing.tree.multiplication.table.top.level.containerColor
 
-private const val MAXIMUM_DIGIT_COUNT = 2
+private const val MAXIMUM_DIGIT_COUNT = 3
 
 private val regex = Regex("^\\d*\$")
 

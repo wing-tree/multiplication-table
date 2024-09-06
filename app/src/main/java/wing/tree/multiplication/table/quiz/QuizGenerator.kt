@@ -5,7 +5,7 @@ import wing.tree.multiplication.table.constant.MAXIMUM_TIMES_TABLE
 import wing.tree.multiplication.table.constant.MINIMUM_MULTIPLICAND
 import wing.tree.multiplication.table.constant.MINIMUM_TIMES_TABLE
 import wing.tree.multiplication.table.constant.NUMBER_OF_QUESTIONS
-import wing.tree.multiplication.table.quiz.model.Question
+import wing.tree.multiplication.table.model.Question
 import kotlin.random.Random
 
 object QuizGenerator {

@@ -1,4 +1,4 @@
-package wing.tree.multiplication.table.quiz.model
+package wing.tree.multiplication.table.model
 
 import androidx.compose.runtime.mutableStateOf
 import wing.tree.multiplication.table.extension.function.`is`

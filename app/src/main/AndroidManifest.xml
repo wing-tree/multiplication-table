@@ -26,6 +26,7 @@
         </activity>
 
         <activity android:name=".quiz.view.QuizActivity" />
+        <activity android:name=".speed.quiz.view.SpeedQuizActivity" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"

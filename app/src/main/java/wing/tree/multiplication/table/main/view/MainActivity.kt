@@ -14,13 +14,23 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.VerticalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.window.Dialog
 import androidx.core.view.WindowCompat
 import timber.log.Timber
 import wing.tree.multiplication.table.R
@@ -35,38 +45,17 @@ import wing.tree.multiplication.table.extension.property.`4`
 import wing.tree.multiplication.table.extension.property.isCompact
 import wing.tree.multiplication.table.extension.property.isNotCompact
 import wing.tree.multiplication.table.extension.property.marginValues
+import wing.tree.multiplication.table.main.action.MainAction
+import wing.tree.multiplication.table.main.state.DialogState
 import wing.tree.multiplication.table.main.view.composable.BottomBar
 import wing.tree.multiplication.table.main.view.composable.NavigationRail
 import wing.tree.multiplication.table.main.view.composable.PageContent
-import wing.tree.multiplication.table.model.Action
+import wing.tree.multiplication.table.model.Key
 import wing.tree.multiplication.table.quiz.view.QuizActivity
+import wing.tree.multiplication.table.speed.quiz.view.SpeedQuizActivity
 import wing.tree.multiplication.table.theme.MultiplicationTableTheme
 
 class MainActivity : ComponentActivity() {
-    private val onAction: (Action) -> Unit = {
-        when (it) {
-            Action.Quiz -> startActivity(Intent(this, QuizActivity::class.java))
-            Action.RateReview -> launchReviewFlow(
-                onSuccess = {
-                    Toast.makeText(
-                        this,
-                        R.string.thank_you_for_your_valuable_review,
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
-                },
-                onFailure = { exception ->
-                    Timber.e(exception)
-
-                    launchGooglePlay()
-                }
-            )
-
-            Action.Share -> shareApp()
-            else -> noOperations
-        }
-    }
-
     @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,6 +65,41 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             MultiplicationTableTheme {
+                var dialogState by remember {
+                    mutableStateOf<DialogState>(DialogState.Dismissed)
+                }
+
+                val onAction: (MainAction) -> Unit = {
+                    when (it) {
+                        MainAction.Quiz -> dialogState = DialogState.Showing
+                        MainAction.RateReview -> launchReviewFlow(
+                            onSuccess = {
+                                Toast.makeText(
+                                    this,
+                                    R.string.thank_you_for_your_valuable_review,
+                                    Toast.LENGTH_SHORT
+                                )
+                                    .show()
+                            },
+                            onFailure = { exception ->
+                                Timber.e(exception)
+
+                                launchGooglePlay()
+                            }
+                        )
+
+                        MainAction.Share -> shareApp()
+                        MainAction.SpeedQuiz -> startActivity(
+                            Intent(this, SpeedQuizActivity::class.java).apply {
+                                putExtra(Key.END_INCLUSIVE(), 3)
+                                putExtra(Key.START(), 2)
+                            }
+                        )
+
+                        MainAction.Test -> startActivity(Intent(this, QuizActivity::class.java))
+                    }
+                }
+
                 val state = rememberPagerState {
                     Int.`4`
                 }
@@ -130,6 +154,52 @@ class MainActivity : ComponentActivity() {
                                 )
                             }
                         }
+                    }
+                }
+
+                Dialog(
+                    state = dialogState,
+                    onDismissRequest = {
+                        dialogState = DialogState.Dismissed
+                    },
+                    onAction = onAction
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun Dialog(
+    state: DialogState,
+    onDismissRequest: () -> Unit,
+    onAction: (MainAction) -> Unit
+) {
+    when (state) {
+        DialogState.Dismissed -> noOperations()
+        else -> Dialog(onDismissRequest = onDismissRequest) {
+            Surface {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    ElevatedButton(
+                        onClick = {
+                            onAction(MainAction.SpeedQuiz)
+                        }
+                    ) {
+                        Text(
+                            text = stringResource(R.string.speed_quiz)
+                        )
+                    }
+
+                    ElevatedButton(
+                        onClick = {
+                            onAction(MainAction.Test)
+                        }
+                    ) {
+                        Text(
+                            text = stringResource(R.string.test)
+                        )
                     }
                 }
             }
