@@ -1,4 +1,4 @@
-package wing.tree.multiplication.table.quiz.view.composable
+package wing.tree.multiplication.table.test.view.composable
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
