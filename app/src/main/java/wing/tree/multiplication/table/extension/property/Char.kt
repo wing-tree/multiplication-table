@@ -19,4 +19,5 @@ val Char.Companion.digit: List<Char>
 val Char.Companion.empty: Char get() = MIN_VALUE
 val Char.Companion.equalsSign: Char get() = '='
 val Char.Companion.multiplicationSign: Char get() = '×'
+val Char.Companion.widestDigit: Char get() = Char.`4`
 val Char.Companion.zeroWidthSpace: Char get() = '\u200B'
