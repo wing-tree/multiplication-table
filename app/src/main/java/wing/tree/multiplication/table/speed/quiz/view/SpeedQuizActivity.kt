@@ -28,7 +28,7 @@ class SpeedQuizActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MultiplicationTableTheme {
+            MultiplicationTableTheme(activity = this) {
                 val sideEffect by viewModel.sideEffect.collectAsState(null)
                 val state by viewModel.state.collectAsState()
 

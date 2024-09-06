@@ -64,7 +64,7 @@ class MainActivity : ComponentActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
         setContent {
-            MultiplicationTableTheme {
+            MultiplicationTableTheme(activity = this) {
                 var dialogState by remember {
                     mutableStateOf<DialogState>(DialogState.Dismissed)
                 }

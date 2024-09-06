@@ -41,7 +41,7 @@ class QuizActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         interstitialAdLoader.load(this)
         setContent {
-            MultiplicationTableTheme {
+            MultiplicationTableTheme(activity = this) {
                 val coroutineScope = rememberCoroutineScope()
                 val state by viewModel.state.collectAsState()
 
