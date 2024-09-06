@@ -1,8 +1,7 @@
-package wing.tree.multiplication.table.quiz.view.composable
+package wing.tree.multiplication.table.test.view.composable
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme.colorScheme
@@ -20,8 +19,9 @@ import wing.tree.multiplication.table.constant.NUMBER_OF_QUESTIONS
 import wing.tree.multiplication.table.constant.PERFECT_SCORE
 import wing.tree.multiplication.table.extension.function.shimmer
 import wing.tree.multiplication.table.extension.small
-import wing.tree.multiplication.table.quiz.model.StarRating
-import wing.tree.multiplication.table.quiz.state.QuizState
+import wing.tree.multiplication.table.model.Question
+import wing.tree.multiplication.table.test.model.StarRating
+import wing.tree.multiplication.table.test.state.TestState
 import wing.tree.multiplication.table.theme.pastelGreen
 
 @Composable
@@ -34,7 +34,6 @@ internal fun Score(
     ElevatedCard(modifier = modifier) {
         Column(
             modifier = Modifier
-                .fillMaxSize()
                 .shimmer()
                 .padding(vertical = Dp.small),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -42,8 +41,7 @@ internal fun Score(
             Text(
                 text = stringResource(id = R.string.score),
                 color = colorScheme.onSurfaceVariant,
-                fontWeight = FontWeight.Bold,
-                style = typography.labelMedium
+                fontWeight = FontWeight.Bold
             )
 
             Text(
@@ -65,11 +63,11 @@ internal fun Score(
 
 @Composable
 internal fun Score(
-    state: QuizState,
+    state: TestState,
     modifier: Modifier = Modifier
 ) {
-    val correct = state.correct()
-    val score = PERFECT_SCORE.div(NUMBER_OF_QUESTIONS).times(correct.count())
+    val count = state.test.count(Question::isCorrect)
+    val score = PERFECT_SCORE.div(NUMBER_OF_QUESTIONS).times(count)
 
     Score(
         score = score,
