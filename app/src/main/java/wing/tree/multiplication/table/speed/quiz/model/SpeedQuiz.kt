@@ -9,6 +9,7 @@ import wing.tree.multiplication.table.constant.MAXIMUM_MULTIPLICAND
 import wing.tree.multiplication.table.constant.MINIMUM_MULTIPLICAND
 import wing.tree.multiplication.table.extension.property.firstIndex
 import wing.tree.multiplication.table.model.Question
+import wing.tree.multiplication.table.model.Submission
 import kotlin.random.Random
 
 class SpeedQuiz(vararg elements: Question) : PersistentList<Question> by persistentListOf(elements = elements) {
@@ -23,8 +24,8 @@ class SpeedQuiz(vararg elements: Question) : PersistentList<Question> by persist
             .toTypedArray()
     )
 
-    val random: Question get() = random(Random.Default).copy()
-    val submission = mutableListOf<Question>()
+    val random: Question get() = random(Random(System.currentTimeMillis())).copy()
+    val submission = Submission()
 
     var index by mutableIntStateOf(Int.firstIndex)
 

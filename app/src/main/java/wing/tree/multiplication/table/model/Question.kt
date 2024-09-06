@@ -10,19 +10,19 @@ data class Question(
     val multiplicand: Int
 ) {
     val answer = mutableStateOf<Int?>(null)
-    val answered: Boolean get() = answer.value.isNotNull()
-    val correct: Boolean get() = when {
-        unanswered -> false
+    val isAnswered: Boolean get() = answer.value.isNotNull()
+    val isCorrect: Boolean get() = when {
+        isUnanswered -> false
         else -> product `is` answer.value
     }
 
-    val incorrect: Boolean get() = when {
-        unanswered -> false
+    val isIncorrect: Boolean get() = when {
+        isUnanswered -> false
         else -> product not answer.value
     }
 
+    val isUnanswered: Boolean get() = isAnswered.not()
     val product = timesTable.times(multiplicand)
-    val unanswered: Boolean get() = answered.not()
 
     fun clear() {
         answer.value = null

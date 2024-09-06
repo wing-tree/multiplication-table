@@ -14,13 +14,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.VerticalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -28,13 +24,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.window.Dialog
 import androidx.core.view.WindowCompat
 import timber.log.Timber
 import wing.tree.multiplication.table.R
-import wing.tree.multiplication.table.composable.noOperations
 import wing.tree.multiplication.table.extension.extraSmall
 import wing.tree.multiplication.table.extension.function.launchGooglePlay
 import wing.tree.multiplication.table.extension.function.launchReviewFlow
@@ -48,12 +41,14 @@ import wing.tree.multiplication.table.extension.property.marginValues
 import wing.tree.multiplication.table.main.action.MainAction
 import wing.tree.multiplication.table.main.state.DialogState
 import wing.tree.multiplication.table.main.view.composable.BottomBar
+import wing.tree.multiplication.table.main.view.composable.Dialog
 import wing.tree.multiplication.table.main.view.composable.NavigationRail
 import wing.tree.multiplication.table.main.view.composable.PageContent
 import wing.tree.multiplication.table.model.Key
 import wing.tree.multiplication.table.quiz.view.QuizActivity
 import wing.tree.multiplication.table.speed.quiz.view.SpeedQuizActivity
 import wing.tree.multiplication.table.theme.MultiplicationTableTheme
+import wing.tree.multiplication.table.top.level.property.fillMaxSize
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3WindowSizeClassApi::class)
@@ -78,7 +73,13 @@ class MainActivity : ComponentActivity() {
                             }
                         )
 
-                        MainAction.Navigate.ToTest -> startActivity(Intent(this, QuizActivity::class.java))
+                        MainAction.Navigate.ToTest -> startActivity(
+                            Intent(
+                                this,
+                                QuizActivity::class.java
+                            )
+                        )
+
                         MainAction.Quiz -> dialogState = DialogState.Showing
                         MainAction.RateReview -> launchReviewFlow(
                             onSuccess = {
@@ -148,9 +149,7 @@ class MainActivity : ComponentActivity() {
                             ) { page ->
                                 PageContent(
                                     page = page,
-                                    modifier = Modifier
-                                        .fillMaxSize()
-                                        .padding(vertical = Dp.extraSmall)
+                                    modifier = fillMaxSize.padding(vertical = Dp.extraSmall)
                                 )
                             }
                         }
@@ -162,46 +161,12 @@ class MainActivity : ComponentActivity() {
                     onDismissRequest = {
                         dialogState = DialogState.Dismissed
                     },
-                    onAction = onAction
+                    onAction = {
+                        dialogState = DialogState.Dismissed
+
+                        onAction(it)
+                    }
                 )
-            }
-        }
-    }
-}
-
-@Composable
-private fun Dialog(
-    state: DialogState,
-    onDismissRequest: () -> Unit,
-    onAction: (MainAction) -> Unit
-) {
-    when (state) {
-        DialogState.Dismissed -> noOperations()
-        else -> Dialog(onDismissRequest = onDismissRequest) {
-            Surface {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    ElevatedButton(
-                        onClick = {
-                            onAction(MainAction.Navigate.ToSpeedQuiz)
-                        }
-                    ) {
-                        Text(
-                            text = stringResource(R.string.speed_quiz)
-                        )
-                    }
-
-                    ElevatedButton(
-                        onClick = {
-                            onAction(MainAction.Navigate.ToTest)
-                        }
-                    ) {
-                        Text(
-                            text = stringResource(R.string.test)
-                        )
-                    }
-                }
             }
         }
     }

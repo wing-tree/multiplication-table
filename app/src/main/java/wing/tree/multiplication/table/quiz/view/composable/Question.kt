@@ -92,8 +92,8 @@ internal fun Question(
                     targetValue = when {
                         tag `is` QuizState.Tag.CLEARING -> onSurface.copy(alpha = Float.fullyTransparent)
                         checked.not() -> onSurface
-                        question.correct -> pastelGreen
-                        question.incorrect -> pastelRed
+                        question.isCorrect -> pastelGreen
+                        question.isIncorrect -> pastelRed
                         else -> onSurface
                     },
                     label = String.empty
@@ -134,7 +134,7 @@ internal fun Question(
 
             val visible = when {
                 checked.not() -> false
-                else -> question.incorrect
+                else -> question.isIncorrect
             }
 
             AnimatedVisibility(
