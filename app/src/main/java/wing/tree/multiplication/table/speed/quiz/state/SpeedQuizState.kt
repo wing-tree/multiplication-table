@@ -13,9 +13,11 @@ sealed interface SpeedQuizState {
     sealed interface Play : SpeedQuizState {
         val speedQuiz: SpeedQuiz
 
-        data class Played(
-            override val speedQuiz: SpeedQuiz
-        ) : Play {
+        data class InterstitialAd(override val speedQuiz: SpeedQuiz) : Play {
+            override val elapsedTime: Long = SpeedQuizViewModel.millisecondsInFuture
+        }
+
+        data class Played(override val speedQuiz: SpeedQuiz) : Play {
             override val elapsedTime: Long = SpeedQuizViewModel.millisecondsInFuture
         }
 
