@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import wing.tree.multiplication.table.composable.Crossfade
 import wing.tree.multiplication.table.composition.local.localWindowWidthSizeClass
-import wing.tree.multiplication.table.extension.property.marginValues
+import wing.tree.multiplication.table.extension.property.paddingValues
 import wing.tree.multiplication.table.speed.quiz.action.SpeedQuizAction
 import wing.tree.multiplication.table.speed.quiz.state.SpeedQuizState
 import wing.tree.multiplication.table.top.level.property.fillMaxSize
@@ -29,7 +29,7 @@ internal fun Play(
                 state = targetState,
                 onAction = onAction,
                 modifier = fillMaxSize.padding(
-                    paddingValues = windowWidthSizeClass.marginValues
+                    paddingValues = windowWidthSizeClass.paddingValues
                 )
             )
 
@@ -37,7 +37,7 @@ internal fun Play(
                 speedQuiz = targetState.speedQuiz,
                 onAction = onAction,
                 modifier = fillMaxSize.padding(
-                    paddingValues = windowWidthSizeClass.marginValues
+                    paddingValues = windowWidthSizeClass.paddingValues
                 )
             )
         }
