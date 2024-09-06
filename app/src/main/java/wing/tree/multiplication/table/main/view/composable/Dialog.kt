@@ -19,53 +19,43 @@ import wing.tree.multiplication.table.extension.`560`
 import wing.tree.multiplication.table.main.action.MainAction
 import wing.tree.multiplication.table.main.state.DialogState
 
-internal object Dialog {
-    sealed interface Token {
-        data object Surface {
-            val modifier = Modifier.heightIn(
-                min = Dp.`280`,
-                max = Dp.`560`
-            )
-
-            val shape = RoundedCornerShape(size = Dp.`28`)
-        }
-    }
-
-    @Composable
-    operator fun invoke(
-        state: DialogState,
-        onDismissRequest: () -> Unit,
-        onAction: (MainAction) -> Unit
-    ) {
-        when (state) {
-            DialogState.Dismissed -> noOperations()
-            else -> androidx.compose.ui.window.Dialog(onDismissRequest = onDismissRequest) {
-                Surface(
-                    modifier = Token.Surface.modifier,
-                    shape = Token.Surface.shape
+@Composable
+internal fun Dialog(
+    state: DialogState,
+    onDismissRequest: () -> Unit,
+    onAction: (MainAction) -> Unit
+) {
+    when (state) {
+        DialogState.Dismissed -> noOperations()
+        else -> androidx.compose.ui.window.Dialog(onDismissRequest = onDismissRequest) {
+            Surface(
+                modifier = Modifier.heightIn(
+                    min = Dp.`280`,
+                    max = Dp.`560`
+                ),
+                shape = RoundedCornerShape(size = Dp.`28`)
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally
+                    ElevatedButton(
+                        onClick = {
+                            onAction(MainAction.Navigate.ToSpeedQuiz)
+                        }
                     ) {
-                        ElevatedButton(
-                            onClick = {
-                                onAction(MainAction.Navigate.ToSpeedQuiz)
-                            }
-                        ) {
-                            Text(
-                                text = stringResource(R.string.speed_quiz)
-                            )
-                        }
+                        Text(
+                            text = stringResource(R.string.speed_quiz)
+                        )
+                    }
 
-                        ElevatedButton(
-                            onClick = {
-                                onAction(MainAction.Navigate.ToTest)
-                            }
-                        ) {
-                            Text(
-                                text = stringResource(R.string.test)
-                            )
+                    ElevatedButton(
+                        onClick = {
+                            onAction(MainAction.Navigate.ToTest)
                         }
+                    ) {
+                        Text(
+                            text = stringResource(R.string.test)
+                        )
                     }
                 }
             }
