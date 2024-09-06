@@ -46,6 +46,39 @@ private val shimmerTheme = defaultShimmerTheme.copy(
     )
 )
 
+fun Modifier.shimmer() = composed {
+    shimmer(
+        rememberShimmer(
+            shimmerBounds = ShimmerBounds.View,
+            theme = shimmerTheme
+        )
+    )
+}
+
+fun Modifier.verticalFadingEdge(
+    scrollState: ScrollState,
+    length: Dp = Dp.medium
+): Modifier = then(
+    Modifier
+        .graphicsLayer {
+            alpha = with(Float) {
+                `1`.minus(onePercent)
+            }
+        }.drawWithContent {
+            drawContent()
+
+            drawTopFadingEdge(
+                scrollState = scrollState,
+                length = length
+            )
+
+            drawBottomFadingEdge(
+                scrollState = scrollState,
+                length = length
+            )
+        }
+)
+
 private fun ContentDrawScope.drawBottomFadingEdge(
     scrollState: ScrollState,
     length: Dp
@@ -82,36 +115,3 @@ private fun ContentDrawScope.drawTopFadingEdge(
         blendMode = BlendMode.DstIn
     )
 }
-
-fun Modifier.shimmer() = composed {
-    shimmer(
-        rememberShimmer(
-            shimmerBounds = ShimmerBounds.View,
-            theme = shimmerTheme
-        )
-    )
-}
-
-fun Modifier.verticalFadingEdge(
-    scrollState: ScrollState,
-    length: Dp = Dp.medium
-): Modifier = then(
-    Modifier
-        .graphicsLayer {
-            alpha = with(Float) {
-                `1`.minus(onePercent)
-            }
-        }.drawWithContent {
-            drawContent()
-
-            drawTopFadingEdge(
-                scrollState = scrollState,
-                length = length
-            )
-
-            drawBottomFadingEdge(
-                scrollState = scrollState,
-                length = length
-            )
-        }
-)
