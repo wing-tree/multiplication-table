@@ -1,11 +1,11 @@
 package wing.tree.multiplication.table.speed.quiz.view.composable
 
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import wing.tree.multiplication.table.composable.Crossfade
 import wing.tree.multiplication.table.speed.quiz.action.SpeedQuizAction
 import wing.tree.multiplication.table.speed.quiz.state.SpeedQuizState
+import wing.tree.multiplication.table.top.level.property.fillMaxSize
 
 @Composable
 internal fun Play(
@@ -20,13 +20,14 @@ internal fun Play(
         when (targetState) {
             is SpeedQuizState.Play.Played -> Played(
                 state = targetState,
-                onAction = onAction
+                onAction = onAction,
+                modifier = fillMaxSize
             )
 
             is SpeedQuizState.Play.Playing -> SpeedQuiz(
                 speedQuiz = targetState.speedQuiz,
                 onAction = onAction,
-                modifier = Modifier.fillMaxSize()
+                modifier = fillMaxSize
             )
         }
     }
