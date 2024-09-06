@@ -15,7 +15,7 @@ import wing.tree.multiplication.table.composable.Icon
 import wing.tree.multiplication.table.extension.medium
 import wing.tree.multiplication.table.extension.small
 import wing.tree.multiplication.table.main.action.MainAction
-import wing.tree.multiplication.table.quiz.view.composable.FloatingActionButton
+import wing.tree.multiplication.table.test.view.composable.FloatingActionButton
 
 @Composable
 internal fun NavigationRail(
