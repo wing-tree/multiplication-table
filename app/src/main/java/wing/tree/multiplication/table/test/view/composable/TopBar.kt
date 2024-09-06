@@ -1,4 +1,4 @@
-package wing.tree.multiplication.table.quiz.view.composable
+package wing.tree.multiplication.table.test.view.composable
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack

@@ -1,4 +1,4 @@
-package wing.tree.multiplication.table.quiz.model
+package wing.tree.multiplication.table.test.model
 
 import wing.tree.multiplication.table.constant.PERFECT_SCORE
 import wing.tree.multiplication.table.extension.function.`is`

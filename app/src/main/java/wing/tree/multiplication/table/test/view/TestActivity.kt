@@ -1,4 +1,4 @@
-package wing.tree.multiplication.table.quiz.view
+package wing.tree.multiplication.table.test.view
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -15,12 +15,12 @@ import wing.tree.multiplication.table.ad.InterstitialAdLoader
 import wing.tree.multiplication.table.composable.noOperations
 import wing.tree.multiplication.table.extension.property.isNotFinishing
 import wing.tree.multiplication.table.model.Action
-import wing.tree.multiplication.table.quiz.view.composable.Content
-import wing.tree.multiplication.table.quiz.view.composable.TopBar
-import wing.tree.multiplication.table.quiz.view.model.QuizViewModel
+import wing.tree.multiplication.table.test.view.composable.Test
+import wing.tree.multiplication.table.test.view.composable.TopBar
+import wing.tree.multiplication.table.test.view.model.TestViewModel
 import wing.tree.multiplication.table.theme.MultiplicationTableTheme
 
-class QuizActivity : ComponentActivity() {
+class TestActivity : ComponentActivity() {
     private val onAction: (Action) -> Unit = {
         when (it) {
             Action.Check -> viewModel.check()
@@ -29,7 +29,7 @@ class QuizActivity : ComponentActivity() {
         }
     }
 
-    private val viewModel by viewModels<QuizViewModel>()
+    private val viewModel by viewModels<TestViewModel>()
 
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,7 +54,7 @@ class QuizActivity : ComponentActivity() {
                 ) {
                     val widthSizeClass = calculateWindowSizeClass(this).widthSizeClass
 
-                    Content(
+                    Test(
                         state = state,
                         widthSizeClass = widthSizeClass,
                         onAction = onAction,
