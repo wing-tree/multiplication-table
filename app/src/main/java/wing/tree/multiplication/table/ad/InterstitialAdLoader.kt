@@ -10,66 +10,76 @@ import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import wing.tree.multiplication.table.BuildConfig
 import wing.tree.multiplication.table.R
+import wing.tree.multiplication.table.extension.function.isNotNull
+import wing.tree.multiplication.table.extension.function.isNull
+import wing.tree.multiplication.table.extension.property.oneHourInMilliseconds
+import java.util.Timer
+import java.util.TimerTask
+import kotlin.concurrent.timerTask
 
-class InterstitialAdLoader {
+object InterstitialAdLoader :  Timer(true) {
+    val isAdLoaded: Boolean get() = interstitialAd.isNotNull()
+
+    private val `this` = this
+
     private var interstitialAd: InterstitialAd? = null
-
-    fun clear() {
-        interstitialAd = null
-    }
+    private var timerTask: TimerTask? = null
 
     fun load(
         context: Context,
         loadCallback: InterstitialAdLoadCallback? = null,
     ) {
-        val adRequest = AdRequest.Builder().build()
-        val adUnitId = context.getString(
-            if (BuildConfig.DEBUG) {
-                R.string.sample_interstitial_ad_unit_id
-            } else {
-                R.string.interstitial_ad_unit_id
-            }
-        )
+        if (interstitialAd.isNull()) {
+            timerTask?.cancel()
 
-        fun setInterstitialAd(interstitialAd: InterstitialAd) {
-            this.interstitialAd = interstitialAd
+            val adRequest = AdRequest.Builder().build()
+            val resId = when {
+                BuildConfig.DEBUG -> R.string.sample_interstitial_ad_unit_id
+                else -> R.string.interstitial_ad_unit_id
+            }
+
+            InterstitialAd.load(
+                context,
+                context.getString(resId),
+                adRequest,
+                object : InterstitialAdLoadCallback() {
+                    override fun onAdFailedToLoad(adError: LoadAdError) {
+                        loadCallback?.onAdFailedToLoad(adError)
+                    }
+
+                    override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                        `this`.interstitialAd = interstitialAd
+
+                        loadCallback?.onAdLoaded(interstitialAd)
+
+                        timerTask = timerTask {
+                            `this`.interstitialAd = null
+
+                            cancel()
+                        }
+
+                        schedule(
+                            timerTask,
+                            Long.oneHourInMilliseconds,
+                            Long.oneHourInMilliseconds
+                        )
+                    }
+                }
+            )
         }
-
-        InterstitialAd.load(
-            context,
-            adUnitId,
-            adRequest,
-            object : InterstitialAdLoadCallback() {
-                override fun onAdFailedToLoad(adError: LoadAdError) {
-                    clear()
-                    loadCallback?.onAdFailedToLoad(adError)
-                }
-
-                override fun onAdLoaded(interstitialAd: InterstitialAd) {
-                    setInterstitialAd(interstitialAd)
-                    loadCallback?.onAdLoaded(interstitialAd)
-                }
-            }
-        )
     }
 
     fun show(
         activity: Activity,
-        fullScreenContentCallback: FullScreenContentCallback? = null,
-    ) {
-        interstitialAd?.let {
+        fullScreenContentCallback: FullScreenContentCallback? = null
+    ): Unit? {
+        return interstitialAd?.let {
             it.fullScreenContentCallback = object : FullScreenContentCallback() {
-                override fun onAdClicked() {
-                    fullScreenContentCallback?.onAdClicked()
-                }
-
                 override fun onAdDismissedFullScreenContent() {
-                    clear()
                     fullScreenContentCallback?.onAdDismissedFullScreenContent()
                 }
 
                 override fun onAdFailedToShowFullScreenContent(adError: AdError) {
-                    clear()
                     fullScreenContentCallback?.onAdFailedToShowFullScreenContent(adError)
                 }
 
@@ -82,7 +92,9 @@ class InterstitialAdLoader {
                 }
             }
 
-            it.show(activity)
+            it.show(activity).also { _ ->
+                interstitialAd = null
+            }
         }
     }
 }
