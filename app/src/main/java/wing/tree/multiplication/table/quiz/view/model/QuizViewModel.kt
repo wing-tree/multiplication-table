@@ -11,7 +11,7 @@ import wing.tree.multiplication.table.extension.property.`7`
 import wing.tree.multiplication.table.extension.property.hundreds
 import wing.tree.multiplication.table.extension.property.immutableList
 import wing.tree.multiplication.table.quiz.QuizGenerator
-import wing.tree.multiplication.table.quiz.model.Question
+import wing.tree.multiplication.table.model.Question
 import wing.tree.multiplication.table.quiz.state.QuizState
 import kotlin.time.Duration.Companion.milliseconds
 
