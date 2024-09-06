@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.core.view.WindowCompat
 import timber.log.Timber
 import wing.tree.multiplication.table.R
+import wing.tree.multiplication.table.constant.MINIMUM_TIMES_TABLE
 import wing.tree.multiplication.table.extension.extraSmall
 import wing.tree.multiplication.table.extension.function.launchGooglePlay
 import wing.tree.multiplication.table.extension.function.launchReviewFlow
@@ -45,8 +46,8 @@ import wing.tree.multiplication.table.main.view.composable.Dialog
 import wing.tree.multiplication.table.main.view.composable.NavigationRail
 import wing.tree.multiplication.table.main.view.composable.PageContent
 import wing.tree.multiplication.table.model.Key
-import wing.tree.multiplication.table.quiz.view.QuizActivity
 import wing.tree.multiplication.table.speed.quiz.view.SpeedQuizActivity
+import wing.tree.multiplication.table.test.view.TestActivity
 import wing.tree.multiplication.table.theme.MultiplicationTableTheme
 import wing.tree.multiplication.table.top.level.property.fillMaxSize
 
@@ -69,15 +70,15 @@ class MainActivity : ComponentActivity() {
                         MainAction.Navigate.ToSpeedQuiz -> startActivity(
                             Intent(this, SpeedQuizActivity::class.java).apply {
                                 putExtra(Key.END_INCLUSIVE(), 3)
-                                putExtra(Key.START(), 2)
+                                putExtra(Key.START(), MINIMUM_TIMES_TABLE)
                             }
                         )
 
                         MainAction.Navigate.ToTest -> startActivity(
-                            Intent(
-                                this,
-                                QuizActivity::class.java
-                            )
+                            Intent(this, TestActivity::class.java).apply {
+                                putExtra(Key.END_INCLUSIVE(), 17)
+                                putExtra(Key.START(), MINIMUM_TIMES_TABLE)
+                            }
                         )
 
                         MainAction.Quiz -> dialogState = DialogState.Showing
