@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -37,8 +38,10 @@ import wing.tree.multiplication.table.extension.extraSmall
 import wing.tree.multiplication.table.extension.function.isLessThan
 import wing.tree.multiplication.table.extension.function.isLessThanOrEqualTo
 import wing.tree.multiplication.table.extension.half
+import wing.tree.multiplication.table.extension.maxWidth
 import wing.tree.multiplication.table.extension.medium
 import wing.tree.multiplication.table.extension.property.`1`
+import wing.tree.multiplication.table.extension.property.digit
 import wing.tree.multiplication.table.extension.property.height
 import wing.tree.multiplication.table.top.level.containerColor
 import wing.tree.multiplication.table.top.level.multiplicationMaxWidth
@@ -64,11 +67,12 @@ fun MultiplicationTable(
         ) {
             val maxWidth = maxWidth
             val height = maxHeight.minus(16.dp).div(other = MAXIMUM_MULTIPLICAND.inc())
-            val fontSize = calculateFontSizeFromTotalHeight(height, maxWidth - 8.dp)
+            val fontSize = calculateFontSize(height, maxWidth - 16.dp)
 
             val style = LocalTextStyle.current.copy(fontSize = fontSize)
             val width = rememberMultiplicationMaxWidth(style)
             val rwidth = rememberMultiplicationWidth(timesTable, style)
+
             Column(
                 modifier = Modifier.width(width = width.plus(Dp.medium)),
                 horizontalAlignment = Alignment.CenterHorizontally
@@ -114,18 +118,46 @@ private fun Multiplication(
     modifier: Modifier = Modifier,
     style: TextStyle = LocalTextStyle.current
 ) {
+    val maxWidth = Char.digit.maxWidth(style)
     val product = timesTable.times(multiplicand)
+    val textStyle = style.merge(color = colorScheme.onSurface)
 
-    Text(
-        text = "$timesTable $MULTIPLICATION_SIGN $multiplicand $EQUALS_SIGN $product",
-        modifier = modifier,
-        color = colorScheme.onSurface,
-        style = style
-    )
+    Row(modifier = modifier) {
+        Text(
+            text = "$timesTable",
+            modifier = Modifier.width(maxWidth.times("$timesTable".length)),
+            textAlign = TextAlign.Center,
+            style = textStyle
+        )
+
+        Text(
+            text = " $MULTIPLICATION_SIGN ",
+            modifier = Modifier,
+            style = textStyle
+        )
+
+        Text(
+            text = "$multiplicand",
+            modifier = Modifier.width(maxWidth),
+            textAlign = TextAlign.Center,
+            style = textStyle
+        )
+
+        Text(
+            text = " $EQUALS_SIGN ",
+            style = textStyle
+        )
+
+        Text(
+            text = "$product",
+            modifier = Modifier.width(maxWidth.times("${timesTable.times(MAXIMUM_MULTIPLICAND)}".length)),
+            style = textStyle
+        )
+    }
 }
 
 @Composable
-fun calculateFontSizeFromTotalHeight(
+fun calculateFontSize(
     maxHeight: Dp,
     maxWidth: Dp
 ): TextUnit = with(LocalDensity.current) {
