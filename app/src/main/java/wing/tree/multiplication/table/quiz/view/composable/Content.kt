@@ -24,7 +24,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
@@ -58,10 +57,9 @@ import wing.tree.multiplication.table.extension.property.marginValues
 import wing.tree.multiplication.table.extension.property.pair
 import wing.tree.multiplication.table.extension.small
 import wing.tree.multiplication.table.model.Action
-import wing.tree.multiplication.table.quiz.model.Question
+import wing.tree.multiplication.table.model.Question
 import wing.tree.multiplication.table.quiz.state.QuizState
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun Content(
     state: QuizState,
