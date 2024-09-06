@@ -26,11 +26,9 @@ import wing.tree.multiplication.table.theme.pastelGreen
 
 @Composable
 internal fun Score(
-    state: QuizState,
+    score: Int,
     modifier: Modifier = Modifier
 ) {
-    val correct = state.correct()
-    val score = PERFECT_SCORE.div(NUMBER_OF_QUESTIONS).times(correct.count())
     val starRating = StarRating.get(score)
 
     ElevatedCard(modifier = modifier) {
@@ -63,4 +61,18 @@ internal fun Score(
             }
         }
     }
+}
+
+@Composable
+internal fun Score(
+    state: QuizState,
+    modifier: Modifier = Modifier
+) {
+    val correct = state.correct()
+    val score = PERFECT_SCORE.div(NUMBER_OF_QUESTIONS).times(correct.count())
+
+    Score(
+        score = score,
+        modifier = modifier
+    )
 }
