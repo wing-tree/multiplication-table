@@ -26,14 +26,14 @@ internal fun PageContent(
 
         MultiplicationTableRow(
             timesTable = timesTable,
-            modifier = Modifier.weight(Float.`1`)
+            modifier = Modifier.weight(weight = Float.`1`)
         )
 
         VerticalSpacer(height = Dp.extraSmall)
 
         MultiplicationTableRow(
             timesTable = timesTable.incrementByTwo(),
-            modifier = Modifier.weight(Float.`1`)
+            modifier = Modifier.weight(weight = Float.`1`)
         )
     }
 }
