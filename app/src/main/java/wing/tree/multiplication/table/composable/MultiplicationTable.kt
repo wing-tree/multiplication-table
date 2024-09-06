@@ -132,7 +132,7 @@ fun calculateFontSizeFromTotalHeight(
     val context = LocalContext.current
     val textStyle = LocalTextStyle.current
 
-    var textSize = 1f
+    var textSize = Float.`1`
 
     val textPaint = TextPaint().also {
         it.typeface = ResourcesCompat.getFont(context, R.font.y_clover_regular)
@@ -142,21 +142,21 @@ fun calculateFontSizeFromTotalHeight(
     var height = textPaint.fontMetrics.height
 
     while (height isLessThanOrEqualTo maxHeight.toPx()) {
-        textSize += 1f
+        textSize += Float.`1`
 
         textPaint.textSize = textSize
 
         height = textPaint.fontMetrics.height
     }
-    println("aaaaa11--11")
+
     var width = multiplicationMaxWidth(textStyle.copy(fontSize = textSize.toSp()))
-    println("aaaaa11--11--11 single maxWidth calc.")
+
     while (maxWidth isLessThan width) {
-        textSize -= 1f
+        textSize -= Float.`1`
 
         width = multiplicationMaxWidth(textStyle.copy(fontSize = textSize.toSp()))
     }
-    println("aaaaa11--22")
+
     return remember(maxWidth, maxHeight) {
         textSize.toSp()
     }
