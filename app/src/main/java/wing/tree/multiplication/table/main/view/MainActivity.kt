@@ -71,6 +71,14 @@ class MainActivity : ComponentActivity() {
 
                 val onAction: (MainAction) -> Unit = {
                     when (it) {
+                        MainAction.Navigate.ToSpeedQuiz -> startActivity(
+                            Intent(this, SpeedQuizActivity::class.java).apply {
+                                putExtra(Key.END_INCLUSIVE(), 3)
+                                putExtra(Key.START(), 2)
+                            }
+                        )
+
+                        MainAction.Navigate.ToTest -> startActivity(Intent(this, QuizActivity::class.java))
                         MainAction.Quiz -> dialogState = DialogState.Showing
                         MainAction.RateReview -> launchReviewFlow(
                             onSuccess = {
@@ -89,14 +97,6 @@ class MainActivity : ComponentActivity() {
                         )
 
                         MainAction.Share -> shareApp()
-                        MainAction.SpeedQuiz -> startActivity(
-                            Intent(this, SpeedQuizActivity::class.java).apply {
-                                putExtra(Key.END_INCLUSIVE(), 3)
-                                putExtra(Key.START(), 2)
-                            }
-                        )
-
-                        MainAction.Test -> startActivity(Intent(this, QuizActivity::class.java))
                     }
                 }
 
@@ -184,7 +184,7 @@ private fun Dialog(
                 ) {
                     ElevatedButton(
                         onClick = {
-                            onAction(MainAction.SpeedQuiz)
+                            onAction(MainAction.Navigate.ToSpeedQuiz)
                         }
                     ) {
                         Text(
@@ -194,7 +194,7 @@ private fun Dialog(
 
                     ElevatedButton(
                         onClick = {
-                            onAction(MainAction.Test)
+                            onAction(MainAction.Navigate.ToTest)
                         }
                     ) {
                         Text(

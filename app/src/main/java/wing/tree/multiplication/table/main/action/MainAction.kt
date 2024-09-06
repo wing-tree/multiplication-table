@@ -4,6 +4,9 @@ sealed interface MainAction {
     data object RateReview : MainAction
     data object Quiz : MainAction
     data object Share : MainAction
-    data object SpeedQuiz : MainAction
-    data object Test : MainAction
+
+    sealed interface Navigate {
+        data object ToSpeedQuiz : MainAction
+        data object ToTest : MainAction
+    }
 }
