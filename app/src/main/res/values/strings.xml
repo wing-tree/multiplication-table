@@ -3,7 +3,6 @@
     <string name="app_name">Gugudan</string>
     <string name="check">Check</string>
     <string name="home">Home</string>
-    <string name="replay">Replay</string>
     <string name="quiz" translatable="false">QUIZ</string>
     <string name="score" translatable="false">Score</string>
     <string name="share_app">Share app</string>
