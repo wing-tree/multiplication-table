@@ -1,6 +1,6 @@
 package wing.tree.multiplication.table.test.model
 
-import wing.tree.multiplication.table.constant.PERFECT_SCORE
+import wing.tree.multiplication.table.top.level.property.PERFECT_SCORE
 import wing.tree.multiplication.table.extension.function.`is`
 import wing.tree.multiplication.table.extension.function.isGreaterThanOrEqualTo
 import wing.tree.multiplication.table.extension.property.`1`

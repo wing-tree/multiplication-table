@@ -7,7 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import wing.tree.multiplication.table.composable.MultiplicationTableRow
 import wing.tree.multiplication.table.composable.VerticalSpacer
-import wing.tree.multiplication.table.constant.MINIMUM_TIMES_TABLE
+import wing.tree.multiplication.table.top.level.property.MINIMUM_TIMES_TABLE
 import wing.tree.multiplication.table.extension.extraSmall
 import wing.tree.multiplication.table.extension.function.incrementByTwo
 import wing.tree.multiplication.table.extension.function.quadrupled
