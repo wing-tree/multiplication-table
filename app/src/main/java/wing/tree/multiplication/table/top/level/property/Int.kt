@@ -2,6 +2,7 @@ package wing.tree.multiplication.table.top.level.property
 
 internal const val INVALID_INDEX = -1
 internal const val MAXIMUM_DIGITS = 3
+internal const val MAXIMUM_TIMES_TABLE_DIGITS = 2
 internal const val MAXIMUM_MULTIPLICAND = 9
 internal const val MAXIMUM_TIMES_TABLE = 17
 internal const val MINIMUM_MULTIPLICAND = 1
