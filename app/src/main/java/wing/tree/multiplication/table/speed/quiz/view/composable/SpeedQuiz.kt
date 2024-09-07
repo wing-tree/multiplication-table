@@ -28,6 +28,7 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import wing.tree.multiplication.table.composable.Term
 import wing.tree.multiplication.table.extension.property.empty
 import wing.tree.multiplication.table.extension.property.equalsSign
 import wing.tree.multiplication.table.extension.property.intOrNull
@@ -137,7 +138,7 @@ private fun Question(
         modifier = modifier,
         label = String.empty
     ) { (timesTable, multiplicand) ->
-        Multiplication(
+        Term(
             timesTable = timesTable,
             multiplicand = multiplicand,
             style = style
