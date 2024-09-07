@@ -5,11 +5,8 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -31,20 +28,17 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.unit.Dp
-import wing.tree.multiplication.table.constant.EQUALS_SIGN
-import wing.tree.multiplication.table.extension.empty
-import wing.tree.multiplication.table.extension.extraExtraSmall
-import wing.tree.multiplication.table.extension.extraLarge
-import wing.tree.multiplication.table.extension.extraSmall
-import wing.tree.multiplication.table.extension.intOrNull
-import wing.tree.multiplication.table.extension.property.`3`
+import wing.tree.multiplication.table.extension.property.empty
+import wing.tree.multiplication.table.extension.property.equalsSign
+import wing.tree.multiplication.table.extension.property.intOrNull
 import wing.tree.multiplication.table.model.Question
 import wing.tree.multiplication.table.speed.quiz.action.SpeedQuizAction
 import wing.tree.multiplication.table.speed.quiz.model.SpeedQuiz
-import wing.tree.multiplication.table.top.level.containerColor
-
-private val regex = Regex("^\\d*\$")
+import wing.tree.multiplication.table.token.Padding
+import wing.tree.multiplication.table.top.level.function.containerColor
+import wing.tree.multiplication.table.top.level.property.MAXIMUM_DIGITS
+import wing.tree.multiplication.table.top.level.property.fillMaxWidth
+import wing.tree.multiplication.table.top.level.property.regex
 
 @Composable
 internal fun SpeedQuiz(
@@ -74,14 +68,13 @@ internal fun SpeedQuiz(
 
     Box(modifier = modifier) {
         ElevatedCard(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = fillMaxWidth,
             colors = CardDefaults.elevatedCardColors(containerColor = containerColor)
         ) {
             Column(
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
-                    .width(IntrinsicSize.Max)
-                    .padding(Dp.extraLarge),
+                    .padding(Padding.large),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Question(
@@ -92,7 +85,7 @@ internal fun SpeedQuiz(
                 )
 
                 Row(
-                    modifier = Modifier.padding(Dp.extraSmall),
+                    modifier = Modifier.padding(Padding.small),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     val style = typography.displaySmall.copy(
@@ -100,7 +93,7 @@ internal fun SpeedQuiz(
                     )
 
                     Text(
-                        text = EQUALS_SIGN,
+                        text = String.equalsSign,
                         style = style
                     )
 
@@ -108,12 +101,12 @@ internal fun SpeedQuiz(
                         value = "${answer ?: String.empty}",
                         onValueChange = { value ->
                             if (value.matches(regex)) {
-                                answer = value.take(Int.`3`).intOrNull
+                                answer = value.take(MAXIMUM_DIGITS).intOrNull
                             }
                         },
                         modifier = Modifier
                             .background(color = colorScheme.surface)
-                            .padding(Dp.extraExtraSmall)
+                            .padding(Padding.extra.small)
                             .focusRequester(focusRequester),
                         textStyle = style,
                         keyboardOptions = KeyboardOptions(
