@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.LaunchedEffect
@@ -21,6 +20,7 @@ import wing.tree.multiplication.table.speed.quiz.view.composable.Ready
 import wing.tree.multiplication.table.speed.quiz.view.composable.TopBar
 import wing.tree.multiplication.table.speed.quiz.view.model.SpeedQuizViewModel
 import wing.tree.multiplication.table.theme.MultiplicationTableTheme
+import wing.tree.multiplication.table.top.level.property.fillMaxSize
 
 class SpeedQuizActivity : ComponentActivity() {
     private val viewModel by viewModels<SpeedQuizViewModel>()
@@ -53,7 +53,7 @@ class SpeedQuizActivity : ComponentActivity() {
                             }
                         )
                     },
-                    modifier = Modifier.fillMaxSize()
+                    modifier = fillMaxSize
                 ) { paddingValues ->
                     Crossfade(
                         targetState = state,
