@@ -5,8 +5,8 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.setValue
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
-import wing.tree.multiplication.table.constant.MAXIMUM_MULTIPLICAND
-import wing.tree.multiplication.table.constant.MINIMUM_MULTIPLICAND
+import wing.tree.multiplication.table.top.level.property.MAXIMUM_MULTIPLICAND
+import wing.tree.multiplication.table.top.level.property.MINIMUM_MULTIPLICAND
 import wing.tree.multiplication.table.extension.property.firstIndex
 import wing.tree.multiplication.table.model.Question
 import wing.tree.multiplication.table.model.Submission
