@@ -13,8 +13,8 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 import wing.tree.multiplication.table.composition.local.localActivity
 import wing.tree.multiplication.table.composition.local.localWindowWidthSizeClass
-import wing.tree.multiplication.table.extension.second
-import wing.tree.multiplication.table.extension.third
+import wing.tree.multiplication.table.extension.function.second
+import wing.tree.multiplication.table.extension.function.third
 
 private val lightColorScheme = lightColorScheme(
     primary = palette.first(),

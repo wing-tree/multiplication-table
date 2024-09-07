@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package wing.tree.multiplication.table.extension
+package wing.tree.multiplication.table.extension.function
 
 import android.text.TextPaint
 import androidx.compose.material3.LocalTextStyle
