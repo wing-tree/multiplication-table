@@ -12,17 +12,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.Dp
 import wing.tree.multiplication.table.R
 import wing.tree.multiplication.table.composable.Icon
-import wing.tree.multiplication.table.constant.NUMBER_OF_QUESTIONS
-import wing.tree.multiplication.table.constant.PERFECT_SCORE
 import wing.tree.multiplication.table.extension.function.shimmer
-import wing.tree.multiplication.table.extension.small
 import wing.tree.multiplication.table.model.Question
 import wing.tree.multiplication.table.test.model.StarRating
 import wing.tree.multiplication.table.test.state.TestState
 import wing.tree.multiplication.table.theme.pastelGreen
+import wing.tree.multiplication.table.token.Padding
+import wing.tree.multiplication.table.top.level.property.NUMBER_OF_QUESTIONS
+import wing.tree.multiplication.table.top.level.property.PERFECT_SCORE
 
 @Composable
 internal fun Score(
@@ -35,7 +34,7 @@ internal fun Score(
         Column(
             modifier = Modifier
                 .shimmer()
-                .padding(vertical = Dp.small),
+                .padding(vertical = Padding.small),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(

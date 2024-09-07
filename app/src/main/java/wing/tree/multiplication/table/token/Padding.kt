@@ -29,13 +29,9 @@ internal abstract class Padding(open val dp: Dp) {
         @ReadOnlyComposable
         get() = dp.times(Int.triple)
 
-    data class Extra internal constructor(
-        private val level: Int
-    ): Padding(dp) {
+    data class Extra internal constructor(private val level: Int): Padding(dp) {
         override val extra: Extra
-            get() = Extra(
-            level = level.inc
-        )
+            get() = Extra(level.inc)
 
         override val small: Dp
             @Composable
@@ -51,6 +47,6 @@ internal abstract class Padding(open val dp: Dp) {
     }
 
     companion object : Padding(dp = Dp.`8`) {
-        override val extra = Extra(level = Int.`1`)
+        override val extra = Extra(Int.`1`)
     }
 }
