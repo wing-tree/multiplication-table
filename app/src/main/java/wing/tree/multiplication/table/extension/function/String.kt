@@ -39,8 +39,10 @@ fun String.width(style: TextStyle = LocalTextStyle.current): Dp {
         letterSpacing.value.div(fontSize.value)
     }
 
-    return with(density) {
-        textPaint.measureText(this@width).toDp()
+    return remember(textPaint.textSize) {
+        with(density) {
+            textPaint.measureText(this@width).toDp()
+        }
     }
 }
 
