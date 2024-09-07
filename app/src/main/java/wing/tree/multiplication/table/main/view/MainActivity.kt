@@ -24,21 +24,18 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
-import androidx.compose.ui.unit.Dp
 import androidx.core.view.WindowCompat
 import timber.log.Timber
 import wing.tree.multiplication.table.R
-import wing.tree.multiplication.table.constant.MINIMUM_TIMES_TABLE
-import wing.tree.multiplication.table.extension.extraSmall
+import wing.tree.multiplication.table.extension.function.copy
 import wing.tree.multiplication.table.extension.function.launchGooglePlay
 import wing.tree.multiplication.table.extension.function.launchReviewFlow
 import wing.tree.multiplication.table.extension.function.shareApp
 import wing.tree.multiplication.table.extension.property.`1`
-import wing.tree.multiplication.table.extension.property.`2`
-import wing.tree.multiplication.table.extension.property.`4`
+import wing.tree.multiplication.table.extension.property.dec
 import wing.tree.multiplication.table.extension.property.isCompact
 import wing.tree.multiplication.table.extension.property.isNotCompact
-import wing.tree.multiplication.table.extension.property.marginValues
+import wing.tree.multiplication.table.extension.property.paddingValues
 import wing.tree.multiplication.table.main.action.MainAction
 import wing.tree.multiplication.table.main.state.DialogState
 import wing.tree.multiplication.table.main.view.composable.BottomBar
@@ -49,6 +46,10 @@ import wing.tree.multiplication.table.model.Key
 import wing.tree.multiplication.table.speed.quiz.view.SpeedQuizActivity
 import wing.tree.multiplication.table.test.view.TestActivity
 import wing.tree.multiplication.table.theme.MultiplicationTableTheme
+import wing.tree.multiplication.table.token.Padding
+import wing.tree.multiplication.table.top.level.property.MAXIMUM_TIMES_TABLE
+import wing.tree.multiplication.table.top.level.property.MINIMUM_TIMES_TABLE
+import wing.tree.multiplication.table.top.level.property.MULTIPLICATION_TABLES_PER_PAGE
 import wing.tree.multiplication.table.top.level.property.fillMaxSize
 
 class MainActivity : ComponentActivity() {
@@ -103,7 +104,7 @@ class MainActivity : ComponentActivity() {
                 }
 
                 val state = rememberPagerState {
-                    Int.`4`
+                    MAXIMUM_TIMES_TABLE.dec.div(MULTIPLICATION_TABLES_PER_PAGE)
                 }
 
                 val windowSizeClass = calculateWindowSizeClass(this)
@@ -121,7 +122,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val layoutDirection = LocalLayoutDirection.current
                     val contentPadding = widthSizeClass
-                        .marginValues
+                        .paddingValues
                         .copy(top = it.calculateTopPadding())
 
                     Row(modifier = Modifier.fillMaxSize()) {
@@ -145,12 +146,11 @@ class MainActivity : ComponentActivity() {
                             VerticalPager(
                                 state = state,
                                 modifier = Modifier.weight(Float.`1`),
-                                contentPadding = contentPadding,
-                                beyondBoundsPageCount = Int.`2`
+                                contentPadding = contentPadding
                             ) { page ->
                                 PageContent(
                                     page = page,
-                                    modifier = fillMaxSize.padding(vertical = Dp.extraSmall)
+                                    modifier = fillMaxSize.padding(vertical = Padding.small)
                                 )
                             }
                         }
