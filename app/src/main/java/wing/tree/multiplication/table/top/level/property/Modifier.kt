@@ -7,6 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.ui.Modifier
 
-val fillMaxHeight = Modifier.fillMaxHeight()
-val fillMaxSize = Modifier.fillMaxSize()
-val fillMaxWidth = Modifier.fillMaxWidth()
+internal val fillMaxHeight = Modifier.fillMaxHeight()
+internal val fillMaxSize = Modifier.fillMaxSize()
+internal val fillMaxWidth = Modifier.fillMaxWidth()
