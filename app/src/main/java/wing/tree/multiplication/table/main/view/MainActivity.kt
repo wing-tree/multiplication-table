@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.VerticalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -125,7 +124,7 @@ class MainActivity : ComponentActivity() {
                         .paddingValues
                         .copy(top = it.calculateTopPadding())
 
-                    Row(modifier = Modifier.fillMaxSize()) {
+                    Row(modifier = fillMaxSize) {
                         if (widthSizeClass.isNotCompact) {
                             NavigationRail(
                                 currentPage = state.currentPage,
@@ -134,13 +133,11 @@ class MainActivity : ComponentActivity() {
                         }
 
                         Column(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(
-                                    start = it.calculateStartPadding(layoutDirection),
-                                    end = it.calculateEndPadding(layoutDirection),
-                                    bottom = it.calculateBottomPadding()
-                                ),
+                            modifier = fillMaxSize.padding(
+                                start = it.calculateStartPadding(layoutDirection),
+                                end = it.calculateEndPadding(layoutDirection),
+                                bottom = it.calculateBottomPadding()
+                            ),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             VerticalPager(
