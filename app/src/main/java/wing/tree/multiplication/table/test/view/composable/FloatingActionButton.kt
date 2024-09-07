@@ -20,19 +20,15 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import wing.tree.multiplication.table.R
 import wing.tree.multiplication.table.composable.noOperations
-import wing.tree.multiplication.table.extension.extraExtraSmall
-import wing.tree.multiplication.table.extension.fourth
+import wing.tree.multiplication.table.extension.`2`
 import wing.tree.multiplication.table.extension.function.fourth
 import wing.tree.multiplication.table.extension.function.second
 import wing.tree.multiplication.table.extension.function.third
-import wing.tree.multiplication.table.extension.half
 import wing.tree.multiplication.table.extension.property.`1`
 import wing.tree.multiplication.table.extension.property.`4`
 import wing.tree.multiplication.table.extension.property.empty
 import wing.tree.multiplication.table.extension.property.isEven
 import wing.tree.multiplication.table.extension.property.negated
-import wing.tree.multiplication.table.extension.second
-import wing.tree.multiplication.table.extension.third
 import wing.tree.multiplication.table.theme.palette
 import wing.tree.multiplication.table.top.level.property.fillMaxHeight
 
@@ -106,6 +102,8 @@ private fun Content(
         }
 
         Column {
+            val translation = Dp.`2`
+
             Row(
                 modifier = Modifier.weight(Float.`1`),
                 verticalAlignment = Alignment.CenterVertically
@@ -119,7 +117,7 @@ private fun Content(
                     Text(
                         text = "${text.first()}",
                         modifier = Modifier.graphicsLayer {
-                            with(Dp.extraExtraSmall.half) {
+                            with(translation) {
                                 translationX = toPx()
                                 translationY = toPx()
                             }
@@ -138,7 +136,7 @@ private fun Content(
                     Text(
                         text = "${text.second()}",
                         modifier = Modifier.graphicsLayer {
-                            with(Dp.extraExtraSmall.half) {
+                            with(translation) {
                                 translationX = toPx().negated
                                 translationY = toPx()
                             }
@@ -162,7 +160,7 @@ private fun Content(
                     Text(
                         text = "${text.third()}",
                         modifier = Modifier.graphicsLayer {
-                            with(Dp.extraExtraSmall.half) {
+                            with(translation) {
                                 translationX = toPx()
                                 translationY = toPx().negated
                             }
@@ -181,7 +179,7 @@ private fun Content(
                     Text(
                         text = "${text.fourth()}",
                         modifier = Modifier.graphicsLayer {
-                            with(Dp.extraExtraSmall.half) {
+                            with(translation) {
                                 translationX = toPx().negated
                                 translationY = toPx().negated
                             }
