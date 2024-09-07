@@ -2,6 +2,8 @@
 
 package wing.tree.multiplication.table.extension.property
 
+val Char.twice: String get() = "$this".repeat(Int.pair)
+
 val Char.Companion.`0`: Char get() = '0'
 val Char.Companion.`1`: Char get() = '1'
 val Char.Companion.`2`: Char get() = '2'

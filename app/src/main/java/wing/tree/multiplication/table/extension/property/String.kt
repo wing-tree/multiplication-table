@@ -2,6 +2,8 @@
 
 package wing.tree.multiplication.table.extension.property
 
+import wing.tree.multiplication.table.extension.function.wrapInSpaces
+
 val String.intOrNull: Int? get() = toIntOrNull()
 
 val String.Companion.colon: String get() = ":"
@@ -21,3 +23,9 @@ val String.Companion.rightCurlyBrace: String get() = "}"
 val String.Companion.slash: String get() = "/"
 val String.Companion.space: String get() = " "
 val String.Companion.underScore: String get() = "_"
+val String.Companion.widestPrompt: String get() = buildString {
+    append(Char.widestDigit.twice)
+    append(String.equalsSign.wrapInSpaces())
+    append(Char.widestDigit)
+    append(String.multiplicationSign.wrapInSpaces())
+}
