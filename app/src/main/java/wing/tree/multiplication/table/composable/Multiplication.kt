@@ -18,7 +18,7 @@ internal fun Multiplication(
     modifier: Modifier = Modifier,
     style: TextStyle = LocalTextStyle.current
 ) {
-    val widestDigitWidth = "${Char.widestDigit}".width(style)
+    val widestDigitWidth = Char.widestDigit.width(style)
     val product = timesTable.times(multiplicand)
 
     Row(modifier = modifier) {

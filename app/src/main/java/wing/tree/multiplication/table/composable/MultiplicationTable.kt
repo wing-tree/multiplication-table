@@ -1,12 +1,11 @@
 package wing.tree.multiplication.table.composable
 
 import android.text.TextPaint
+import androidx.collection.LruCache
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -22,31 +21,29 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.dp
 import androidx.core.content.res.ResourcesCompat
 import wing.tree.multiplication.table.R
-import wing.tree.multiplication.table.constant.EQUALS_SIGN
-import wing.tree.multiplication.table.constant.MAXIMUM_MULTIPLICAND
-import wing.tree.multiplication.table.constant.MINIMUM_MULTIPLICAND
-import wing.tree.multiplication.table.constant.MULTIPLICATION_SIGN
-import wing.tree.multiplication.table.extension.extraSmall
 import wing.tree.multiplication.table.extension.function.isLessThan
 import wing.tree.multiplication.table.extension.function.isLessThanOrEqualTo
-import wing.tree.multiplication.table.extension.half
-import wing.tree.multiplication.table.extension.maxWidth
-import wing.tree.multiplication.table.extension.medium
+import wing.tree.multiplication.table.extension.function.width
 import wing.tree.multiplication.table.extension.property.`1`
-import wing.tree.multiplication.table.extension.property.digit
+import wing.tree.multiplication.table.extension.property.`2`
 import wing.tree.multiplication.table.extension.property.height
-import wing.tree.multiplication.table.top.level.containerColor
-import wing.tree.multiplication.table.top.level.multiplicationMaxWidth
-import wing.tree.multiplication.table.top.level.rememberMultiplicationMaxWidth
-import wing.tree.multiplication.table.top.level.rememberMultiplicationWidth
+import wing.tree.multiplication.table.extension.property.inc
+import wing.tree.multiplication.table.extension.property.widestDigit
+import wing.tree.multiplication.table.token.Padding
+import wing.tree.multiplication.table.top.level.function.containerColor
+import wing.tree.multiplication.table.top.level.property.MAXIMUM_MULTIPLICAND
+import wing.tree.multiplication.table.top.level.property.MAXIMUM_TIMES_TABLE_DIGITS
+import wing.tree.multiplication.table.top.level.property.MINIMUM_MULTIPLICAND
+import wing.tree.multiplication.table.top.level.property.fillMaxWidth
+import wing.tree.multiplication.table.top.level.widestMultiplicationWidth
+
+private val lruCache = LruCache<Pair<Dp, Dp>, TextUnit>(Int.`2`)
 
 @Composable
 fun MultiplicationTable(
@@ -62,24 +59,34 @@ fun MultiplicationTable(
     ) {
         BoxWithConstraints(
             modifier = Modifier
-                .padding(horizontal = Dp.extraSmall)
-                .padding(bottom = Dp.extraSmall)
+                .padding(horizontal = Padding.small)
+                .padding(bottom = Padding.small)
         ) {
             val maxWidth = maxWidth
-            val height = maxHeight.minus(16.dp).div(other = MAXIMUM_MULTIPLICAND.inc())
-            val fontSize = calculateFontSize(height, maxWidth - 16.dp)
+            val height = maxHeight
+                .minus(Padding.large)
+                .div(MAXIMUM_MULTIPLICAND.inc)
 
-            val style = LocalTextStyle.current.copy(fontSize = fontSize)
-            val width = rememberMultiplicationMaxWidth(style)
-            val rwidth = rememberMultiplicationWidth(timesTable, style)
+            val fontSize = fontSizeOf(
+                maxWidth = maxWidth.minus(Padding.extra.small),
+                maxHeight = height
+            )
+
+            val style = LocalTextStyle.current.copy(
+                color = colorScheme.onSurface,
+                fontSize = fontSize
+            )
+
+            val width = widestMultiplicationWidth(style)
+            val widestDigitWidth = Char.widestDigit.width(style)
 
             Column(
-                modifier = Modifier.width(width = width.plus(Dp.medium)),
+                modifier = Modifier.width(width = width.plus(Padding.small)),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
                     text = stringResource(id = R.string.times_table, timesTable),
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = fillMaxWidth.padding(vertical = Padding.extra.small),
                     color = colorScheme.onSurfaceVariant,
                     fontSize = fontSize,
                     fontWeight = FontWeight.Bold,
@@ -87,12 +94,11 @@ fun MultiplicationTable(
                 )
 
                 Column(
-                    modifier = Modifier
-                        .width(width = maxWidth)
+                    modifier = fillMaxWidth
                         .weight(weight = Float.`1`)
                         .background(color = colorScheme.surface)
-                        .padding(horizontal = Dp.extraSmall)
-                        .padding(start = (width - rwidth).half),
+                        .padding(horizontal = Padding.extra.small)
+                        .padding(start = widestDigitWidth.times(MAXIMUM_TIMES_TABLE_DIGITS.minus("$timesTable".length))),
                     verticalArrangement = Arrangement.Center
                 ) {
                     for (multiplicand in MINIMUM_MULTIPLICAND..MAXIMUM_MULTIPLICAND) {
@@ -112,55 +118,14 @@ fun MultiplicationTable(
 }
 
 @Composable
-private fun Multiplication(
-    timesTable: Int,
-    multiplicand: Int,
-    modifier: Modifier = Modifier,
-    style: TextStyle = LocalTextStyle.current
-) {
-    val maxWidth = Char.digit.maxWidth(style)
-    val product = timesTable.times(multiplicand)
-    val textStyle = style.merge(color = colorScheme.onSurface)
-
-    Row(modifier = modifier) {
-        Text(
-            text = "$timesTable",
-            modifier = Modifier.width(maxWidth.times("$timesTable".length)),
-            textAlign = TextAlign.Center,
-            style = textStyle
-        )
-
-        Text(
-            text = " $MULTIPLICATION_SIGN ",
-            modifier = Modifier,
-            style = textStyle
-        )
-
-        Text(
-            text = "$multiplicand",
-            modifier = Modifier.width(maxWidth),
-            textAlign = TextAlign.Center,
-            style = textStyle
-        )
-
-        Text(
-            text = " $EQUALS_SIGN ",
-            style = textStyle
-        )
-
-        Text(
-            text = "$product",
-            modifier = Modifier.width(maxWidth.times("${timesTable.times(MAXIMUM_MULTIPLICAND)}".length)),
-            style = textStyle
-        )
-    }
-}
-
-@Composable
-fun calculateFontSize(
-    maxHeight: Dp,
-    maxWidth: Dp
+private fun fontSizeOf(
+    maxWidth: Dp,
+    maxHeight: Dp
 ): TextUnit = with(LocalDensity.current) {
+    lruCache[maxWidth to maxHeight]?.let {
+        return@with it
+    }
+
     val context = LocalContext.current
     val textStyle = LocalTextStyle.current
 
@@ -180,15 +145,17 @@ fun calculateFontSize(
         height = textPaint.fontMetrics.height
     }
 
-    var width = multiplicationMaxWidth(textStyle.copy(fontSize = textSize.toSp()))
+    var width = widestMultiplicationWidth(textStyle.copy(fontSize = textSize.toSp()))
 
     while (maxWidth isLessThan width) {
         textSize -= Float.`1`
 
-        width = multiplicationMaxWidth(textStyle.copy(fontSize = textSize.toSp()))
+        width = widestMultiplicationWidth(textStyle.copy(fontSize = textSize.toSp()))
     }
 
     return remember(maxWidth, maxHeight) {
-        textSize.toSp()
+        textSize.toSp().also {
+            lruCache.put(maxWidth to maxHeight, it)
+        }
     }
 }
