@@ -2,7 +2,6 @@ package wing.tree.multiplication.table.main.view.composable
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
@@ -12,10 +11,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import wing.tree.multiplication.table.R
 import wing.tree.multiplication.table.composable.Icon
-import wing.tree.multiplication.table.extension.medium
 import wing.tree.multiplication.table.extension.small
 import wing.tree.multiplication.table.main.action.MainAction
 import wing.tree.multiplication.table.test.view.composable.FloatingActionButton
+import wing.tree.multiplication.table.token.Padding
+import wing.tree.multiplication.table.top.level.property.fillMaxHeight
 
 @Composable
 internal fun NavigationRail(
@@ -31,12 +31,12 @@ internal fun NavigationRail(
                 onClick = {
                     onAction(MainAction.Quiz)
                 },
-                modifier = Modifier.padding(vertical = Dp.medium)
+                modifier = Modifier.padding(vertical = Padding.medium)
             )
         }
     ) {
         Column(
-            modifier = Modifier.fillMaxHeight(),
+            modifier = fillMaxHeight,
             verticalArrangement = Arrangement.spacedBy(
                 space = Dp.small,
                 alignment = Alignment.Bottom

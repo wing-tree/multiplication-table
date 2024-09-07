@@ -4,10 +4,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.Dp
-import wing.tree.multiplication.table.extension.extraSmall
 import wing.tree.multiplication.table.extension.property.`1`
 import wing.tree.multiplication.table.top.level.property.fillMaxHeight
+import wing.tree.multiplication.table.type.alias.Spacing
 
 @Composable
 internal fun MultiplicationTableRow(
@@ -26,7 +25,7 @@ internal fun MultiplicationTableRow(
             )
         )
 
-        HorizontalSpacer(width = Dp.extraSmall)
+        HorizontalSpacer(width = Spacing.small)
 
         MultiplicationTable(
             timesTable = timesTable.inc(),
