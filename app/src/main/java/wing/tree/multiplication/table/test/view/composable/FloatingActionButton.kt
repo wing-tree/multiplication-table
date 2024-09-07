@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,17 +20,21 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import wing.tree.multiplication.table.R
 import wing.tree.multiplication.table.composable.noOperations
-import wing.tree.multiplication.table.extension.empty
 import wing.tree.multiplication.table.extension.extraExtraSmall
 import wing.tree.multiplication.table.extension.fourth
+import wing.tree.multiplication.table.extension.function.fourth
+import wing.tree.multiplication.table.extension.function.second
+import wing.tree.multiplication.table.extension.function.third
 import wing.tree.multiplication.table.extension.half
 import wing.tree.multiplication.table.extension.property.`1`
 import wing.tree.multiplication.table.extension.property.`4`
+import wing.tree.multiplication.table.extension.property.empty
 import wing.tree.multiplication.table.extension.property.isEven
 import wing.tree.multiplication.table.extension.property.negated
 import wing.tree.multiplication.table.extension.second
 import wing.tree.multiplication.table.extension.third
 import wing.tree.multiplication.table.theme.palette
+import wing.tree.multiplication.table.top.level.property.fillMaxHeight
 
 @Composable
 internal fun FloatingActionButton(
@@ -108,8 +111,7 @@ private fun Content(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Box(
-                    modifier = Modifier
-                        .fillMaxHeight()
+                    modifier = fillMaxHeight
                         .weight(Float.`1`)
                         .background(colors.first()),
                     contentAlignment = Alignment.Center
@@ -128,8 +130,7 @@ private fun Content(
                 }
 
                 Box(
-                    modifier = Modifier
-                        .fillMaxHeight()
+                    modifier = fillMaxHeight
                         .weight(Float.`1`)
                         .background(colors.second()),
                     contentAlignment = Alignment.Center
@@ -153,8 +154,7 @@ private fun Content(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Box(
-                    modifier = Modifier
-                        .fillMaxHeight()
+                    modifier = fillMaxHeight
                         .weight(Float.`1`)
                         .background(colors.third()),
                     contentAlignment = Alignment.Center
@@ -173,8 +173,7 @@ private fun Content(
                 }
 
                 Box(
-                    modifier = Modifier
-                        .fillMaxHeight()
+                    modifier = fillMaxHeight
                         .weight(Float.`1`)
                         .background(colors.fourth()),
                     contentAlignment = Alignment.Center

@@ -7,8 +7,8 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import wing.tree.multiplication.table.extension.empty
 import wing.tree.multiplication.table.extension.function.`this`
+import wing.tree.multiplication.table.extension.property.empty
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
