@@ -99,7 +99,12 @@ internal fun Test(
 
     val scrollState = rememberScrollState()
 
-    Column(modifier = modifier.padding(widthSizeClass.paddingValues)) {
+    Column(
+        modifier = modifier
+            .padding(widthSizeClass.paddingValues)
+            .padding(vertical = Padding.medium),
+        verticalArrangement = Arrangement.spacedBy(space = Space.medium)
+    ) {
         val isInProgress = tag.isInProgress
         val interactionSource = remember {
             MutableInteractionSource()
@@ -128,18 +133,6 @@ internal fun Test(
             label = String.empty
         )
 
-        AnimatedVisibility(
-            visible = state is TestState.Completed,
-            modifier = fillMaxWidth
-        ) {
-            Score(
-                state = state,
-                modifier = Modifier
-                    .padding(bottom = Padding.extra.small)
-                    .padding(bottom = Padding.small)
-            )
-        }
-
         LaunchedEffect(isInProgress) {
             if (isInProgress) {
                 scrollState.animateScrollTo(value = Int.`0`)
@@ -148,12 +141,22 @@ internal fun Test(
             }
         }
 
+        AnimatedVisibility(
+            visible = state is TestState.Completed,
+            modifier = fillMaxWidth
+        ) {
+            Score(
+                state = state,
+                modifier = fillMaxWidth
+            )
+        }
+
         Column(
             modifier = fillMaxWidth
                 .weight(weight = Float.`1`)
                 .verticalScroll(scrollState)
                 .verticalFadingEdge(scrollState)
-                .padding(vertical = Padding.small),
+                .padding(vertical = Padding.medium),
             verticalArrangement = Arrangement.spacedBy(space = Space.small)
         ) {
             test.forEachIndexed { index, question ->
