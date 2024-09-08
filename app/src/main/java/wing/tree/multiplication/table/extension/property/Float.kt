@@ -49,6 +49,7 @@ val Float.Companion.fullyOpaque: Float get() = Float.`1`
 val Float.Companion.fullyTransparent: Float get() = Float.`0`
 val Float.Companion.half: Float get() = 0.50F
 val Float.Companion.none: Float get() = Float.`0`
+val Float.Companion.oneAndAHalf: Float get() = 1.50F
 val Float.Companion.oneAndAQuarter: Float get() = 1.25F
 val Float.Companion.oneEighth: Float get() = 0.125F
 val Float.Companion.onePercent: Float get() = 0.01F

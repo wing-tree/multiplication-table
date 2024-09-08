@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="ad_loading">광고 로딩 중…</string>
     <string name="app_name">구구단</string>
     <string name="check">정답 확인</string>
     <string name="home">홈</string>
