@@ -20,6 +20,7 @@ import wing.tree.multiplication.table.speed.quiz.view.composable.Ready
 import wing.tree.multiplication.table.speed.quiz.view.composable.TopBar
 import wing.tree.multiplication.table.speed.quiz.view.model.SpeedQuizViewModel
 import wing.tree.multiplication.table.theme.MultiplicationTableTheme
+import wing.tree.multiplication.table.token.Padding
 import wing.tree.multiplication.table.top.level.property.fillMaxSize
 
 class SpeedQuizActivity : ComponentActivity() {
@@ -57,7 +58,9 @@ class SpeedQuizActivity : ComponentActivity() {
                 ) { paddingValues ->
                     Crossfade(
                         targetState = state,
-                        modifier = Modifier.padding(paddingValues = paddingValues)
+                        modifier = Modifier
+                            .padding(paddingValues = paddingValues)
+                            .padding(vertical = Padding.medium)
                     ) { targetState ->
                         when (targetState) {
                             is SpeedQuizState.Play -> Play(

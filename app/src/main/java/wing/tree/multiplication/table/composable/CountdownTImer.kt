@@ -37,7 +37,8 @@ internal fun CountdownTimer(
         Minutes(
             minutes = {
                 minutes
-            }
+            },
+            style = style
         )
 
         Text(
@@ -48,7 +49,8 @@ internal fun CountdownTimer(
         Seconds(
             seconds = {
                 seconds
-            }
+            },
+            style = style
         )
     }
 }
