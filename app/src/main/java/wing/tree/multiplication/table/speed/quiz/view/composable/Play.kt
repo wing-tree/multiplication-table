@@ -31,8 +31,8 @@ internal fun Play(
                 )
             )
 
-            is SpeedQuizState.Play.Playing -> SpeedQuiz(
-                speedQuiz = targetState.speedQuiz,
+            is SpeedQuizState.Play.Playing -> Playing(
+                state = targetState,
                 onAction = onAction,
                 modifier = fillMaxSize.padding(
                     paddingValues = windowWidthSizeClass.paddingValues

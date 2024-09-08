@@ -121,12 +121,12 @@ internal fun Question(
                             }
                         },
                         modifier = Modifier
-                            .weight(Float.`1`)
+                            .weight(weight = Float.`1`)
                             .background(color = colorScheme.surface)
                             .focusRequester(focusRequester)
                             .padding(Padding.extra.small),
                         readOnly = tag not TestState.Tag.IN_PROGRESS,
-                        textStyle = textStyle.copy(color = color),
+                        textStyle = textStyle.merge(color = color),
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Decimal,
                             imeAction = ImeAction.Next
@@ -159,7 +159,7 @@ internal fun Question(
                                 this.alpha = alpha
                             },
                         color = Color.Blue,
-                        style = textStyle.copy(textAlign = TextAlign.End)
+                        style = textStyle.merge(textAlign = TextAlign.End)
                     )
                 }
             }

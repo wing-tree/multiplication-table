@@ -1,15 +1,9 @@
 package wing.tree.multiplication.table.test.view.composable
 
-import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
-import androidx.compose.animation.expandVertically
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.shrinkVertically
-import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
@@ -44,6 +38,8 @@ import wing.tree.multiplication.table.extension.function.isLessThan
 import wing.tree.multiplication.table.extension.function.isLessThanOrEqualTo
 import wing.tree.multiplication.table.extension.function.not
 import wing.tree.multiplication.table.extension.function.verticalFadingEdge
+import wing.tree.multiplication.table.extension.property.`0`
+import wing.tree.multiplication.table.extension.property.`1`
 import wing.tree.multiplication.table.extension.property.empty
 import wing.tree.multiplication.table.extension.property.inc
 import wing.tree.multiplication.table.extension.property.paddingValues
@@ -63,6 +59,7 @@ internal fun Test(
     onAction: (Action) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val tag = state.tag
     val test = state.test
     val focusManager = LocalFocusManager.current
     val focusRequesters = remember(state) {
@@ -102,52 +99,8 @@ internal fun Test(
 
     val scrollState = rememberScrollState()
 
-    LaunchedEffect(Unit) {
-        focusRequesters.first().requestFocus()
-    }
-
-    Column(
-        modifier = modifier
-            .verticalScroll(scrollState)
-            .verticalFadingEdge(scrollState)
-            .padding(vertical = Padding.small)
-            .padding(paddingValues = widthSizeClass.paddingValues),
-        verticalArrangement = Arrangement.spacedBy(space = Space.small)
-    ) {
-        AnimatedContent(
-            targetState = state is TestState.Completed,
-            modifier = fillMaxWidth,
-            transitionSpec = {
-                val enter = expandVertically().plus(fadeIn())
-                val exit = fadeOut().plus(shrinkVertically())
-
-                enter togetherWith exit
-            },
-            label = String.empty
-        ) {
-            if (it) {
-                Score(
-                    state = state,
-                    modifier = Modifier
-                        .padding(bottom = Padding.extra.small)
-                        .padding(bottom = Padding.small)
-                )
-            }
-        }
-
-        test.forEachIndexed { index, question ->
-            Question(
-                index = index,
-                question = question,
-                tag = state.tag,
-                focusRequester = focusRequesters[index],
-                onKeyboardAction = onKeyboardAction,
-                modifier = fillMaxWidth
-            )
-        }
-
-        val isInProgress = state.tag.isInProgress
-
+    Column(modifier = modifier.padding(widthSizeClass.paddingValues)) {
+        val isInProgress = tag.isInProgress
         val interactionSource = remember {
             MutableInteractionSource()
         }
@@ -174,6 +127,46 @@ internal fun Test(
             },
             label = String.empty
         )
+
+        AnimatedVisibility(
+            visible = state is TestState.Completed,
+            modifier = fillMaxWidth
+        ) {
+            Score(
+                state = state,
+                modifier = Modifier
+                    .padding(bottom = Padding.extra.small)
+                    .padding(bottom = Padding.small)
+            )
+        }
+
+        LaunchedEffect(isInProgress) {
+            if (isInProgress) {
+                scrollState.animateScrollTo(value = Int.`0`)
+
+                focusRequesters.first().requestFocus()
+            }
+        }
+
+        Column(
+            modifier = fillMaxWidth
+                .weight(weight = Float.`1`)
+                .verticalScroll(scrollState)
+                .verticalFadingEdge(scrollState)
+                .padding(vertical = Padding.small),
+            verticalArrangement = Arrangement.spacedBy(space = Space.small)
+        ) {
+            test.forEachIndexed { index, question ->
+                Question(
+                    index = index,
+                    question = question,
+                    tag = tag,
+                    focusRequester = focusRequesters[index],
+                    onKeyboardAction = onKeyboardAction,
+                    modifier = fillMaxWidth
+                )
+            }
+        }
 
         val visible = when (state) {
             is TestState.Preparing -> false

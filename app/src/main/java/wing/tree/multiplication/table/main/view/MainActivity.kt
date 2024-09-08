@@ -142,8 +142,9 @@ class MainActivity : ComponentActivity() {
                         ) {
                             VerticalPager(
                                 state = state,
-                                modifier = Modifier.weight(Float.`1`),
-                                contentPadding = contentPadding
+                                modifier = Modifier.weight(weight = Float.`1`),
+                                contentPadding = contentPadding,
+                                beyondBoundsPageCount = Int.`1`
                             ) { page ->
                                 PageContent(
                                     page = page,

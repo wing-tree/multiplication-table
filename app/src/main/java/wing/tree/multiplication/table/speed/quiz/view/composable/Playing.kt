@@ -34,7 +34,7 @@ import wing.tree.multiplication.table.extension.property.equalsSign
 import wing.tree.multiplication.table.extension.property.intOrNull
 import wing.tree.multiplication.table.model.Question
 import wing.tree.multiplication.table.speed.quiz.action.SpeedQuizAction
-import wing.tree.multiplication.table.speed.quiz.model.SpeedQuiz
+import wing.tree.multiplication.table.speed.quiz.state.SpeedQuizState
 import wing.tree.multiplication.table.token.Padding
 import wing.tree.multiplication.table.top.level.function.containerColor
 import wing.tree.multiplication.table.top.level.property.MAXIMUM_DIGITS
@@ -42,8 +42,8 @@ import wing.tree.multiplication.table.top.level.property.fillMaxWidth
 import wing.tree.multiplication.table.top.level.property.regex
 
 @Composable
-internal fun SpeedQuiz(
-    speedQuiz: SpeedQuiz,
+internal fun Playing(
+    state: SpeedQuizState.Play.Playing,
     onAction: (SpeedQuizAction) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -51,6 +51,7 @@ internal fun SpeedQuiz(
         FocusRequester()
     }
 
+    val speedQuiz = state.speedQuiz
     val index = speedQuiz.index
     val question = remember(index) {
         speedQuiz.random

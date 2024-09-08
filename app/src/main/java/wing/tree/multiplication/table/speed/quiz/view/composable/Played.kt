@@ -45,21 +45,24 @@ internal fun Played(
 ) {
     Column(
         modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(space = Space.medium),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        val speedQuiz = state.speedQuiz
+
+        Score(submission = speedQuiz.submission)
+
         Column(
             modifier = fillMaxWidth.weight(weight = Float.`1`),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             val scrollState = rememberScrollState()
-            val speedQuiz = state.speedQuiz
-
-            Score(score = speedQuiz.submission.score)
 
             Column(
                 modifier = fillMaxWidth
                     .verticalScroll(state = scrollState)
-                    .verticalFadingEdge(scrollState = scrollState),
+                    .verticalFadingEdge(scrollState = scrollState)
+                    .padding(vertical = Padding.medium),
                 verticalArrangement = Arrangement.spacedBy(space = Space.small)
             ) {
                 speedQuiz.submission.forEach {
@@ -129,7 +132,8 @@ internal fun Played(
             ElevatedButton(
                 onClick = {
                     onAction(SpeedQuizAction.Home)
-                }
+                },
+                modifier = fillMaxWidth
             ) {
                 Text(text = stringResource(R.string.home))
             }
@@ -137,7 +141,8 @@ internal fun Played(
             ElevatedButton(
                 onClick = {
                     onAction(SpeedQuizAction.Replay)
-                }
+                },
+                modifier = fillMaxWidth
             ) {
                 Text(text = stringResource(R.string.replay))
             }
