@@ -10,6 +10,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import wing.tree.multiplication.table.ad.InterstitialAdLoader
 import wing.tree.multiplication.table.composable.Crossfade
 import wing.tree.multiplication.table.extension.property.isNotFinishing
 import wing.tree.multiplication.table.speed.quiz.action.SpeedQuizAction
@@ -28,6 +29,9 @@ class SpeedQuizActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        InterstitialAdLoader.load(context = this)
+
         setContent {
             MultiplicationTableTheme(activity = this) {
                 val sideEffect by viewModel.sideEffect.collectAsState(null)

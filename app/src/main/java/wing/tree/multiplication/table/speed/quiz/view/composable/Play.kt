@@ -23,8 +23,6 @@ internal fun Play(
         modifier = modifier
     ) { targetState ->
         when (targetState) {
-            is SpeedQuizState.Play.InterstitialAd -> {}
-            
             is SpeedQuizState.Play.Played -> Played(
                 state = targetState,
                 onAction = onAction,
