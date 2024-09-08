@@ -4,14 +4,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.Dp
 import wing.tree.multiplication.table.composable.MultiplicationTableRow
 import wing.tree.multiplication.table.composable.VerticalSpacer
-import wing.tree.multiplication.table.top.level.property.MINIMUM_TIMES_TABLE
-import wing.tree.multiplication.table.extension.extraSmall
 import wing.tree.multiplication.table.extension.function.incrementByTwo
 import wing.tree.multiplication.table.extension.function.quadrupled
 import wing.tree.multiplication.table.extension.property.`1`
+import wing.tree.multiplication.table.top.level.property.MINIMUM_TIMES_TABLE
+import wing.tree.multiplication.table.type.alias.Space
 
 @Composable
 internal fun PageContent(
@@ -29,7 +28,7 @@ internal fun PageContent(
             modifier = Modifier.weight(weight = Float.`1`)
         )
 
-        VerticalSpacer(height = Dp.extraSmall)
+        VerticalSpacer(height = Space.extra.small)
 
         MultiplicationTableRow(
             timesTable = timesTable.incrementByTwo(),

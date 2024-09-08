@@ -59,7 +59,7 @@ class SpeedQuizViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
             }
 
             SpeedQuizAction.OnReady -> play()
-            SpeedQuizAction.Replay -> ready()
+            SpeedQuizAction.Replay -> prepare()
             is SpeedQuizAction.Next -> with(state.value) {
                 if (this is SpeedQuizState.Play.Playing) {
                     speedQuiz.submit(action.question)
@@ -89,7 +89,7 @@ class SpeedQuizViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
         countdownTimer.start()
     }
 
-    private fun ready() {
+    private fun prepare() {
         _state.update {
             SpeedQuizState.Ready
         }

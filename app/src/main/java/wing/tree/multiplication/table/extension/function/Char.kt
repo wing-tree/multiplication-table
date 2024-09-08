@@ -10,4 +10,7 @@ import androidx.compose.ui.unit.Dp
 fun Char.repeat(n: Int): String = "$this".repeat(n)
 
 @Composable
+fun Char.height(style: TextStyle = LocalTextStyle.current): Dp = "$this".height(style)
+
+@Composable
 fun Char.width(style: TextStyle = LocalTextStyle.current): Dp = "$this".width(style)

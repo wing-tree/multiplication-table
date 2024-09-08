@@ -14,12 +14,32 @@ import androidx.core.content.res.ResourcesCompat
 import wing.tree.multiplication.table.R
 import wing.tree.multiplication.table.extension.property.`2`
 import wing.tree.multiplication.table.extension.property.`3`
+import wing.tree.multiplication.table.extension.property.height
 import wing.tree.multiplication.table.extension.property.secondIndex
 import wing.tree.multiplication.table.extension.property.space
 
 fun String.fourth() = get(Int.`3`)
 fun String.second() = get(Int.secondIndex)
 fun String.third() = get(Int.`2`)
+
+@Composable
+fun String.height(style: TextStyle = LocalTextStyle.current): Dp {
+    val context = LocalContext.current
+    val density = LocalDensity.current
+    val textPaint = remember {
+        TextPaint().also {
+            it.typeface = ResourcesCompat.getFont(context, R.font.y_clover_regular)
+        }
+    }
+
+    textPaint.textSize = with(density) {
+        style.fontSize.toPx()
+    }
+
+    return with(density) {
+        textPaint.fontMetrics.height.toDp()
+    }
+}
 
 @Composable
 fun String.width(style: TextStyle = LocalTextStyle.current): Dp {

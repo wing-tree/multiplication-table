@@ -8,10 +8,8 @@ import androidx.compose.material3.NavigationRailItem
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.Dp
 import wing.tree.multiplication.table.R
 import wing.tree.multiplication.table.composable.Icon
-import wing.tree.multiplication.table.extension.small
 import wing.tree.multiplication.table.main.action.MainAction
 import wing.tree.multiplication.table.test.view.composable.FloatingActionButton
 import wing.tree.multiplication.table.token.Padding
@@ -38,7 +36,7 @@ internal fun NavigationRail(
         Column(
             modifier = fillMaxHeight,
             verticalArrangement = Arrangement.spacedBy(
-                space = Dp.small,
+                space = Padding.small,
                 alignment = Alignment.Bottom
             )
         ) {
