@@ -34,7 +34,7 @@ class TestViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
         _state.update {
             when (it) {
                 is TestState.InProgress -> when {
-                    it.isAllAnswered -> TestState.Completed(it.test)
+                    it.allAnswered -> TestState.Completed(it.test)
                     else -> it
                 }
 

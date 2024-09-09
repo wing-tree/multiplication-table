@@ -173,7 +173,7 @@ internal fun Test(
 
         val visible = when (state) {
             is TestState.Preparing -> false
-            else -> state.isAllAnswered
+            else -> state.allAnswered
         }
 
         AnimatedVisibility(visible = visible) {

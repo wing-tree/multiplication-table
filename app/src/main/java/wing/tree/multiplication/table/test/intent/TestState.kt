@@ -7,7 +7,7 @@ import wing.tree.multiplication.table.test.model.Test
 
 @Stable
 sealed interface TestState {
-    val isAllAnswered: Boolean get() = test.all(Question::isAnswered)
+    val allAnswered: Boolean get() = test.all(Question::isAnswered)
 
     val tag: Tag
     val test: Test
