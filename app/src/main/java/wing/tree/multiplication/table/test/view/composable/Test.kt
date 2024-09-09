@@ -45,7 +45,7 @@ import wing.tree.multiplication.table.extension.property.inc
 import wing.tree.multiplication.table.extension.property.paddingValues
 import wing.tree.multiplication.table.model.Action
 import wing.tree.multiplication.table.model.Question
-import wing.tree.multiplication.table.test.state.TestState
+import wing.tree.multiplication.table.test.intent.TestState
 import wing.tree.multiplication.table.token.Padding
 import wing.tree.multiplication.table.top.level.property.INVALID_INDEX
 import wing.tree.multiplication.table.top.level.property.NUMBER_OF_QUESTIONS

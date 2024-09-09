@@ -1,4 +1,4 @@
-package wing.tree.multiplication.table.test.state
+package wing.tree.multiplication.table.test.intent
 
 import androidx.compose.runtime.Stable
 import wing.tree.multiplication.table.extension.function.`is`

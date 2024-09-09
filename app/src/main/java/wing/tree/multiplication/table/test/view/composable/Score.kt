@@ -16,7 +16,7 @@ import wing.tree.multiplication.table.extension.half
 import wing.tree.multiplication.table.extension.property.slash
 import wing.tree.multiplication.table.model.Question
 import wing.tree.multiplication.table.model.Submission
-import wing.tree.multiplication.table.test.state.TestState
+import wing.tree.multiplication.table.test.intent.TestState
 import wing.tree.multiplication.table.type.alias.Space
 
 @Composable

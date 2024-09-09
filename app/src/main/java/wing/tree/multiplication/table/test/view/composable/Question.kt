@@ -41,7 +41,7 @@ import wing.tree.multiplication.table.extension.property.threeQuarters
 import wing.tree.multiplication.table.extension.property.widestDigit
 import wing.tree.multiplication.table.model.Action
 import wing.tree.multiplication.table.model.Question
-import wing.tree.multiplication.table.test.state.TestState
+import wing.tree.multiplication.table.test.intent.TestState
 import wing.tree.multiplication.table.theme.pastelGreen
 import wing.tree.multiplication.table.theme.pastelRed
 import wing.tree.multiplication.table.token.Padding
