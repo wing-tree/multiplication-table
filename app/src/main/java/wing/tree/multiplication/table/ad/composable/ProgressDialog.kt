@@ -13,8 +13,8 @@ import wing.tree.multiplication.table.composable.noOperations
 import wing.tree.multiplication.table.dialog.intent.DialogState
 import wing.tree.multiplication.table.dialog.model.Dialog
 import wing.tree.multiplication.table.extension.property.oneAndAHalf
+import wing.tree.multiplication.table.token.Space
 import wing.tree.multiplication.table.top.level.property.fillMaxSize
-import wing.tree.multiplication.table.type.alias.Space
 
 @Composable
 internal fun ProgressDialog(

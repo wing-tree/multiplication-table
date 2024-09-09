@@ -10,8 +10,7 @@ import wing.tree.multiplication.table.extension.property.triple
 import wing.tree.multiplication.table.extension.property.twice
 
 internal abstract class Padding(val dp: Dp) {
-    abstract val extra: Extra
-
+    open val extra: Extra get() = Extra(dp = dp, level = Int.`1`)
     open val small: Dp = dp
     open val medium: Dp = dp.twice
     open val large: Dp = dp.triple
@@ -29,11 +28,7 @@ internal abstract class Padding(val dp: Dp) {
             get() = super.large.plus(dp.half.times(level))
     }
 
-    internal object Compact : Padding(Dp.`4`) {
-        override val extra = Extra(dp = dp, level = Int.`1`)
-    }
+    internal object Compact : Padding(Dp.`4`)
 
-    companion object : Padding(Dp.`8`) {
-        override val extra = Extra(dp = dp, level = Int.`1`)
-    }
+    companion object : Padding(Dp.`8`)
 }

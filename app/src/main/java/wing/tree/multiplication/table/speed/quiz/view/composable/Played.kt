@@ -33,9 +33,9 @@ import wing.tree.multiplication.table.test.view.composable.Score
 import wing.tree.multiplication.table.theme.pastelGreen
 import wing.tree.multiplication.table.theme.pastelRed
 import wing.tree.multiplication.table.token.Padding
+import wing.tree.multiplication.table.token.Space
 import wing.tree.multiplication.table.top.level.function.containerColor
 import wing.tree.multiplication.table.top.level.property.fillMaxWidth
-import wing.tree.multiplication.table.type.alias.Space
 
 @Composable
 internal fun Played(

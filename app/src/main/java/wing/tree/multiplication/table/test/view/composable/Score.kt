@@ -12,12 +12,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import wing.tree.multiplication.table.R
 import wing.tree.multiplication.table.extension.function.shimmer
-import wing.tree.multiplication.table.extension.property.half
 import wing.tree.multiplication.table.extension.property.slash
 import wing.tree.multiplication.table.model.Question
 import wing.tree.multiplication.table.model.Submission
 import wing.tree.multiplication.table.test.intent.TestState
-import wing.tree.multiplication.table.type.alias.Space
+import wing.tree.multiplication.table.token.Space
 
 @Composable
 internal fun Score(
@@ -53,7 +52,7 @@ private fun Score(
 ) {
     Column(
         modifier = modifier.shimmer(),
-        verticalArrangement = Arrangement.spacedBy(space = Space.large.half),
+        verticalArrangement = Arrangement.spacedBy(space = Space.Compact.large),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
