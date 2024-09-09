@@ -16,11 +16,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Constraints
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import wing.tree.multiplication.table.R
 import wing.tree.multiplication.table.composable.noOperations
-import wing.tree.multiplication.table.extension.`2`
 import wing.tree.multiplication.table.extension.function.fourth
 import wing.tree.multiplication.table.extension.function.second
 import wing.tree.multiplication.table.extension.function.third
@@ -30,6 +28,7 @@ import wing.tree.multiplication.table.extension.property.empty
 import wing.tree.multiplication.table.extension.property.isEven
 import wing.tree.multiplication.table.extension.property.negated
 import wing.tree.multiplication.table.theme.palette
+import wing.tree.multiplication.table.token.Padding
 import wing.tree.multiplication.table.top.level.property.fillMaxHeight
 
 @Composable
@@ -63,13 +62,16 @@ internal fun FloatingActionButton(
                 it.width to it.height
             }
 
-        val placeable = subcompose(content, content).map {
+        val placeable = subcompose(
+            slotId = content,
+            content = content
+        ).map {
             it.measure(Constraints(maxWidth = width, maxHeight = height))
         }
             .first()
 
-        layout(width, height) {
-            placeable.place(IntOffset.Zero)
+        layout(width = width, height = height) {
+            placeable.place(position = IntOffset.Zero)
         }
     }
 
@@ -81,7 +83,7 @@ private fun Content(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val text = stringResource(id = R.string.quiz)
+    val text = stringResource(R.string.quiz)
 
     FloatingActionButton(
         onClick = onClick,
@@ -102,16 +104,16 @@ private fun Content(
         }
 
         Column {
-            val translation = Dp.`2`
+            val translation = Padding.Compact.extra.small
 
             Row(
-                modifier = Modifier.weight(Float.`1`),
+                modifier = Modifier.weight(weight = Float.`1`),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Box(
                     modifier = fillMaxHeight
-                        .weight(Float.`1`)
-                        .background(colors.first()),
+                        .weight(weight = Float.`1`)
+                        .background(color = colors.first()),
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
