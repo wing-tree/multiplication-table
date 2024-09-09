@@ -12,7 +12,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import wing.tree.multiplication.table.R
 import wing.tree.multiplication.table.extension.function.shimmer
-import wing.tree.multiplication.table.extension.half
+import wing.tree.multiplication.table.extension.property.half
 import wing.tree.multiplication.table.extension.property.slash
 import wing.tree.multiplication.table.model.Question
 import wing.tree.multiplication.table.model.Submission

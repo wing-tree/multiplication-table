@@ -43,7 +43,7 @@ class SpeedQuizActivity : ComponentActivity() {
         InterstitialAdLoader.load(context = this)
 
         setContent {
-            MultiplicationTableTheme(activity = this) {
+            MultiplicationTableTheme(this) {
                 val state by viewModel.state.collectAsState()
 
                 var dialogState by remember {

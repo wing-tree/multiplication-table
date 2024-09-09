@@ -1,13 +1,13 @@
 package wing.tree.multiplication.table.token
 
 import androidx.compose.ui.unit.Dp
-import wing.tree.multiplication.table.extension.`4`
-import wing.tree.multiplication.table.extension.`8`
-import wing.tree.multiplication.table.extension.half
 import wing.tree.multiplication.table.extension.property.`1`
+import wing.tree.multiplication.table.extension.property.`4`
+import wing.tree.multiplication.table.extension.property.`8`
+import wing.tree.multiplication.table.extension.property.half
 import wing.tree.multiplication.table.extension.property.inc
-import wing.tree.multiplication.table.extension.triple
-import wing.tree.multiplication.table.extension.twice
+import wing.tree.multiplication.table.extension.property.triple
+import wing.tree.multiplication.table.extension.property.twice
 
 internal abstract class Padding(val dp: Dp) {
     abstract val extra: Extra

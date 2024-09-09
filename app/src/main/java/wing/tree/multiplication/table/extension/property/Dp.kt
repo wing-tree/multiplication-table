@@ -1,15 +1,11 @@
 @file:Suppress("ObjectPropertyName", "unused")
 
-package wing.tree.multiplication.table.extension
+package wing.tree.multiplication.table.extension.property
 
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import wing.tree.multiplication.table.extension.function.`is`
 import wing.tree.multiplication.table.extension.function.not
-import wing.tree.multiplication.table.extension.property.`2`
-import wing.tree.multiplication.table.extension.property.`3`
-import wing.tree.multiplication.table.extension.property.`4`
-import wing.tree.multiplication.table.extension.property.threeQuarters
 
 val Dp.Companion.`0`: Dp get() = 0.00.dp
 val Dp.Companion.`1`: Dp get() = 1.00.dp
