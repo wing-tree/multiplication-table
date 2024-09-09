@@ -52,13 +52,13 @@ private fun Score(
 ) {
     Column(
         modifier = modifier.shimmer(),
-        verticalArrangement = Arrangement.spacedBy(space = Space.Compact.large),
+        verticalArrangement = Arrangement.spacedBy(space = Space.Compact.small),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
             text = stringResource(id = R.string.score),
             color = colorScheme.onSurfaceVariant,
-            fontWeight = FontWeight.Bold
+            style = typography.bodyMedium.merge(fontWeight = FontWeight.Bold)
         )
 
         Text(
