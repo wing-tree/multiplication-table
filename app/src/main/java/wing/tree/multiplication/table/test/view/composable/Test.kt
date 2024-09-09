@@ -4,13 +4,10 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
@@ -24,9 +21,9 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.Dp
 import kotlinx.collections.immutable.persistentListOf
 import wing.tree.multiplication.table.R
+import wing.tree.multiplication.table.composable.MultiplicationTableButton
 import wing.tree.multiplication.table.extension.function.`is`
 import wing.tree.multiplication.table.extension.function.isLessThan
 import wing.tree.multiplication.table.extension.function.isLessThanOrEqualTo
@@ -34,7 +31,6 @@ import wing.tree.multiplication.table.extension.function.not
 import wing.tree.multiplication.table.extension.function.verticalFadingEdge
 import wing.tree.multiplication.table.extension.property.`0`
 import wing.tree.multiplication.table.extension.property.`1`
-import wing.tree.multiplication.table.extension.property.`16`
 import wing.tree.multiplication.table.extension.property.inc
 import wing.tree.multiplication.table.extension.property.paddingValues
 import wing.tree.multiplication.table.model.Action
@@ -140,8 +136,9 @@ internal fun Test(
             }
         }
 
-        val visible = when (state) {
-            is TestState.Preparing -> false
+        val visible = when {
+            state is TestState.Preparing -> false
+            tag `is` TestState.Tag.CLEARING -> false
             else -> state.allAnswered
         }
 
@@ -151,34 +148,58 @@ internal fun Test(
             }
         }
 
-        AnimatedVisibility(
-            visible = visible,
-            modifier = fillMaxWidth.padding(widthSizeClass.paddingValues)
+        Column(
+            modifier = fillMaxWidth.padding(vertical = Padding.small)
         ) {
-            ElevatedCard(
-                onClick = {
-                    val action = when (state) {
-                        is TestState.Completed -> Action.SolveAgain
-                        else -> {
-                            focusManager.clearFocus()
+            val style = typography.bodyMedium.merge(fontWeight = FontWeight.Bold)
 
-                            Action.Check
+            AnimatedVisibility(
+                visible = isInProgress.not()
+            ) {
+                Column {
+                    MultiplicationTableButton(
+                        onClick = {
+
                         }
+                    ) {
+                        Text(
+                            text = stringResource(R.string.home),
+                            modifier = Modifier.align(Alignment.Center),
+                            style = style
+                        )
                     }
 
-                    onAction(action)
-                },
-                modifier = Modifier
-                    .padding(vertical = Padding.small)
-                    .focusRequester(focusRequesters.last())
-                    .focusable(interactionSource = interactionSource),
-                shape = RoundedCornerShape(Dp.`16`)
-            ) {
-                Box(
-                    modifier = fillMaxWidth.padding(
-                        horizontal = Padding.medium,
-                        vertical = Padding.Compact.large
-                    )
+                    MultiplicationTableButton(
+                        onClick = {
+
+                        }
+                    ) {
+                        Text(
+                            text = stringResource(R.string.home),
+                            modifier = Modifier.align(Alignment.Center),
+                            style = style
+                        )
+                    }
+                }
+            }
+
+            AnimatedVisibility(visible = visible) {
+                MultiplicationTableButton(
+                    onClick = {
+                        val action = when (state) {
+                            is TestState.Completed -> Action.SolveAgain
+                            else -> {
+                                focusManager.clearFocus()
+
+                                Action.Check
+                            }
+                        }
+
+                        onAction(action)
+                    },
+                    modifier = Modifier
+                        .focusRequester(focusRequesters.last())
+                        .focusable(interactionSource = interactionSource)
                 ) {
                     Text(
                         text = when {
@@ -186,8 +207,7 @@ internal fun Test(
                             else -> stringResource(id = R.string.solve_again)
                         },
                         modifier = Modifier.align(Alignment.Center),
-                        fontWeight = FontWeight.Bold,
-                        style = typography.bodyMedium
+                        style = style
                     )
                 }
             }

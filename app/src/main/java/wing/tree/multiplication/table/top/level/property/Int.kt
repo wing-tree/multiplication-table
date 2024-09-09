@@ -8,5 +8,5 @@ internal const val MAXIMUM_TIMES_TABLE = 17
 internal const val MINIMUM_MULTIPLICAND = 1
 internal const val MINIMUM_TIMES_TABLE = 2
 internal const val MULTIPLICATION_TABLES_PER_PAGE = 4
-internal const val NUMBER_OF_QUESTIONS = 20
+internal const val NUMBER_OF_QUESTIONS = 5
 internal const val PERFECT_SCORE = 100
