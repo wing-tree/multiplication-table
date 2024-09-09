@@ -20,23 +20,19 @@ internal fun Play(
 
     Crossfade(
         targetState = state,
-        modifier = modifier
+        modifier = modifier.padding(windowWidthSizeClass.paddingValues)
     ) { targetState ->
         when (targetState) {
             is SpeedQuizState.Play.Played -> Played(
                 state = targetState,
                 onAction = onAction,
-                modifier = fillMaxSize.padding(
-                    paddingValues = windowWidthSizeClass.paddingValues
-                )
+                modifier = fillMaxSize
             )
 
             is SpeedQuizState.Play.Playing -> Playing(
                 state = targetState,
                 onAction = onAction,
-                modifier = fillMaxSize.padding(
-                    paddingValues = windowWidthSizeClass.paddingValues
-                )
+                modifier = fillMaxSize
             )
         }
     }
