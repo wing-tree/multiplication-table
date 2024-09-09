@@ -48,7 +48,6 @@ import wing.tree.multiplication.table.test.view.TestActivity
 import wing.tree.multiplication.table.theme.MultiplicationTableTheme
 import wing.tree.multiplication.table.token.Padding
 import wing.tree.multiplication.table.top.level.property.MAXIMUM_TIMES_TABLE
-import wing.tree.multiplication.table.top.level.property.MINIMUM_TIMES_TABLE
 import wing.tree.multiplication.table.top.level.property.MULTIPLICATION_TABLES_PER_PAGE
 import wing.tree.multiplication.table.top.level.property.fillMaxSize
 
@@ -68,17 +67,17 @@ class MainActivity : ComponentActivity() {
 
                 val onAction: (MainAction) -> Unit = {
                     when (it) {
-                        MainAction.Navigate.ToSpeedQuiz -> startActivity(
+                        is MainAction.Navigate.ToSpeedQuiz -> startActivity(
                             Intent(this, SpeedQuizActivity::class.java).apply {
-                                putExtra(Key.END_INCLUSIVE(), 3)
-                                putExtra(Key.START(), MINIMUM_TIMES_TABLE)
+                                putExtra(Key.START(), it.start)
+                                putExtra(Key.END_INCLUSIVE(), it.endInclusive)
                             }
                         )
 
-                        MainAction.Navigate.ToTest -> startActivity(
+                        is MainAction.Navigate.ToTest -> startActivity(
                             Intent(this, TestActivity::class.java).apply {
-                                putExtra(Key.END_INCLUSIVE(), 17)
-                                putExtra(Key.START(), MINIMUM_TIMES_TABLE)
+                                putExtra(Key.START(), it.start)
+                                putExtra(Key.END_INCLUSIVE(), it.endInclusive)
                             }
                         )
 
