@@ -6,7 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -45,33 +44,30 @@ class SpeedQuizActivity : ComponentActivity() {
 
         setContent {
             MultiplicationTableTheme(activity = this) {
-                val sideEffect by viewModel.sideEffect.collectAsState(null)
                 val state by viewModel.state.collectAsState()
 
                 var dialogState by remember {
                     mutableStateOf<DialogState<Dialog.Progress>>(DialogState.Dismissed)
                 }
 
-                LaunchedEffect(sideEffect) {
-                    sideEffect?.let {
-                        when (it) {
-                            SpeedQuizSideEffect.Home -> if (isNotFinishing) {
-                                finish()
-                            }
+                viewModel.collectSideEffect { sideEffect ->
+                    when (sideEffect) {
+                        SpeedQuizSideEffect.Home -> if (isNotFinishing) {
+                            finish()
+                        }
 
-                            SpeedQuizSideEffect.Show.InterstitialAd -> {
-                                dialogState = DialogState.Showing(
-                                    Dialog.Progress(getString(R.string.ad_loading))
-                                )
+                        SpeedQuizSideEffect.Show.InterstitialAd -> {
+                            dialogState = DialogState.Showing(
+                                Dialog.Progress(getString(R.string.ad_loading))
+                            )
 
-                                delay(timeMillis = Long.`7`.hundreds.twice)
+                            delay(timeMillis = Long.`7`.hundreds.twice)
 
-                                InterstitialAdLoader.show(
-                                    activity = this@SpeedQuizActivity
-                                )
+                            InterstitialAdLoader.show(
+                                activity = this@SpeedQuizActivity
+                            )
 
-                                dialogState = DialogState.Dismissed
-                            }
+                            dialogState = DialogState.Dismissed
                         }
                     }
                 }

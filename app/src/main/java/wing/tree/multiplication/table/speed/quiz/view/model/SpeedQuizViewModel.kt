@@ -1,16 +1,11 @@
 package wing.tree.multiplication.table.speed.quiz.view.model
 
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import wing.tree.multiplication.table.ad.InterstitialAdLoader
+import wing.tree.multiplication.table.base.view.model.BaseViewModel
 import wing.tree.multiplication.table.countdown.timer.CountdownTimer
 import wing.tree.multiplication.table.extension.property.`1`
 import wing.tree.multiplication.table.extension.property.`7`
@@ -22,12 +17,10 @@ import wing.tree.multiplication.table.speed.quiz.model.SpeedQuiz
 import wing.tree.multiplication.table.speed.quiz.side.effect.SpeedQuizSideEffect
 import wing.tree.multiplication.table.speed.quiz.state.SpeedQuizState
 
-class SpeedQuizViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
-    private val _sideEffect = Channel<SpeedQuizSideEffect>()
-    private val _state = MutableStateFlow<SpeedQuizState>(SpeedQuizState.Ready)
-
-    val sideEffect = _sideEffect.receiveAsFlow()
-    val state = _state.asStateFlow()
+class SpeedQuizViewModel(
+    savedStateHandle: SavedStateHandle
+) : BaseViewModel<SpeedQuizState, SpeedQuizSideEffect>() {
+    override val initialState: SpeedQuizState = SpeedQuizState.Ready
 
     private val countdownTimer = object : CountdownTimer(
         millisecondsInFuture = millisecondsInFuture,
@@ -59,7 +52,7 @@ class SpeedQuizViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
     fun onAction(action: SpeedQuizAction) {
         when (action) {
             SpeedQuizAction.Home -> viewModelScope.launch {
-                _sideEffect.send(SpeedQuizSideEffect.Home)
+                postSideEffect(SpeedQuizSideEffect.Home)
             }
 
             SpeedQuizAction.OnReady -> play()
@@ -77,11 +70,11 @@ class SpeedQuizViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
             viewModelScope.launch {
                 delay(timeMillis = Long.`7`.hundreds)
 
-                _sideEffect.send(SpeedQuizSideEffect.Show.InterstitialAd)
+                postSideEffect(SpeedQuizSideEffect.Show.InterstitialAd)
             }
         }
 
-        _state.update {
+        reduce {
             when (it) {
                 is SpeedQuizState.Play.Playing -> it.finish()
                 else -> it
@@ -92,7 +85,7 @@ class SpeedQuizViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
     }
 
     private fun play() {
-        _state.update {
+        reduce {
             SpeedQuizState.Play.Playing(
                 speedQuiz = SpeedQuiz(start = start, endInclusive = endInclusive)
             )
@@ -102,7 +95,7 @@ class SpeedQuizViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
     }
 
     private fun prepare() {
-        _state.update {
+        reduce {
             SpeedQuizState.Ready
         }
     }
