@@ -73,7 +73,7 @@ class SpeedQuizViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
     }
 
     private fun finish() {
-        if (InterstitialAdLoader.isAdLoaded) {
+        if (InterstitialAdLoader.adLoaded) {
             viewModelScope.launch {
                 delay(timeMillis = Long.`7`.hundreds)
 
