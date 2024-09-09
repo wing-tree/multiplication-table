@@ -26,6 +26,8 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.core.view.WindowCompat
 import timber.log.Timber
 import wing.tree.multiplication.table.R
+import wing.tree.multiplication.table.dialog.intent.DialogState
+import wing.tree.multiplication.table.dialog.model.Dialog
 import wing.tree.multiplication.table.extension.function.copy
 import wing.tree.multiplication.table.extension.function.launchGooglePlay
 import wing.tree.multiplication.table.extension.function.launchReviewFlow
@@ -36,7 +38,6 @@ import wing.tree.multiplication.table.extension.property.isCompact
 import wing.tree.multiplication.table.extension.property.isNotCompact
 import wing.tree.multiplication.table.extension.property.paddingValues
 import wing.tree.multiplication.table.main.action.MainAction
-import wing.tree.multiplication.table.dialog.intent.DialogState
 import wing.tree.multiplication.table.main.view.composable.BottomBar
 import wing.tree.multiplication.table.main.view.composable.Dialog
 import wing.tree.multiplication.table.main.view.composable.NavigationRail
@@ -62,7 +63,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             MultiplicationTableTheme(activity = this) {
                 var dialogState by remember {
-                    mutableStateOf<DialogState>(DialogState.Dismissed)
+                    mutableStateOf<DialogState<Dialog>>(DialogState.Dismissed)
                 }
 
                 val onAction: (MainAction) -> Unit = {
@@ -81,7 +82,7 @@ class MainActivity : ComponentActivity() {
                             }
                         )
 
-                        MainAction.Quiz -> dialogState = DialogState.Showing
+                        MainAction.Quiz -> dialogState = DialogState.Showing(Dialog)
                         MainAction.RateReview -> launchReviewFlow(
                             onSuccess = {
                                 Toast.makeText(

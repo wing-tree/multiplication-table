@@ -11,23 +11,25 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.window.Dialog
 import wing.tree.multiplication.table.R
 import wing.tree.multiplication.table.composable.noOperations
+import wing.tree.multiplication.table.dialog.intent.DialogState
+import wing.tree.multiplication.table.dialog.model.Dialog
 import wing.tree.multiplication.table.extension.`28`
 import wing.tree.multiplication.table.extension.`280`
 import wing.tree.multiplication.table.extension.`560`
 import wing.tree.multiplication.table.main.action.MainAction
-import wing.tree.multiplication.table.dialog.intent.DialogState
 
 @Composable
 internal fun Dialog(
-    state: DialogState,
+    state: DialogState<Dialog>,
     onDismissRequest: () -> Unit,
     onAction: (MainAction) -> Unit
 ) {
     when (state) {
         DialogState.Dismissed -> noOperations()
-        else -> androidx.compose.ui.window.Dialog(onDismissRequest = onDismissRequest) {
+        else -> Dialog(onDismissRequest = onDismissRequest) {
             Surface(
                 modifier = Modifier.heightIn(
                     min = Dp.`280`,

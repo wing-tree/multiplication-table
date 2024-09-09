@@ -14,14 +14,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import kotlinx.coroutines.delay
+import wing.tree.multiplication.table.R
 import wing.tree.multiplication.table.ad.InterstitialAdLoader
-import wing.tree.multiplication.table.ad.composable.AdLoading
+import wing.tree.multiplication.table.ad.composable.ProgressDialog
 import wing.tree.multiplication.table.composable.Crossfade
+import wing.tree.multiplication.table.dialog.intent.DialogState
+import wing.tree.multiplication.table.dialog.model.Dialog
 import wing.tree.multiplication.table.extension.property.`7`
 import wing.tree.multiplication.table.extension.property.hundreds
 import wing.tree.multiplication.table.extension.property.isNotFinishing
 import wing.tree.multiplication.table.extension.property.twice
-import wing.tree.multiplication.table.dialog.intent.DialogState
 import wing.tree.multiplication.table.speed.quiz.action.SpeedQuizAction
 import wing.tree.multiplication.table.speed.quiz.side.effect.SpeedQuizSideEffect
 import wing.tree.multiplication.table.speed.quiz.state.SpeedQuizState
@@ -47,7 +49,7 @@ class SpeedQuizActivity : ComponentActivity() {
                 val state by viewModel.state.collectAsState()
 
                 var dialogState by remember {
-                    mutableStateOf<DialogState>(DialogState.Dismissed)
+                    mutableStateOf<DialogState<Dialog.Progress>>(DialogState.Dismissed)
                 }
 
                 LaunchedEffect(sideEffect) {
@@ -58,7 +60,9 @@ class SpeedQuizActivity : ComponentActivity() {
                             }
 
                             SpeedQuizSideEffect.Show.InterstitialAd -> {
-                                dialogState = DialogState.Showing
+                                dialogState = DialogState.Showing(
+                                    Dialog.Progress(getString(R.string.ad_loading))
+                                )
 
                                 delay(timeMillis = Long.`7`.hundreds.twice)
 
@@ -104,7 +108,7 @@ class SpeedQuizActivity : ComponentActivity() {
                     }
                 }
 
-                AdLoading(state = dialogState) {
+                ProgressDialog(state = dialogState) {
                     dialogState = DialogState.Dismissed
                 }
             }

@@ -7,23 +7,23 @@ import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import wing.tree.multiplication.table.R
+import androidx.compose.ui.window.Dialog
 import wing.tree.multiplication.table.composable.noOperations
-import wing.tree.multiplication.table.extension.property.oneAndAHalf
 import wing.tree.multiplication.table.dialog.intent.DialogState
+import wing.tree.multiplication.table.dialog.model.Dialog
+import wing.tree.multiplication.table.extension.property.oneAndAHalf
 import wing.tree.multiplication.table.top.level.property.fillMaxSize
 import wing.tree.multiplication.table.type.alias.Space
 
 @Composable
-internal fun AdLoading(
-    state: DialogState,
+internal fun ProgressDialog(
+    state: DialogState<Dialog.Progress>,
     onDismissRequest: () -> Unit
 ) {
     when (state) {
         DialogState.Dismissed -> noOperations()
-        else -> androidx.compose.ui.window.Dialog(onDismissRequest = onDismissRequest) {
+        is DialogState.Showing<Dialog.Progress> -> Dialog(onDismissRequest = onDismissRequest) {
             Column(
                 modifier = fillMaxSize,
                 verticalArrangement = Arrangement.spacedBy(
@@ -34,11 +34,13 @@ internal fun AdLoading(
             ) {
                 CircularProgressIndicator()
 
-                Text(
-                    text = stringResource(R.string.ad_loading),
-                    color = colorScheme.inverseOnSurface,
-                    fontWeight = FontWeight.Bold
-                )
+                state.value.message?.let {
+                    Text(
+                        text = it,
+                        color = colorScheme.inverseOnSurface,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
             }
         }
     }
