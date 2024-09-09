@@ -45,7 +45,7 @@ import wing.tree.multiplication.table.extension.property.inc
 import wing.tree.multiplication.table.extension.property.paddingValues
 import wing.tree.multiplication.table.model.Action
 import wing.tree.multiplication.table.model.Question
-import wing.tree.multiplication.table.test.state.TestState
+import wing.tree.multiplication.table.test.intent.TestState
 import wing.tree.multiplication.table.token.Padding
 import wing.tree.multiplication.table.top.level.property.INVALID_INDEX
 import wing.tree.multiplication.table.top.level.property.NUMBER_OF_QUESTIONS
@@ -100,10 +100,8 @@ internal fun Test(
     val scrollState = rememberScrollState()
 
     Column(
-        modifier = modifier
-            .padding(widthSizeClass.paddingValues)
-            .padding(vertical = Padding.medium),
-        verticalArrangement = Arrangement.spacedBy(space = Space.medium)
+        modifier = modifier.padding(vertical = Padding.medium),
+        verticalArrangement = Arrangement.spacedBy(space = Space.small)
     ) {
         val isInProgress = tag.isInProgress
         val interactionSource = remember {
@@ -154,9 +152,9 @@ internal fun Test(
         Column(
             modifier = fillMaxWidth
                 .weight(weight = Float.`1`)
-                .verticalScroll(scrollState)
-                .verticalFadingEdge(scrollState)
-                .padding(vertical = Padding.medium),
+                .verticalScroll(state = scrollState)
+                .verticalFadingEdge(scrollState = scrollState, length = Padding.extra.small)
+                .padding(vertical = Padding.small),
             verticalArrangement = Arrangement.spacedBy(space = Space.small)
         ) {
             test.forEachIndexed { index, question ->
@@ -166,17 +164,20 @@ internal fun Test(
                     tag = tag,
                     focusRequester = focusRequesters[index],
                     onKeyboardAction = onKeyboardAction,
-                    modifier = fillMaxWidth
+                    modifier = fillMaxWidth.padding(widthSizeClass.paddingValues)
                 )
             }
         }
 
         val visible = when (state) {
             is TestState.Preparing -> false
-            else -> state.isAllAnswered
+            else -> state.allAnswered
         }
 
-        AnimatedVisibility(visible = visible) {
+        AnimatedVisibility(
+            visible = visible,
+            modifier = fillMaxWidth.padding(widthSizeClass.paddingValues)
+        ) {
             ElevatedCard(
                 onClick = {
                     val action = when (state) {

@@ -1,12 +1,17 @@
 package wing.tree.multiplication.table.speed.quiz.view.composable
 
-import androidx.compose.animation.Crossfade
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -28,8 +33,12 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import wing.tree.multiplication.table.composable.Prompt
+import wing.tree.multiplication.table.extension.property.`0`
+import wing.tree.multiplication.table.extension.property.`3`
 import wing.tree.multiplication.table.extension.property.empty
+import wing.tree.multiplication.table.extension.property.hundreds
 import wing.tree.multiplication.table.extension.property.intOrNull
+import wing.tree.multiplication.table.extension.property.isZero
 import wing.tree.multiplication.table.model.Question
 import wing.tree.multiplication.table.speed.quiz.action.SpeedQuizAction
 import wing.tree.multiplication.table.speed.quiz.state.SpeedQuizState
@@ -82,7 +91,9 @@ internal fun Playing(
                 )
 
                 Question(
+                    index = index,
                     question = question,
+                    modifier = fillMaxWidth,
                     style = style
                 )
 
@@ -121,18 +132,31 @@ internal fun Playing(
 
 @Composable
 private fun Question(
+    index: Int,
     question: Question,
     modifier: Modifier = Modifier,
     style: TextStyle = LocalTextStyle.current
 ) {
-    Crossfade(
-        targetState = question,
+    AnimatedContent(
+        targetState = IndexedValue(index = index, value = question),
         modifier = modifier,
+        transitionSpec = {
+            val delayMillis = when {
+                targetState.index.isZero -> Int.`0`
+                else -> Int.`3`.hundreds
+            }
+
+            fadeIn(tween(delayMillis = delayMillis)) togetherWith fadeOut()
+        },
+        contentAlignment = Alignment.Center,
         label = String.empty
-    ) { (timesTable, multiplicand) ->
+    ) { (_, value) ->
+        val (timesTable, multiplicand) = value
+
         Prompt(
             timesTable = timesTable,
             multiplicand = multiplicand,
+            modifier = Modifier.wrapContentSize(),
             style = style
         )
     }

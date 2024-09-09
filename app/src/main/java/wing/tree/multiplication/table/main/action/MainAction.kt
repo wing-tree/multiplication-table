@@ -6,7 +6,7 @@ sealed interface MainAction {
     data object Share : MainAction
 
     sealed interface Navigate {
-        data object ToSpeedQuiz : MainAction
-        data object ToTest : MainAction
+        data class ToSpeedQuiz(val start: Int, val endInclusive: Int) : MainAction
+        data class ToTest(val start: Int, val endInclusive: Int) : MainAction
     }
 }
