@@ -21,7 +21,7 @@ import wing.tree.multiplication.table.extension.property.`7`
 import wing.tree.multiplication.table.extension.property.hundreds
 import wing.tree.multiplication.table.extension.property.isNotFinishing
 import wing.tree.multiplication.table.extension.property.twice
-import wing.tree.multiplication.table.main.state.DialogState
+import wing.tree.multiplication.table.dialog.intent.DialogState
 import wing.tree.multiplication.table.speed.quiz.action.SpeedQuizAction
 import wing.tree.multiplication.table.speed.quiz.side.effect.SpeedQuizSideEffect
 import wing.tree.multiplication.table.speed.quiz.state.SpeedQuizState

@@ -17,7 +17,7 @@ import wing.tree.multiplication.table.extension.`28`
 import wing.tree.multiplication.table.extension.`280`
 import wing.tree.multiplication.table.extension.`560`
 import wing.tree.multiplication.table.main.action.MainAction
-import wing.tree.multiplication.table.main.state.DialogState
+import wing.tree.multiplication.table.dialog.intent.DialogState
 
 @Composable
 internal fun Dialog(

@@ -12,7 +12,7 @@ import androidx.compose.ui.text.font.FontWeight
 import wing.tree.multiplication.table.R
 import wing.tree.multiplication.table.composable.noOperations
 import wing.tree.multiplication.table.extension.property.oneAndAHalf
-import wing.tree.multiplication.table.main.state.DialogState
+import wing.tree.multiplication.table.dialog.intent.DialogState
 import wing.tree.multiplication.table.top.level.property.fillMaxSize
 import wing.tree.multiplication.table.type.alias.Space
 

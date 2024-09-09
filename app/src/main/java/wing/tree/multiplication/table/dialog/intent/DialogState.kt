@@ -1,4 +1,4 @@
-package wing.tree.multiplication.table.main.state
+package wing.tree.multiplication.table.dialog.intent
 
 import androidx.compose.runtime.Immutable
 
