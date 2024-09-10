@@ -41,11 +41,13 @@ import wing.tree.multiplication.table.main.view.composable.Dialog
 import wing.tree.multiplication.table.main.view.composable.NavigationRail
 import wing.tree.multiplication.table.main.view.composable.PageContent
 import wing.tree.multiplication.table.model.Key
+import wing.tree.multiplication.table.model.Name
 import wing.tree.multiplication.table.speed.quiz.view.SpeedQuizActivity
 import wing.tree.multiplication.table.test.view.TestActivity
 import wing.tree.multiplication.table.theme.MultiplicationTableTheme
 import wing.tree.multiplication.table.token.Padding
 import wing.tree.multiplication.table.top.level.property.MAXIMUM_TIMES_TABLE
+import wing.tree.multiplication.table.top.level.property.MINIMUM_TIMES_TABLE
 import wing.tree.multiplication.table.top.level.property.MULTIPLICATION_TABLES_PER_PAGE
 import wing.tree.multiplication.table.top.level.property.fillMaxSize
 
@@ -60,7 +62,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             MultiplicationTableTheme(activity = this) {
                 var dialogState by remember {
-                    mutableStateOf<DialogState<Dialog>>(DialogState.Dismissed)
+                    mutableStateOf<DialogState<Dialog.Quiz>>(DialogState.Dismissed)
                 }
 
                 val onAction: (MainAction) -> Unit = {
@@ -79,7 +81,26 @@ class MainActivity : ComponentActivity() {
                             }
                         )
 
-                        MainAction.Quiz -> dialogState = DialogState.Showing(Dialog)
+                        MainAction.Quiz -> {
+                            val sharedPreferences = getSharedPreferences(Name.QUIZ(), MODE_PRIVATE)
+                            val start = sharedPreferences.getInt(
+                                Key.START(),
+                                MINIMUM_TIMES_TABLE
+                            )
+
+                            val endInclusive = sharedPreferences.getInt(
+                                Key.END_INCLUSIVE(),
+                                MAXIMUM_TIMES_TABLE
+                            )
+
+                            dialogState = DialogState.Showing(
+                                Dialog.Quiz(
+                                    start = start,
+                                    endInclusive = endInclusive
+                                )
+                            )
+                        }
+
                         MainAction.RateReview -> launchReviewFlow(
                             onSuccess = {
                                 Toast.makeText(

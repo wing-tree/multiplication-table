@@ -1,5 +1,6 @@
 package wing.tree.multiplication.table.main.view.composable
 
+import android.content.Context.MODE_PRIVATE
 import android.content.res.ColorStateList
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -21,7 +22,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.window.Dialog
+import androidx.core.content.edit
 import com.google.android.material.slider.RangeSlider
+import com.google.android.material.slider.RangeSlider.OnSliderTouchListener
 import wing.tree.multiplication.table.R
 import wing.tree.multiplication.table.composable.AnimatedText
 import wing.tree.multiplication.table.composable.MultiplicationTableButton
@@ -30,10 +33,13 @@ import wing.tree.multiplication.table.dialog.intent.DialogState
 import wing.tree.multiplication.table.dialog.model.Dialog
 import wing.tree.multiplication.table.extension.function.bounceVertically
 import wing.tree.multiplication.table.extension.function.second
+import wing.tree.multiplication.table.extension.property.`1`
 import wing.tree.multiplication.table.extension.property.float
 import wing.tree.multiplication.table.extension.property.hyphen
 import wing.tree.multiplication.table.extension.property.int
 import wing.tree.multiplication.table.main.intent.MainAction
+import wing.tree.multiplication.table.model.Key
+import wing.tree.multiplication.table.model.Name
 import wing.tree.multiplication.table.token.Padding
 import wing.tree.multiplication.table.token.Space
 import wing.tree.multiplication.table.top.level.property.MAXIMUM_TIMES_TABLE
@@ -42,13 +48,15 @@ import wing.tree.multiplication.table.top.level.property.fillMaxWidth
 
 @Composable
 internal fun Dialog(
-    state: DialogState<Dialog>,
+    state: DialogState<Dialog.Quiz>,
     onDismissRequest: () -> Unit,
     onAction: (MainAction) -> Unit
 ) {
     when (state) {
         DialogState.Dismissed -> noOperations()
         is DialogState.Showing -> Dialog(onDismissRequest = onDismissRequest) {
+            val value = state.value
+
             Surface(
                 shape = AlertDialogDefaults.shape,
                 color = colorScheme.background
@@ -59,11 +67,11 @@ internal fun Dialog(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     var start by remember {
-                        mutableIntStateOf(MINIMUM_TIMES_TABLE) // TODO save these as persistent.
+                        mutableIntStateOf(value.start)
                     }
 
                     var endInclusive by remember {
-                        mutableIntStateOf(MAXIMUM_TIMES_TABLE)
+                        mutableIntStateOf(value.endInclusive)
                     }
 
                     Column(
@@ -89,14 +97,15 @@ internal fun Dialog(
                                         ColorStateList.valueOf(this)
                                     }
 
+                                    values = listOf(start, endInclusive).map(Int::float)
+
+                                    valueFrom = MINIMUM_TIMES_TABLE.float
+                                    valueTo = MAXIMUM_TIMES_TABLE.float
+
+                                    stepSize = Float.`1`
+
                                     thumbTintList = colorStateList
                                     trackActiveTintList = colorStateList
-
-                                    valueFrom = 2f // TODO extract as const includes belows.
-                                    valueTo = 17f
-                                    values = listOf(start, endInclusive).map(Int::float)
-                                    stepSize = 1f
-                                    isTickVisible = false
 
                                     addOnChangeListener { slider, _, _ ->
                                         with(slider.values.map(Float::int)) {
@@ -104,6 +113,29 @@ internal fun Dialog(
                                             endInclusive = second()
                                         }
                                     }
+
+                                    addOnSliderTouchListener(
+                                        object : OnSliderTouchListener {
+                                            override fun onStartTrackingTouch(slider: RangeSlider) {
+                                                noOperations
+                                            }
+
+                                            override fun onStopTrackingTouch(slider: RangeSlider) {
+                                                with(slider.values.map(Float::int)) {
+                                                    val sharedPreferences =
+                                                        context.getSharedPreferences(
+                                                            Name.QUIZ(),
+                                                            MODE_PRIVATE
+                                                        )
+
+                                                    sharedPreferences.edit {
+                                                        putInt(Key.START(), first())
+                                                        putInt(Key.END_INCLUSIVE(), second())
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    )
                                 }
                             },
                             update = {
