@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme.colorScheme
+import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -12,7 +13,6 @@ import androidx.compose.ui.window.Dialog
 import wing.tree.multiplication.table.composable.noOperations
 import wing.tree.multiplication.table.dialog.intent.DialogState
 import wing.tree.multiplication.table.dialog.model.Dialog
-import wing.tree.multiplication.table.extension.property.oneAndAHalf
 import wing.tree.multiplication.table.token.Space
 import wing.tree.multiplication.table.top.level.property.fillMaxSize
 
@@ -27,7 +27,7 @@ internal fun ProgressDialog(
             Column(
                 modifier = fillMaxSize,
                 verticalArrangement = Arrangement.spacedBy(
-                    space = Space.small.times(Float.oneAndAHalf),
+                    space = Space.extra.small,
                     alignment = Alignment.CenterVertically
                 ),
                 horizontalAlignment = Alignment.CenterHorizontally
@@ -38,7 +38,7 @@ internal fun ProgressDialog(
                     Text(
                         text = it,
                         color = colorScheme.inverseOnSurface,
-                        fontWeight = FontWeight.Bold
+                        style = typography.bodyMedium.merge(fontWeight = FontWeight.Bold)
                     )
                 }
             }
