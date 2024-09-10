@@ -8,6 +8,7 @@ import wing.tree.multiplication.table.R
 import wing.tree.multiplication.table.composable.Icon
 import wing.tree.multiplication.table.main.intent.MainAction
 import wing.tree.multiplication.table.test.view.composable.FloatingActionButton
+import wing.tree.multiplication.table.theme.ivory
 
 @Composable
 internal fun BottomBar(
@@ -41,6 +42,7 @@ internal fun BottomBar(
                     onAction(MainAction.Quiz)
                 }
             )
-        }
+        },
+        containerColor = ivory
     )
 }
