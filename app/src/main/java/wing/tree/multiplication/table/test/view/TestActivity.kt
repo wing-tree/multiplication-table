@@ -28,7 +28,7 @@ import wing.tree.multiplication.table.dialog.model.Dialog
 import wing.tree.multiplication.table.extension.property.`7`
 import wing.tree.multiplication.table.extension.property.hundreds
 import wing.tree.multiplication.table.extension.property.isNotFinishing
-import wing.tree.multiplication.table.extension.property.twice
+import wing.tree.multiplication.table.extension.property.triple
 import wing.tree.multiplication.table.test.intent.TestEvent
 import wing.tree.multiplication.table.test.intent.TestSideEffect
 import wing.tree.multiplication.table.test.intent.TestState
@@ -66,7 +66,7 @@ class TestActivity : ComponentActivity() {
                                 Dialog.Progress(getString(R.string.ad_loading))
                             )
 
-                            delay(timeMillis = Long.`7`.hundreds.twice)
+                            delay(timeMillis = Long.`7`.hundreds.triple)
 
                             InterstitialAdLoader.show(activity = this@TestActivity)
 

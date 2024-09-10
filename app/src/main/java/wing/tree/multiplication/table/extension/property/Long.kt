@@ -22,6 +22,7 @@ val Long.isPositive: Boolean get() = isGreaterThan(Long.`0`)
 val Long.isZero: Boolean get() = `is`(Long.`0`)
 val Long.quarter: Long get() = float.quarter.roundToLong()
 val Long.threeQuarters: Long get() = float.threeQuarters.roundToLong()
+val Long.triple: Long get() = times(Int.`3`)
 val Long.twice: Long get() = times(Int.`2`)
 
 val Long.Companion.`0`: Long get() = 0L
