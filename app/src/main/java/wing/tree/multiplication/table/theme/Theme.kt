@@ -19,7 +19,8 @@ import wing.tree.multiplication.table.extension.function.third
 private val lightColorScheme = lightColorScheme(
     primary = palette.first(),
     secondary = palette.second(),
-    tertiary = palette.third()
+    tertiary = palette.third(),
+    background = chalkWhite
 )
 
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
@@ -32,16 +33,13 @@ fun MultiplicationTableTheme(
 
     if (view.isNotInEditMode) {
         SideEffect {
-            val context = view.context
+            val window = activity.window
+            val insetsController = WindowCompat.getInsetsController(
+                window,
+                view
+            )
 
-            if (context is Activity) {
-                val insetsController = WindowCompat.getInsetsController(
-                    context.window,
-                    view
-                )
-
-                insetsController.isAppearanceLightStatusBars = true
-            }
+            insetsController.isAppearanceLightStatusBars = true
         }
     }
 

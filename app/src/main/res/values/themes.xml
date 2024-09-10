@@ -3,6 +3,7 @@
 
     <style name="Theme.MultiplicationTable" parent="Theme.Material3.Light">
         <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowBackground">@color/chalk_white</item>
     </style>
 
 </resources>
