@@ -20,7 +20,7 @@ private val lightColorScheme = lightColorScheme(
     primary = palette.first(),
     secondary = palette.second(),
     tertiary = palette.third(),
-    background = chalkWhite
+    background = snow
 )
 
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
