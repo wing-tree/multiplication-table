@@ -22,7 +22,7 @@ internal fun TopBar(
 ) {
     CenterAlignedTopAppBar(
         title = {
-            Text(text = stringResource(id = R.string.quiz))
+            Text(text = stringResource(id = R.string.test))
         },
         modifier = modifier,
         navigationIcon = {

@@ -16,11 +16,10 @@ import wing.tree.multiplication.table.composition.local.localWindowWidthSizeClas
 import wing.tree.multiplication.table.extension.function.second
 import wing.tree.multiplication.table.extension.function.third
 
-private val lightColorScheme = lightColorScheme(
+private val colorScheme = lightColorScheme(
     primary = palette.first(),
     secondary = palette.second(),
-    tertiary = palette.third(),
-    background = snow
+    tertiary = palette.third()
 )
 
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
@@ -48,7 +47,7 @@ fun MultiplicationTableTheme(
         localWindowWidthSizeClass provides calculateWindowSizeClass(activity = activity).widthSizeClass
     ) {
         MaterialTheme(
-            colorScheme = lightColorScheme,
+            colorScheme = colorScheme,
             typography = typography,
             content = content
         )

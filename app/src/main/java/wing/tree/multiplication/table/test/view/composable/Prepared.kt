@@ -31,8 +31,6 @@ import wing.tree.multiplication.table.extension.function.`is`
 import wing.tree.multiplication.table.extension.function.isLessThan
 import wing.tree.multiplication.table.extension.function.isLessThanOrEqualTo
 import wing.tree.multiplication.table.extension.function.not
-import wing.tree.multiplication.table.extension.function.second
-import wing.tree.multiplication.table.extension.function.third
 import wing.tree.multiplication.table.extension.function.verticalFadingEdge
 import wing.tree.multiplication.table.extension.property.`0`
 import wing.tree.multiplication.table.extension.property.`1`
@@ -44,7 +42,6 @@ import wing.tree.multiplication.table.model.Question
 import wing.tree.multiplication.table.test.intent.KeyboardEvent
 import wing.tree.multiplication.table.test.intent.TestEvent
 import wing.tree.multiplication.table.test.intent.TestState
-import wing.tree.multiplication.table.theme.palette
 import wing.tree.multiplication.table.token.Padding
 import wing.tree.multiplication.table.token.Space
 import wing.tree.multiplication.table.top.level.property.INVALID_INDEX
@@ -178,7 +175,7 @@ internal fun Prepared(
                             onClick = {
                                 onEvent(TestEvent.Click.Home)
                             },
-                            containerColor = palette.first(),
+                            containerColor = colorScheme.primary,
                             contentColor = colorScheme.onSurfaceVariant
                         ) {
                             Text(
@@ -191,7 +188,7 @@ internal fun Prepared(
                             onClick = {
                                 onEvent(TestEvent.Click.SolveNew)
                             },
-                            containerColor = palette.second(),
+                            containerColor = colorScheme.secondary,
                             contentColor = colorScheme.onSurfaceVariant
                         ) {
                             Text(
@@ -218,7 +215,7 @@ internal fun Prepared(
                     modifier = Modifier
                         .focusRequester(focusRequesters.last())
                         .focusable(interactionSource = interactionSource),
-                    containerColor = palette.third(),
+                    containerColor = colorScheme.tertiary,
                     contentColor = colorScheme.onSurfaceVariant
                 ) {
                     Crossfade(

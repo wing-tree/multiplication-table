@@ -30,12 +30,10 @@ import wing.tree.multiplication.table.dialog.intent.DialogState
 import wing.tree.multiplication.table.dialog.model.Dialog
 import wing.tree.multiplication.table.extension.function.bounceVertically
 import wing.tree.multiplication.table.extension.function.second
-import wing.tree.multiplication.table.extension.function.third
 import wing.tree.multiplication.table.extension.property.float
 import wing.tree.multiplication.table.extension.property.hyphen
 import wing.tree.multiplication.table.extension.property.int
 import wing.tree.multiplication.table.main.intent.MainAction
-import wing.tree.multiplication.table.theme.palette
 import wing.tree.multiplication.table.token.Padding
 import wing.tree.multiplication.table.token.Space
 import wing.tree.multiplication.table.top.level.property.MAXIMUM_TIMES_TABLE
@@ -72,6 +70,7 @@ internal fun Dialog(
                         modifier = fillMaxWidth,
                         verticalArrangement = Arrangement.spacedBy(space = Space.small),
                     ) {
+                        val colorScheme = colorScheme
                         val context = LocalContext.current
 
                         Row(
@@ -86,7 +85,7 @@ internal fun Dialog(
                         AndroidView(
                             factory = {
                                 RangeSlider(context).apply {
-                                    val colorStateList = with(palette.first().toArgb()) {
+                                    val colorStateList = with(colorScheme.primary.toArgb()) {
                                         ColorStateList.valueOf(this)
                                     }
 
@@ -128,7 +127,7 @@ internal fun Dialog(
                                     )
                                 )
                             },
-                            containerColor = palette.second(),
+                            containerColor = colorScheme.secondary,
                             contentColor = colorScheme.onSurfaceVariant
 
                         ) {
@@ -147,7 +146,7 @@ internal fun Dialog(
                                     )
                                 )
                             },
-                            containerColor = palette.third(),
+                            containerColor = colorScheme.tertiary,
                             contentColor = colorScheme.onSurfaceVariant
                         ) {
                             Text(

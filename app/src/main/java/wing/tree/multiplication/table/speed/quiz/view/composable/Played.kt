@@ -23,7 +23,6 @@ import wing.tree.multiplication.table.R
 import wing.tree.multiplication.table.composable.MultiplicationTableButton
 import wing.tree.multiplication.table.composable.Prompt
 import wing.tree.multiplication.table.extension.function.bounceVertically
-import wing.tree.multiplication.table.extension.function.second
 import wing.tree.multiplication.table.extension.function.verticalFadingEdge
 import wing.tree.multiplication.table.extension.property.`1`
 import wing.tree.multiplication.table.extension.property.empty
@@ -32,7 +31,6 @@ import wing.tree.multiplication.table.extension.property.threeQuarters
 import wing.tree.multiplication.table.speed.quiz.intent.SpeedQuizAction
 import wing.tree.multiplication.table.speed.quiz.intent.SpeedQuizState
 import wing.tree.multiplication.table.test.view.composable.Score
-import wing.tree.multiplication.table.theme.palette
 import wing.tree.multiplication.table.theme.pastelGreen
 import wing.tree.multiplication.table.theme.pastelRed
 import wing.tree.multiplication.table.token.Padding
@@ -140,7 +138,7 @@ internal fun Played(
                     onAction(SpeedQuizAction.Home)
                 },
                 modifier = fillMaxWidth,
-                containerColor = palette.first(),
+                containerColor = colorScheme.primary,
                 contentColor = colorScheme.onSurfaceVariant
             ) {
                 Text(
@@ -154,7 +152,7 @@ internal fun Played(
                     onAction(SpeedQuizAction.SolveNew)
                 },
                 modifier = fillMaxWidth,
-                containerColor = palette.second(),
+                containerColor = colorScheme.secondary,
                 contentColor = colorScheme.onSurfaceVariant
             ) {
                 Text(
