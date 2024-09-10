@@ -39,7 +39,7 @@ import wing.tree.multiplication.table.extension.property.fullyTransparent
 import wing.tree.multiplication.table.extension.property.intOrNull
 import wing.tree.multiplication.table.extension.property.threeQuarters
 import wing.tree.multiplication.table.extension.property.widestDigit
-import wing.tree.multiplication.table.keyboard.intent.KeyboardEvent
+import wing.tree.multiplication.table.test.intent.KeyboardEvent
 import wing.tree.multiplication.table.model.Question
 import wing.tree.multiplication.table.test.intent.TestState
 import wing.tree.multiplication.table.theme.pastelGreen

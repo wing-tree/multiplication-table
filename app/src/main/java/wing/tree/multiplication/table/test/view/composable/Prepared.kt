@@ -34,7 +34,7 @@ import wing.tree.multiplication.table.extension.property.`3`
 import wing.tree.multiplication.table.extension.property.hundreds
 import wing.tree.multiplication.table.extension.property.inc
 import wing.tree.multiplication.table.extension.property.paddingValues
-import wing.tree.multiplication.table.keyboard.intent.KeyboardEvent
+import wing.tree.multiplication.table.test.intent.KeyboardEvent
 import wing.tree.multiplication.table.model.Question
 import wing.tree.multiplication.table.test.intent.TestEvent
 import wing.tree.multiplication.table.test.intent.TestState
