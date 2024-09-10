@@ -4,10 +4,11 @@ import android.content.Context.MODE_PRIVATE
 import android.content.res.ColorStateList
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.AlertDialogDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
+import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,13 +21,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.window.Dialog
 import androidx.core.content.edit
+import com.google.android.material.slider.LabelFormatter
 import com.google.android.material.slider.RangeSlider
 import com.google.android.material.slider.RangeSlider.OnSliderTouchListener
 import wing.tree.multiplication.table.R
-import wing.tree.multiplication.table.composable.AnimatedText
 import wing.tree.multiplication.table.composable.MultiplicationTableButton
 import wing.tree.multiplication.table.composable.noOperations
 import wing.tree.multiplication.table.dialog.intent.DialogState
@@ -35,7 +37,6 @@ import wing.tree.multiplication.table.extension.function.bounceVertically
 import wing.tree.multiplication.table.extension.function.second
 import wing.tree.multiplication.table.extension.property.`1`
 import wing.tree.multiplication.table.extension.property.float
-import wing.tree.multiplication.table.extension.property.hyphen
 import wing.tree.multiplication.table.extension.property.int
 import wing.tree.multiplication.table.main.intent.MainAction
 import wing.tree.multiplication.table.model.Key
@@ -63,9 +64,12 @@ internal fun Dialog(
             ) {
                 Column(
                     modifier = Modifier.padding(Padding.large),
-                    verticalArrangement = Arrangement.spacedBy(space = Space.medium),
+                    verticalArrangement = Arrangement.spacedBy(Space.medium),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
+                    val colorScheme = colorScheme
+                    val context = LocalContext.current
+
                     var start by remember {
                         mutableIntStateOf(value.start)
                     }
@@ -74,75 +78,66 @@ internal fun Dialog(
                         mutableIntStateOf(value.endInclusive)
                     }
 
-                    Column(
-                        modifier = fillMaxWidth,
-                        verticalArrangement = Arrangement.spacedBy(space = Space.small),
-                    ) {
-                        val colorScheme = colorScheme
-                        val context = LocalContext.current
+                    Text(
+                        text = stringResource(R.string.quiz),
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        style = typography.bodyMedium.merge(fontWeight = FontWeight.Bold)
+                    )
 
-                        Row(
-                            horizontalArrangement = Arrangement.Center,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            AnimatedText(text = "$start")
-                            Text(text = String.hyphen)
-                            AnimatedText(text = "$endInclusive")
-                        }
+                    AndroidView(
+                        factory = {
+                            RangeSlider(context).apply {
+                                val colorStateList = with(colorScheme.primary.toArgb()) {
+                                    ColorStateList.valueOf(this)
+                                }
 
-                        AndroidView(
-                            factory = {
-                                RangeSlider(context).apply {
-                                    val colorStateList = with(colorScheme.primary.toArgb()) {
-                                        ColorStateList.valueOf(this)
+                                values = listOf(start, endInclusive).map(Int::float)
+
+                                valueFrom = MINIMUM_TIMES_TABLE.float
+                                valueTo = MAXIMUM_TIMES_TABLE.float
+
+                                stepSize = Float.`1`
+
+                                labelBehavior = LabelFormatter.LABEL_VISIBLE
+
+                                thumbTintList = colorStateList
+                                trackActiveTintList = colorStateList
+
+                                this.addOnChangeListener { slider, _, _ ->
+                                    with(slider.values.map(Float::int)) {
+                                        start = first()
+                                        endInclusive = second()
                                     }
+                                }
 
-                                    values = listOf(start, endInclusive).map(Int::float)
-
-                                    valueFrom = MINIMUM_TIMES_TABLE.float
-                                    valueTo = MAXIMUM_TIMES_TABLE.float
-
-                                    stepSize = Float.`1`
-
-                                    thumbTintList = colorStateList
-                                    trackActiveTintList = colorStateList
-
-                                    addOnChangeListener { slider, _, _ ->
-                                        with(slider.values.map(Float::int)) {
-                                            start = first()
-                                            endInclusive = second()
+                                addOnSliderTouchListener(
+                                    object : OnSliderTouchListener {
+                                        override fun onStartTrackingTouch(slider: RangeSlider) {
+                                            noOperations
                                         }
-                                    }
 
-                                    addOnSliderTouchListener(
-                                        object : OnSliderTouchListener {
-                                            override fun onStartTrackingTouch(slider: RangeSlider) {
-                                                noOperations
-                                            }
+                                        override fun onStopTrackingTouch(slider: RangeSlider) {
+                                            with(slider.values.map(Float::int)) {
+                                                val sharedPreferences =
+                                                    context.getSharedPreferences(
+                                                        Name.QUIZ(),
+                                                        MODE_PRIVATE
+                                                    )
 
-                                            override fun onStopTrackingTouch(slider: RangeSlider) {
-                                                with(slider.values.map(Float::int)) {
-                                                    val sharedPreferences =
-                                                        context.getSharedPreferences(
-                                                            Name.QUIZ(),
-                                                            MODE_PRIVATE
-                                                        )
-
-                                                    sharedPreferences.edit {
-                                                        putInt(Key.START(), first())
-                                                        putInt(Key.END_INCLUSIVE(), second())
-                                                    }
+                                                sharedPreferences.edit {
+                                                    putInt(Key.START(), first())
+                                                    putInt(Key.END_INCLUSIVE(), second())
                                                 }
                                             }
                                         }
-                                    )
-                                }
-                            },
-                            update = {
-                                it.values = listOf(start, endInclusive).map(Int::float)
+                                    }
+                                )
                             }
-                        )
-                    }
+                        },
+                        update = {
+                            it.values = listOf(start, endInclusive).map(Int::float)
+                        }
+                    )
 
                     Column(
                         modifier = fillMaxWidth.bounceVertically(

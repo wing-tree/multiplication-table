@@ -23,6 +23,7 @@ val Dp.Companion.`36`: Dp get() = 36.00.dp
 val Dp.Companion.`4`: Dp get() = 4.00.dp
 val Dp.Companion.`40`: Dp get() = 40.00.dp
 val Dp.Companion.`42`: Dp get() = 42.00.dp
+val Dp.Companion.`44`: Dp get() = 44.00.dp
 val Dp.Companion.`48`: Dp get() = 48.00.dp
 val Dp.Companion.`5`: Dp get() = 5.00.dp
 val Dp.Companion.`56`: Dp get() = 56.00.dp
