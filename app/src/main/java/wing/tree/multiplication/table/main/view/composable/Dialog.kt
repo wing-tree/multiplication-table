@@ -67,45 +67,50 @@ internal fun Dialog(
                         mutableIntStateOf(MAXIMUM_TIMES_TABLE)
                     }
 
-                    Row(
-                        horizontalArrangement = Arrangement.Center,
-                        verticalAlignment = Alignment.CenterVertically
+                    Column(
+                        modifier = fillMaxWidth,
+                        verticalArrangement = Arrangement.spacedBy(space = Space.small),
                     ) {
-                        AnimatedText(text = "$start")
-                        Text(text = String.hyphen)
-                        AnimatedText(text = "$endInclusive")
-                    }
+                        val context = LocalContext.current
 
-                    val context = LocalContext.current
+                        Row(
+                            horizontalArrangement = Arrangement.Center,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            AnimatedText(text = "$start")
+                            Text(text = String.hyphen)
+                            AnimatedText(text = "$endInclusive")
+                        }
 
-                    AndroidView(
-                        factory = {
-                            RangeSlider(context).apply {
-                                val colorStateList = with(palette.first().toArgb()) {
-                                    ColorStateList.valueOf(this)
-                                }
+                        AndroidView(
+                            factory = {
+                                RangeSlider(context).apply {
+                                    val colorStateList = with(palette.first().toArgb()) {
+                                        ColorStateList.valueOf(this)
+                                    }
 
-                                thumbTintList = colorStateList
-                                trackActiveTintList = colorStateList
+                                    thumbTintList = colorStateList
+                                    trackActiveTintList = colorStateList
 
-                                valueFrom = 2f // TODO extract as const includes belows.
-                                valueTo = 17f
-                                values = listOf(start, endInclusive).map(Int::float)
-                                stepSize = 1f
-                                isTickVisible = false
+                                    valueFrom = 2f // TODO extract as const includes belows.
+                                    valueTo = 17f
+                                    values = listOf(start, endInclusive).map(Int::float)
+                                    stepSize = 1f
+                                    isTickVisible = false
 
-                                addOnChangeListener { slider, _, _ ->
-                                    with(slider.values.map(Float::int)) {
-                                        start = first()
-                                        endInclusive = second()
+                                    addOnChangeListener { slider, _, _ ->
+                                        with(slider.values.map(Float::int)) {
+                                            start = first()
+                                            endInclusive = second()
+                                        }
                                     }
                                 }
+                            },
+                            update = {
+                                it.values = listOf(start, endInclusive).map(Int::float)
                             }
-                        },
-                        update = {
-                            it.values = listOf(start, endInclusive).map(Int::float)
-                        }
-                    )
+                        )
+                    }
 
                     Column(
                         modifier = fillMaxWidth,
