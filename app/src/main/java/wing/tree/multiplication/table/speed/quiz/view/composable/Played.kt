@@ -22,6 +22,7 @@ import androidx.compose.ui.text.style.TextAlign
 import wing.tree.multiplication.table.R
 import wing.tree.multiplication.table.composable.MultiplicationTableButton
 import wing.tree.multiplication.table.composable.Prompt
+import wing.tree.multiplication.table.extension.function.second
 import wing.tree.multiplication.table.extension.function.verticalFadingEdge
 import wing.tree.multiplication.table.extension.property.`1`
 import wing.tree.multiplication.table.extension.property.empty
@@ -30,6 +31,7 @@ import wing.tree.multiplication.table.extension.property.threeQuarters
 import wing.tree.multiplication.table.speed.quiz.intent.SpeedQuizAction
 import wing.tree.multiplication.table.speed.quiz.intent.SpeedQuizState
 import wing.tree.multiplication.table.test.view.composable.Score
+import wing.tree.multiplication.table.theme.palette
 import wing.tree.multiplication.table.theme.pastelGreen
 import wing.tree.multiplication.table.theme.pastelRed
 import wing.tree.multiplication.table.token.Padding
@@ -134,7 +136,9 @@ internal fun Played(
                 onClick = {
                     onAction(SpeedQuizAction.Home)
                 },
-                modifier = fillMaxWidth
+                modifier = fillMaxWidth,
+                containerColor = palette.first(),
+                contentColor = colorScheme.onSurfaceVariant
             ) {
                 Text(
                     text = stringResource(R.string.home),
@@ -146,7 +150,9 @@ internal fun Played(
                 onClick = {
                     onAction(SpeedQuizAction.SolveNew)
                 },
-                modifier = fillMaxWidth
+                modifier = fillMaxWidth,
+                containerColor = palette.second(),
+                contentColor = colorScheme.onSurfaceVariant
             ) {
                 Text(
                     text = stringResource(R.string.solve_new),
