@@ -1,7 +1,6 @@
 package wing.tree.multiplication.table.composable
 
 import android.text.TextPaint
-import androidx.collection.LruCache
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -27,11 +26,11 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.core.content.res.ResourcesCompat
 import wing.tree.multiplication.table.R
+import wing.tree.multiplication.table.lru.cache.LruCache
 import wing.tree.multiplication.table.extension.function.isLessThan
 import wing.tree.multiplication.table.extension.function.isLessThanOrEqualTo
 import wing.tree.multiplication.table.extension.function.width
 import wing.tree.multiplication.table.extension.property.`1`
-import wing.tree.multiplication.table.extension.property.`2`
 import wing.tree.multiplication.table.extension.property.height
 import wing.tree.multiplication.table.extension.property.inc
 import wing.tree.multiplication.table.extension.property.widestDigit
@@ -42,8 +41,6 @@ import wing.tree.multiplication.table.top.level.property.MAXIMUM_MULTIPLICAND
 import wing.tree.multiplication.table.top.level.property.MAXIMUM_TIMES_TABLE_DIGITS
 import wing.tree.multiplication.table.top.level.property.MINIMUM_MULTIPLICAND
 import wing.tree.multiplication.table.top.level.property.fillMaxWidth
-
-private val lruCache = LruCache<Pair<Dp, Dp>, TextUnit>(Int.`2`)
 
 @Composable
 fun MultiplicationTable(
@@ -120,6 +117,8 @@ private fun fontSizeOf(
     maxWidth: Dp,
     maxHeight: Dp
 ): TextUnit = with(LocalDensity.current) {
+    val lruCache = LruCache.fontSize
+
     lruCache[maxWidth to maxHeight]?.let {
         return@with it
     }
