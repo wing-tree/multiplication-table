@@ -18,7 +18,7 @@ import java.util.TimerTask
 import kotlin.concurrent.timerTask
 
 object InterstitialAdLoader :  Timer(true) {
-    val isAdLoaded: Boolean get() = interstitialAd.isNotNull()
+    val adLoaded: Boolean get() = interstitialAd.isNotNull()
 
     private val `this` = this
 

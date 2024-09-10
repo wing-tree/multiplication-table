@@ -5,8 +5,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import wing.tree.multiplication.table.extension.property.`1`
+import wing.tree.multiplication.table.token.Space
 import wing.tree.multiplication.table.top.level.property.fillMaxHeight
-import wing.tree.multiplication.table.type.alias.Space
 
 @Composable
 internal fun MultiplicationTableRow(

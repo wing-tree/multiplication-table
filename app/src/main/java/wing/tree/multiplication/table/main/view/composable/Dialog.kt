@@ -26,6 +26,7 @@ import wing.tree.multiplication.table.composable.noOperations
 import wing.tree.multiplication.table.dialog.intent.DialogState
 import wing.tree.multiplication.table.dialog.model.Dialog
 import wing.tree.multiplication.table.extension.function.second
+import wing.tree.multiplication.table.extension.property.`28`
 import wing.tree.multiplication.table.extension.property.float
 import wing.tree.multiplication.table.extension.property.hyphen
 import wing.tree.multiplication.table.extension.property.int

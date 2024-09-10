@@ -9,8 +9,8 @@ import wing.tree.multiplication.table.composable.VerticalSpacer
 import wing.tree.multiplication.table.extension.function.incrementByTwo
 import wing.tree.multiplication.table.extension.function.quadrupled
 import wing.tree.multiplication.table.extension.property.`1`
+import wing.tree.multiplication.table.token.Space
 import wing.tree.multiplication.table.top.level.property.MINIMUM_TIMES_TABLE
-import wing.tree.multiplication.table.type.alias.Space
 
 @Composable
 internal fun PageContent(

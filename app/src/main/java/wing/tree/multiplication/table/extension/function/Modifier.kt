@@ -25,10 +25,9 @@ import com.valentinilk.shimmer.rememberShimmer
 import com.valentinilk.shimmer.shimmer
 import kotlinx.collections.immutable.persistentListOf
 import wing.tree.multiplication.table.constant.LowContrastContentAlpha
-import wing.tree.multiplication.table.extension.`0`
-import wing.tree.multiplication.table.extension.`8`
 import wing.tree.multiplication.table.extension.property.`0`
 import wing.tree.multiplication.table.extension.property.`1`
+import wing.tree.multiplication.table.extension.property.`8`
 import wing.tree.multiplication.table.extension.property.empty
 import wing.tree.multiplication.table.extension.property.float
 import wing.tree.multiplication.table.extension.property.fullyOpaque
@@ -135,7 +134,8 @@ fun Modifier.verticalFadingEdge(
             alpha = with(Float) {
                 `1`.minus(onePercent)
             }
-        }.drawWithContent {
+        }
+        .drawWithContent {
             drawContent()
 
             drawTopFadingEdge(

@@ -20,7 +20,6 @@ import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -33,11 +32,10 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import wing.tree.multiplication.table.composable.Term
+import wing.tree.multiplication.table.composable.Prompt
 import wing.tree.multiplication.table.extension.property.`0`
 import wing.tree.multiplication.table.extension.property.`3`
 import wing.tree.multiplication.table.extension.property.empty
-import wing.tree.multiplication.table.extension.property.equalsSign
 import wing.tree.multiplication.table.extension.property.hundreds
 import wing.tree.multiplication.table.extension.property.intOrNull
 import wing.tree.multiplication.table.extension.property.isZero
@@ -88,28 +86,21 @@ internal fun Playing(
                     .padding(Padding.large),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                val style = typography.headlineLarge.copy(
+                    color = colorScheme.onSurface
+                )
+
                 Question(
                     index = index,
                     question = question,
                     modifier = fillMaxWidth,
-                    style = typography.displayMedium.copy(
-                        color = colorScheme.onSurface
-                    )
+                    style = style
                 )
 
                 Row(
                     modifier = Modifier.padding(Padding.small),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    val style = typography.displaySmall.copy(
-                        color = colorScheme.onSurface
-                    )
-
-                    Text(
-                        text = String.equalsSign,
-                        style = style
-                    )
-
                     BasicTextField(
                         value = "${answer ?: String.empty}",
                         onValueChange = { value ->
@@ -162,7 +153,7 @@ private fun Question(
     ) { (_, value) ->
         val (timesTable, multiplicand) = value
 
-        Term(
+        Prompt(
             timesTable = timesTable,
             multiplicand = multiplicand,
             modifier = Modifier.wrapContentSize(),

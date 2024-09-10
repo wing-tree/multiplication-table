@@ -4,6 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import wing.tree.multiplication.table.ad.InterstitialAdLoader
 import wing.tree.multiplication.table.base.view.model.BaseViewModel
 import wing.tree.multiplication.table.extension.property.`3`
 import wing.tree.multiplication.table.extension.property.`7`
@@ -29,7 +30,9 @@ class TestViewModel(savedStateHandle: SavedStateHandle) : BaseViewModel<TestStat
                         viewModelScope.launch {
                             delay(timeMillis = Long.`7`.hundreds)
 
-                            postSideEffect(TestSideEffect.Show.InterstitialAd)
+                            if (InterstitialAdLoader.adLoaded) {
+                                postSideEffect(TestSideEffect.Show.InterstitialAd)
+                            }
                         }
 
                         TestState.Completed(it.test)
