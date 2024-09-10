@@ -6,11 +6,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Text
@@ -37,11 +37,11 @@ import wing.tree.multiplication.table.extension.property.inc
 import wing.tree.multiplication.table.extension.property.widestDigit
 import wing.tree.multiplication.table.token.Padding
 import wing.tree.multiplication.table.top.level.function.containerColor
+import wing.tree.multiplication.table.top.level.function.widestMultiplicationWidth
 import wing.tree.multiplication.table.top.level.property.MAXIMUM_MULTIPLICAND
 import wing.tree.multiplication.table.top.level.property.MAXIMUM_TIMES_TABLE_DIGITS
 import wing.tree.multiplication.table.top.level.property.MINIMUM_MULTIPLICAND
 import wing.tree.multiplication.table.top.level.property.fillMaxWidth
-import wing.tree.multiplication.table.top.level.function.widestMultiplicationWidth
 
 private val lruCache = LruCache<Pair<Dp, Dp>, TextUnit>(Int.`2`)
 
@@ -50,12 +50,9 @@ fun MultiplicationTable(
     timesTable: Int,
     modifier: Modifier = Modifier
 ) {
-    val shape = CardDefaults.elevatedShape
-
-    ElevatedCard(
+    Card(
         modifier = modifier,
-        shape = shape,
-        colors = CardDefaults.elevatedCardColors(containerColor = containerColor(timesTable))
+        colors = CardDefaults.cardColors(containerColor = containerColor(timesTable))
     ) {
         BoxWithConstraints(
             modifier = Modifier
@@ -105,9 +102,10 @@ fun MultiplicationTable(
                         Multiplication(
                             timesTable = timesTable,
                             multiplicand = multiplicand,
-                            modifier = Modifier
-                                .width(width = width)
-                                .height(height = height),
+                            modifier = Modifier.size(
+                                width = width,
+                                height = height
+                            ),
                             style = style
                         )
                     }

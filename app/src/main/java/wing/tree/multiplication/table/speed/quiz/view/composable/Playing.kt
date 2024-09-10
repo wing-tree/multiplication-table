@@ -15,8 +15,8 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
@@ -76,9 +76,9 @@ internal fun Playing(
     }
 
     Box(modifier = modifier) {
-        ElevatedCard(
+        Card(
             modifier = fillMaxWidth,
-            colors = CardDefaults.elevatedCardColors(containerColor = containerColor)
+            colors = CardDefaults.cardColors(containerColor = containerColor)
         ) {
             Column(
                 modifier = Modifier

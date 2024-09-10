@@ -3,7 +3,7 @@ package wing.tree.multiplication.table.composable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.Card
 import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.ProvideTextStyle
@@ -19,7 +19,7 @@ internal fun MultiplicationTableButton(
     modifier: Modifier = Modifier,
     content: @Composable BoxScope.() -> Unit
 ) {
-    ElevatedCard(
+    Card(
         onClick = onClick,
         modifier = modifier,
         shape = FloatingActionButtonDefaults.shape

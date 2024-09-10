@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.AlertDialogDefaults
-import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,6 +21,7 @@ import androidx.compose.ui.window.Dialog
 import com.google.android.material.slider.RangeSlider
 import wing.tree.multiplication.table.R
 import wing.tree.multiplication.table.composable.AnimatedText
+import wing.tree.multiplication.table.composable.MultiplicationTableButton
 import wing.tree.multiplication.table.composable.noOperations
 import wing.tree.multiplication.table.dialog.intent.DialogState
 import wing.tree.multiplication.table.dialog.model.Dialog
@@ -89,7 +89,7 @@ internal fun Dialog(
                         }
                     )
 
-                    ElevatedButton(
+                    MultiplicationTableButton(
                         onClick = {
                             onAction(
                                 MainAction.Navigate.ToSpeedQuiz(
@@ -100,11 +100,12 @@ internal fun Dialog(
                         }
                     ) {
                         Text(
-                            text = stringResource(R.string.speed_quiz)
+                            text = stringResource(R.string.speed_quiz),
+                            modifier = Modifier.align(Alignment.Center)
                         )
                     }
 
-                    ElevatedButton(
+                    MultiplicationTableButton(
                         onClick = {
                             onAction(
                                 MainAction.Navigate.ToTest(
@@ -115,7 +116,8 @@ internal fun Dialog(
                         }
                     ) {
                         Text(
-                            text = stringResource(R.string.test)
+                            text = stringResource(R.string.test),
+                            modifier = Modifier.align(Alignment.Center)
                         )
                     }
                 }

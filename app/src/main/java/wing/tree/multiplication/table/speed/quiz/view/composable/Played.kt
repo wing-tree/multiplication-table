@@ -7,9 +7,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ElevatedButton
-import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,6 +20,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import wing.tree.multiplication.table.R
+import wing.tree.multiplication.table.composable.MultiplicationTableButton
 import wing.tree.multiplication.table.composable.Prompt
 import wing.tree.multiplication.table.extension.function.verticalFadingEdge
 import wing.tree.multiplication.table.extension.property.`1`
@@ -66,8 +66,8 @@ internal fun Played(
                 verticalArrangement = Arrangement.spacedBy(space = Space.small)
             ) {
                 speedQuiz.submission.forEach {
-                    ElevatedCard(
-                        colors = CardDefaults.elevatedCardColors(
+                    Card(
+                        colors = CardDefaults.cardColors(
                             containerColor = containerColor(it.timesTable),
                             contentColor = colorScheme.onSurface
                         )
@@ -129,22 +129,28 @@ internal fun Played(
             modifier = fillMaxWidth,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            ElevatedButton(
+            MultiplicationTableButton(
                 onClick = {
                     onAction(SpeedQuizAction.Home)
                 },
                 modifier = fillMaxWidth
             ) {
-                Text(text = stringResource(R.string.home))
+                Text(
+                    text = stringResource(R.string.home),
+                    modifier = Modifier.align(Alignment.Center)
+                )
             }
 
-            ElevatedButton(
+            MultiplicationTableButton(
                 onClick = {
                     onAction(SpeedQuizAction.SolveNew)
                 },
                 modifier = fillMaxWidth
             ) {
-                Text(text = stringResource(R.string.solve_new))
+                Text(
+                    text = stringResource(R.string.solve_new),
+                    modifier = Modifier.align(Alignment.Center)
+                )
             }
         }
     }

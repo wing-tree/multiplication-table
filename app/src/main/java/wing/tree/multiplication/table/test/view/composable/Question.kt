@@ -10,8 +10,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Text
@@ -39,8 +39,8 @@ import wing.tree.multiplication.table.extension.property.fullyTransparent
 import wing.tree.multiplication.table.extension.property.intOrNull
 import wing.tree.multiplication.table.extension.property.threeQuarters
 import wing.tree.multiplication.table.extension.property.widestDigit
-import wing.tree.multiplication.table.test.intent.KeyboardEvent
 import wing.tree.multiplication.table.model.Question
+import wing.tree.multiplication.table.test.intent.KeyboardEvent
 import wing.tree.multiplication.table.test.intent.TestState
 import wing.tree.multiplication.table.theme.pastelGreen
 import wing.tree.multiplication.table.theme.pastelRed
@@ -60,9 +60,9 @@ internal fun Question(
     onKeyboardEvent: (KeyboardEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    ElevatedCard(
+    Card(
         modifier = modifier,
-        colors = CardDefaults.elevatedCardColors(
+        colors = CardDefaults.cardColors(
             containerColor = containerColor(question.timesTable)
         )
     ) {
