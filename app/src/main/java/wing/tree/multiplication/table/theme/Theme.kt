@@ -19,7 +19,8 @@ import wing.tree.multiplication.table.extension.function.third
 private val colorScheme = lightColorScheme(
     primary = palette.first(),
     secondary = palette.second(),
-    tertiary = palette.third()
+    tertiary = palette.third(),
+    surfaceContainer = honeydew
 )
 
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
