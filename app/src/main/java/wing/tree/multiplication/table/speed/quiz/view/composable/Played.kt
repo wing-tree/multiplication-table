@@ -45,7 +45,7 @@ internal fun Played(
 ) {
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(space = Space.medium),
+        verticalArrangement = Arrangement.spacedBy(space = Space.small),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         val speedQuiz = state.speedQuiz
@@ -61,8 +61,8 @@ internal fun Played(
             Column(
                 modifier = fillMaxWidth
                     .verticalScroll(state = scrollState)
-                    .verticalFadingEdge(scrollState = scrollState)
-                    .padding(vertical = Padding.medium),
+                    .verticalFadingEdge(scrollState = scrollState, length = Padding.extra.small)
+                    .padding(vertical = Padding.small),
                 verticalArrangement = Arrangement.spacedBy(space = Space.small)
             ) {
                 speedQuiz.submission.forEach {
@@ -127,6 +127,7 @@ internal fun Played(
 
         Column(
             modifier = fillMaxWidth,
+            verticalArrangement = Arrangement.spacedBy(space = Space.small),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             MultiplicationTableButton(
