@@ -4,10 +4,12 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
@@ -22,11 +24,14 @@ import androidx.compose.ui.res.stringResource
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.delay
 import wing.tree.multiplication.table.R
+import wing.tree.multiplication.table.composable.Crossfade
 import wing.tree.multiplication.table.composable.MultiplicationTableButton
 import wing.tree.multiplication.table.extension.function.`is`
 import wing.tree.multiplication.table.extension.function.isLessThan
 import wing.tree.multiplication.table.extension.function.isLessThanOrEqualTo
 import wing.tree.multiplication.table.extension.function.not
+import wing.tree.multiplication.table.extension.function.second
+import wing.tree.multiplication.table.extension.function.third
 import wing.tree.multiplication.table.extension.function.verticalFadingEdge
 import wing.tree.multiplication.table.extension.property.`0`
 import wing.tree.multiplication.table.extension.property.`1`
@@ -34,10 +39,11 @@ import wing.tree.multiplication.table.extension.property.`3`
 import wing.tree.multiplication.table.extension.property.hundreds
 import wing.tree.multiplication.table.extension.property.inc
 import wing.tree.multiplication.table.extension.property.paddingValues
-import wing.tree.multiplication.table.test.intent.KeyboardEvent
 import wing.tree.multiplication.table.model.Question
+import wing.tree.multiplication.table.test.intent.KeyboardEvent
 import wing.tree.multiplication.table.test.intent.TestEvent
 import wing.tree.multiplication.table.test.intent.TestState
+import wing.tree.multiplication.table.theme.palette
 import wing.tree.multiplication.table.token.Padding
 import wing.tree.multiplication.table.token.Space
 import wing.tree.multiplication.table.top.level.property.INVALID_INDEX
@@ -168,7 +174,9 @@ internal fun Prepared(
                         MultiplicationTableButton(
                             onClick = {
                                 onEvent(TestEvent.Click.Home)
-                            }
+                            },
+                            containerColor = palette.first(),
+                            contentColor = colorScheme.onSurfaceVariant
                         ) {
                             Text(
                                 text = stringResource(R.string.home),
@@ -179,7 +187,9 @@ internal fun Prepared(
                         MultiplicationTableButton(
                             onClick = {
                                 onEvent(TestEvent.Click.SolveNew)
-                            }
+                            },
+                            containerColor = palette.second(),
+                            contentColor = colorScheme.onSurfaceVariant
                         ) {
                             Text(
                                 text = stringResource(R.string.solve_new),
@@ -204,15 +214,24 @@ internal fun Prepared(
                     },
                     modifier = Modifier
                         .focusRequester(focusRequesters.last())
-                        .focusable(interactionSource = interactionSource)
+                        .focusable(interactionSource = interactionSource),
+                    containerColor = palette.third(),
+                    contentColor = colorScheme.onSurfaceVariant
                 ) {
-                    Text(
-                        text = when {
+                    Crossfade(
+                        targetState = when {
                             isInProgress -> stringResource(id = R.string.check)
                             else -> stringResource(id = R.string.solve_again)
                         },
-                        modifier = Modifier.align(Alignment.Center)
-                    )
+                        modifier = fillMaxWidth
+                    ) {
+                        Box(
+                            modifier = fillMaxWidth,
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(text = it)
+                        }
+                    }
                 }
             }
         }
