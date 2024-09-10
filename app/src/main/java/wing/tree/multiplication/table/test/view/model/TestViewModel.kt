@@ -21,10 +21,16 @@ class TestViewModel(savedStateHandle: SavedStateHandle) : BaseViewModel<TestStat
     private val endInclusive = checkNotNull(savedStateHandle.get<Int>(Key.END_INCLUSIVE()))
     private val start = checkNotNull(savedStateHandle.get<Int>(Key.START()))
 
-    override val initialState: TestState = TestState.InProgress(Test(start = start, endInclusive = endInclusive))
+    override val initialState: TestState = TestState.Preparing(
+        Test(
+            start = start,
+            endInclusive = endInclusive
+        )
+    )
 
     fun onEvent(event: TestEvent) {
         when (event) {
+            TestEvent.Prepared -> onPrepared()
             is TestEvent.Click -> onClick(event)
         }
     }
@@ -32,7 +38,7 @@ class TestViewModel(savedStateHandle: SavedStateHandle) : BaseViewModel<TestStat
     private fun check() {
         reduce {
             when (it) {
-                is TestState.InProgress -> when {
+                is TestState.Prepared.InProgress -> when {
                     it.allAnswered -> {
                         viewModelScope.launch {
                             delay(timeMillis = Long.`7`.hundreds)
@@ -42,7 +48,7 @@ class TestViewModel(savedStateHandle: SavedStateHandle) : BaseViewModel<TestStat
                             }
                         }
 
-                        TestState.Completed(it.test)
+                        TestState.Prepared.Completed(it.test)
                     }
                     else -> it
                 }
@@ -60,6 +66,13 @@ class TestViewModel(savedStateHandle: SavedStateHandle) : BaseViewModel<TestStat
             }
 
             TestEvent.Click.SolveAgain -> solveAgain()
+            TestEvent.Click.SolveNew -> solveNew()
+        }
+    }
+
+    private fun onPrepared() {
+        reduce {
+            TestState.Prepared.InProgress(it.test)
         }
     }
 
@@ -67,7 +80,7 @@ class TestViewModel(savedStateHandle: SavedStateHandle) : BaseViewModel<TestStat
         viewModelScope.launch {
             reduce {
                 when (it) {
-                    is TestState.Completed -> it.copy(tag = TestState.Tag.CLEARING)
+                    is TestState.Prepared.Completed -> it.copy(tag = TestState.Tag.CLEARING)
                     else -> it
                 }
             }
@@ -75,8 +88,19 @@ class TestViewModel(savedStateHandle: SavedStateHandle) : BaseViewModel<TestStat
             delay(Long.`3`.hundreds.milliseconds)
 
             reduce {
-                TestState.InProgress(it.test.onEach(Question::clear))
+                TestState.Prepared.InProgress(it.test.onEach(Question::clear))
             }
+        }
+    }
+
+    private fun solveNew() {
+        reduce {
+            TestState.Preparing(
+                Test(
+                    start = start,
+                    endInclusive = endInclusive
+                )
+            )
         }
     }
 }

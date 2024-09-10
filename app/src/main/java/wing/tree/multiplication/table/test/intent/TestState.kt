@@ -8,17 +8,20 @@ import wing.tree.multiplication.table.test.model.Test
 @Stable
 sealed interface TestState {
     val allAnswered: Boolean get() = test.all(Question::isAnswered)
+    val contentKey: Boolean get() = this is Prepared
 
     val tag: Tag
     val test: Test
 
-    data class Completed(
-        override val test: Test,
-        override val tag: Tag = Tag.COMPLETED
-    ) : TestState
+    sealed interface Prepared : TestState {
+        data class Completed(
+            override val test: Test,
+            override val tag: Tag = Tag.COMPLETED
+        ) : Prepared
 
-    data class InProgress(override val test: Test) : TestState {
-        override val tag: Tag = Tag.IN_PROGRESS
+        data class InProgress(override val test: Test) : Prepared {
+            override val tag: Tag = Tag.IN_PROGRESS
+        }
     }
 
     data class Preparing(override val test: Test) : TestState {

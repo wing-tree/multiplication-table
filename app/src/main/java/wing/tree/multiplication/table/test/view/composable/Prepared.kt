@@ -45,8 +45,8 @@ import wing.tree.multiplication.table.top.level.property.NUMBER_OF_QUESTIONS
 import wing.tree.multiplication.table.top.level.property.fillMaxWidth
 
 @Composable
-internal fun Test(
-    state: TestState,
+internal fun Prepared(
+    state: TestState.Prepared,
     widthSizeClass: WindowWidthSizeClass,
     onEvent: (TestEvent) -> Unit,
     modifier: Modifier = Modifier
@@ -139,7 +139,6 @@ internal fun Test(
         }
 
         val visible = when {
-            state is TestState.Preparing -> false
             tag `is` TestState.Tag.CLEARING -> false
             else -> state.allAnswered
         }
@@ -155,13 +154,17 @@ internal fun Test(
             modifier = fillMaxWidth.padding(widthSizeClass.paddingValues)
         ) {
             Column(
-                modifier = fillMaxWidth.padding(vertical = Padding.small)
+                modifier = fillMaxWidth.padding(vertical = Padding.small),
+                verticalArrangement = Arrangement.spacedBy(space = Space.small)
             ) {
                 AnimatedVisibility(
                     visible = isInProgress.not(),
                     modifier = fillMaxWidth
                 ) {
-                    Column {
+                    Column(
+                        modifier = fillMaxWidth,
+                        verticalArrangement = Arrangement.spacedBy(space = Space.small)
+                    ) {
                         MultiplicationTableButton(
                             onClick = {
                                 onEvent(TestEvent.Click.Home)
@@ -175,11 +178,11 @@ internal fun Test(
 
                         MultiplicationTableButton(
                             onClick = {
-
+                                onEvent(TestEvent.Click.SolveNew)
                             }
                         ) {
                             Text(
-                                text = stringResource(R.string.home),
+                                text = stringResource(R.string.solve_new),
                                 modifier = Modifier.align(Alignment.Center)
                             )
                         }
@@ -189,7 +192,7 @@ internal fun Test(
                 MultiplicationTableButton(
                     onClick = {
                         val event = when (state) {
-                            is TestState.Completed -> TestEvent.Click.SolveAgain
+                            is TestState.Prepared.Completed -> TestEvent.Click.SolveAgain
                             else -> {
                                 focusManager.clearFocus()
 
