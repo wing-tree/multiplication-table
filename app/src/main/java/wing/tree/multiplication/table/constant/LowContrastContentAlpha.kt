@@ -1,4 +1,4 @@
-@file:Suppress("unused")
+@file:Suppress("ConstPropertyName", "unused")
 
 package wing.tree.multiplication.table.constant
 

@@ -6,8 +6,8 @@ import androidx.compose.ui.Modifier
 import wing.tree.multiplication.table.composable.Crossfade
 import wing.tree.multiplication.table.composition.local.localWindowWidthSizeClass
 import wing.tree.multiplication.table.extension.property.paddingValues
-import wing.tree.multiplication.table.speed.quiz.action.SpeedQuizAction
-import wing.tree.multiplication.table.speed.quiz.state.SpeedQuizState
+import wing.tree.multiplication.table.speed.quiz.intent.SpeedQuizAction
+import wing.tree.multiplication.table.speed.quiz.intent.SpeedQuizState
 import wing.tree.multiplication.table.top.level.property.fillMaxSize
 
 @Composable

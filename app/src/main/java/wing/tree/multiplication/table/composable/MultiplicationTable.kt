@@ -41,7 +41,7 @@ import wing.tree.multiplication.table.top.level.property.MAXIMUM_MULTIPLICAND
 import wing.tree.multiplication.table.top.level.property.MAXIMUM_TIMES_TABLE_DIGITS
 import wing.tree.multiplication.table.top.level.property.MINIMUM_MULTIPLICAND
 import wing.tree.multiplication.table.top.level.property.fillMaxWidth
-import wing.tree.multiplication.table.top.level.widestMultiplicationWidth
+import wing.tree.multiplication.table.top.level.function.widestMultiplicationWidth
 
 private val lruCache = LruCache<Pair<Dp, Dp>, TextUnit>(Int.`2`)
 

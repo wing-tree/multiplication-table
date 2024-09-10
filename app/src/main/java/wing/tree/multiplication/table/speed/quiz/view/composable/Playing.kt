@@ -40,8 +40,8 @@ import wing.tree.multiplication.table.extension.property.hundreds
 import wing.tree.multiplication.table.extension.property.intOrNull
 import wing.tree.multiplication.table.extension.property.isZero
 import wing.tree.multiplication.table.model.Question
-import wing.tree.multiplication.table.speed.quiz.action.SpeedQuizAction
-import wing.tree.multiplication.table.speed.quiz.state.SpeedQuizState
+import wing.tree.multiplication.table.speed.quiz.intent.SpeedQuizAction
+import wing.tree.multiplication.table.speed.quiz.intent.SpeedQuizState
 import wing.tree.multiplication.table.token.Padding
 import wing.tree.multiplication.table.top.level.function.containerColor
 import wing.tree.multiplication.table.top.level.property.MAXIMUM_DIGITS

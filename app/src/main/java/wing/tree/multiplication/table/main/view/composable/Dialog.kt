@@ -29,7 +29,7 @@ import wing.tree.multiplication.table.extension.function.second
 import wing.tree.multiplication.table.extension.property.float
 import wing.tree.multiplication.table.extension.property.hyphen
 import wing.tree.multiplication.table.extension.property.int
-import wing.tree.multiplication.table.main.action.MainAction
+import wing.tree.multiplication.table.main.intent.MainAction
 import wing.tree.multiplication.table.token.Padding
 import wing.tree.multiplication.table.top.level.property.MAXIMUM_TIMES_TABLE
 import wing.tree.multiplication.table.top.level.property.MINIMUM_TIMES_TABLE

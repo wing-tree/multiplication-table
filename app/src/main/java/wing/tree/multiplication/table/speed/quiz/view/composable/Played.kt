@@ -27,8 +27,8 @@ import wing.tree.multiplication.table.extension.property.`1`
 import wing.tree.multiplication.table.extension.property.empty
 import wing.tree.multiplication.table.extension.property.fullyTransparent
 import wing.tree.multiplication.table.extension.property.threeQuarters
-import wing.tree.multiplication.table.speed.quiz.action.SpeedQuizAction
-import wing.tree.multiplication.table.speed.quiz.state.SpeedQuizState
+import wing.tree.multiplication.table.speed.quiz.intent.SpeedQuizAction
+import wing.tree.multiplication.table.speed.quiz.intent.SpeedQuizState
 import wing.tree.multiplication.table.test.view.composable.Score
 import wing.tree.multiplication.table.theme.pastelGreen
 import wing.tree.multiplication.table.theme.pastelRed

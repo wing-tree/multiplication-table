@@ -12,10 +12,10 @@ import wing.tree.multiplication.table.extension.property.`7`
 import wing.tree.multiplication.table.extension.property.hundreds
 import wing.tree.multiplication.table.extension.property.thirtySecondsInMilliseconds
 import wing.tree.multiplication.table.model.Key
-import wing.tree.multiplication.table.speed.quiz.action.SpeedQuizAction
+import wing.tree.multiplication.table.speed.quiz.intent.SpeedQuizAction
 import wing.tree.multiplication.table.speed.quiz.model.SpeedQuiz
-import wing.tree.multiplication.table.speed.quiz.side.effect.SpeedQuizSideEffect
-import wing.tree.multiplication.table.speed.quiz.state.SpeedQuizState
+import wing.tree.multiplication.table.speed.quiz.intent.SpeedQuizSideEffect
+import wing.tree.multiplication.table.speed.quiz.intent.SpeedQuizState
 
 class SpeedQuizViewModel(
     savedStateHandle: SavedStateHandle

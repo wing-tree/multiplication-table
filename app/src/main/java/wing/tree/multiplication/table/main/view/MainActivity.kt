@@ -35,7 +35,7 @@ import wing.tree.multiplication.table.extension.property.dec
 import wing.tree.multiplication.table.extension.property.isCompact
 import wing.tree.multiplication.table.extension.property.isNotCompact
 import wing.tree.multiplication.table.extension.property.paddingValues
-import wing.tree.multiplication.table.main.action.MainAction
+import wing.tree.multiplication.table.main.intent.MainAction
 import wing.tree.multiplication.table.main.view.composable.BottomBar
 import wing.tree.multiplication.table.main.view.composable.Dialog
 import wing.tree.multiplication.table.main.view.composable.NavigationRail

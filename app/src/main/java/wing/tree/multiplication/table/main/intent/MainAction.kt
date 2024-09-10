@@ -1,4 +1,4 @@
-package wing.tree.multiplication.table.main.action
+package wing.tree.multiplication.table.main.intent
 
 sealed interface MainAction {
     data object RateReview : MainAction

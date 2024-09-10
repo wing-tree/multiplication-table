@@ -1,4 +1,4 @@
-package wing.tree.multiplication.table.speed.quiz.action
+package wing.tree.multiplication.table.speed.quiz.intent
 
 import wing.tree.multiplication.table.model.Question
 

@@ -1,4 +1,4 @@
-package wing.tree.multiplication.table.speed.quiz.side.effect
+package wing.tree.multiplication.table.speed.quiz.intent
 
 sealed interface SpeedQuizSideEffect {
     data object Home : SpeedQuizSideEffect

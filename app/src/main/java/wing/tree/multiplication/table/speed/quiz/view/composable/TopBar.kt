@@ -21,7 +21,7 @@ import wing.tree.multiplication.table.R
 import wing.tree.multiplication.table.composable.CountdownTimer
 import wing.tree.multiplication.table.extension.function.divAsFloat
 import wing.tree.multiplication.table.extension.property.`1`
-import wing.tree.multiplication.table.speed.quiz.state.SpeedQuizState
+import wing.tree.multiplication.table.speed.quiz.intent.SpeedQuizState
 import wing.tree.multiplication.table.speed.quiz.view.model.SpeedQuizViewModel
 import wing.tree.multiplication.table.token.Padding
 import wing.tree.multiplication.table.top.level.property.fillMaxWidth

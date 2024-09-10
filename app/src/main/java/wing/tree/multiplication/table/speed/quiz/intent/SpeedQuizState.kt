@@ -1,4 +1,4 @@
-package wing.tree.multiplication.table.speed.quiz.state
+package wing.tree.multiplication.table.speed.quiz.intent
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableLongStateOf

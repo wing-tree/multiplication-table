@@ -23,9 +23,9 @@ import wing.tree.multiplication.table.extension.property.`7`
 import wing.tree.multiplication.table.extension.property.hundreds
 import wing.tree.multiplication.table.extension.property.isNotFinishing
 import wing.tree.multiplication.table.extension.property.twice
-import wing.tree.multiplication.table.speed.quiz.action.SpeedQuizAction
-import wing.tree.multiplication.table.speed.quiz.side.effect.SpeedQuizSideEffect
-import wing.tree.multiplication.table.speed.quiz.state.SpeedQuizState
+import wing.tree.multiplication.table.speed.quiz.intent.SpeedQuizAction
+import wing.tree.multiplication.table.speed.quiz.intent.SpeedQuizSideEffect
+import wing.tree.multiplication.table.speed.quiz.intent.SpeedQuizState
 import wing.tree.multiplication.table.speed.quiz.view.composable.Play
 import wing.tree.multiplication.table.speed.quiz.view.composable.Preparing
 import wing.tree.multiplication.table.speed.quiz.view.composable.TopBar

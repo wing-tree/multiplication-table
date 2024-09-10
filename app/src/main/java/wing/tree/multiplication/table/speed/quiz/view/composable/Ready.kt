@@ -10,7 +10,7 @@ import androidx.compose.ui.graphics.StrokeCap
 import kotlinx.coroutines.delay
 import wing.tree.multiplication.table.extension.property.`7`
 import wing.tree.multiplication.table.extension.property.hundreds
-import wing.tree.multiplication.table.speed.quiz.state.SpeedQuizState
+import wing.tree.multiplication.table.speed.quiz.intent.SpeedQuizState
 
 @Composable
 internal fun Preparing(
