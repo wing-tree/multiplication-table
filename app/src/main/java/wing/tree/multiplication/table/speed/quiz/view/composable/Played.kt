@@ -22,6 +22,7 @@ import androidx.compose.ui.text.style.TextAlign
 import wing.tree.multiplication.table.R
 import wing.tree.multiplication.table.composable.MultiplicationTableButton
 import wing.tree.multiplication.table.composable.Prompt
+import wing.tree.multiplication.table.extension.function.bounceVertically
 import wing.tree.multiplication.table.extension.function.second
 import wing.tree.multiplication.table.extension.function.verticalFadingEdge
 import wing.tree.multiplication.table.extension.property.`1`
@@ -128,7 +129,9 @@ internal fun Played(
         }
 
         Column(
-            modifier = fillMaxWidth,
+            modifier = fillMaxWidth.bounceVertically(
+                targetValue = Padding.extra.small
+            ),
             verticalArrangement = Arrangement.spacedBy(space = Space.small),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {

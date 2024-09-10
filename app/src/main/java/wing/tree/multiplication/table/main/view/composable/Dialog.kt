@@ -28,6 +28,7 @@ import wing.tree.multiplication.table.composable.MultiplicationTableButton
 import wing.tree.multiplication.table.composable.noOperations
 import wing.tree.multiplication.table.dialog.intent.DialogState
 import wing.tree.multiplication.table.dialog.model.Dialog
+import wing.tree.multiplication.table.extension.function.bounceVertically
 import wing.tree.multiplication.table.extension.function.second
 import wing.tree.multiplication.table.extension.function.third
 import wing.tree.multiplication.table.extension.property.float
@@ -113,7 +114,9 @@ internal fun Dialog(
                     }
 
                     Column(
-                        modifier = fillMaxWidth,
+                        modifier = fillMaxWidth.bounceVertically(
+                            targetValue = Padding.extra.small
+                        ),
                         verticalArrangement = Arrangement.spacedBy(space = Space.small)
                     ) {
                         MultiplicationTableButton(

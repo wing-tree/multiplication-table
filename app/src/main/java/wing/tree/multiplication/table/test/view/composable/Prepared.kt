@@ -26,6 +26,7 @@ import kotlinx.coroutines.delay
 import wing.tree.multiplication.table.R
 import wing.tree.multiplication.table.composable.Crossfade
 import wing.tree.multiplication.table.composable.MultiplicationTableButton
+import wing.tree.multiplication.table.extension.function.bounceVertically
 import wing.tree.multiplication.table.extension.function.`is`
 import wing.tree.multiplication.table.extension.function.isLessThan
 import wing.tree.multiplication.table.extension.function.isLessThanOrEqualTo
@@ -160,7 +161,9 @@ internal fun Prepared(
             modifier = fillMaxWidth.padding(widthSizeClass.paddingValues)
         ) {
             Column(
-                modifier = fillMaxWidth.padding(vertical = Padding.small),
+                modifier = fillMaxWidth
+                    .padding(vertical = Padding.small)
+                    .bounceVertically(targetValue = Padding.extra.small),
                 verticalArrangement = Arrangement.spacedBy(space = Space.small)
             ) {
                 AnimatedVisibility(

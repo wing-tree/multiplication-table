@@ -1,12 +1,17 @@
 package wing.tree.multiplication.table.extension.function
 
 import androidx.compose.animation.core.AnimationSpec
+import androidx.compose.animation.core.DurationBasedAnimationSpec
+import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ScrollState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.drawWithContent
@@ -27,11 +32,13 @@ import kotlinx.collections.immutable.persistentListOf
 import wing.tree.multiplication.table.constant.LowContrastContentAlpha
 import wing.tree.multiplication.table.extension.property.`0`
 import wing.tree.multiplication.table.extension.property.`1`
+import wing.tree.multiplication.table.extension.property.`7`
 import wing.tree.multiplication.table.extension.property.`8`
 import wing.tree.multiplication.table.extension.property.empty
 import wing.tree.multiplication.table.extension.property.float
 import wing.tree.multiplication.table.extension.property.fullyOpaque
 import wing.tree.multiplication.table.extension.property.fullyTransparent
+import wing.tree.multiplication.table.extension.property.hundreds
 import wing.tree.multiplication.table.extension.property.isNotZero
 import wing.tree.multiplication.table.extension.property.onePercent
 import wing.tree.multiplication.table.extension.property.oneSecondInMilliseconds
@@ -55,6 +62,45 @@ private val shimmerTheme = defaultShimmerTheme.copy(
         Color.Unspecified.copy(alpha = Float.fullyTransparent),
     )
 )
+
+fun Modifier.bounceVertically(
+    targetValue: Dp,
+    animation: DurationBasedAnimationSpec<Float> = tween(
+        durationMillis = Int.`7`.hundreds,
+        easing = FastOutLinearInEasing,
+    ),
+): Modifier = composed {
+    bounceVertically(
+        targetValue = with(LocalDensity.current) {
+            targetValue.toPx()
+        },
+        animation = animation,
+    )
+}
+
+fun Modifier.bounceVertically(
+    targetValue: Float,
+    animation: DurationBasedAnimationSpec<Float> = tween(
+        durationMillis = Int.`7`.hundreds,
+        easing = FastOutLinearInEasing,
+    ),
+): Modifier = composed {
+    val value by rememberInfiniteTransition(
+        label = String.empty
+    ).animateFloat(
+        initialValue = Float.`0`,
+        targetValue = targetValue,
+        animationSpec = infiniteRepeatable(
+            animation = animation,
+            repeatMode = RepeatMode.Reverse,
+        ),
+        label = String.empty
+    )
+
+    graphicsLayer {
+        translationY = value
+    }
+}
 
 fun Modifier.shimmer() = composed {
     shimmer(
