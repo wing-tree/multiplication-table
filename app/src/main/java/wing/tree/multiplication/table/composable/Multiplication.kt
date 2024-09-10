@@ -7,6 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextOverflow
 import wing.tree.multiplication.table.extension.function.width
 import wing.tree.multiplication.table.extension.property.widestDigit
 import wing.tree.multiplication.table.top.level.property.MAXIMUM_MULTIPLICAND
@@ -33,6 +34,7 @@ internal fun Multiplication(
             modifier = Modifier.width(
                 widestDigitWidth.times("${timesTable.times(MAXIMUM_MULTIPLICAND)}".length)
             ),
+            overflow = TextOverflow.Visible,
             style = style
         )
     }

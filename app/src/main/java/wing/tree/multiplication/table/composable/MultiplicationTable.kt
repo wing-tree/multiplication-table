@@ -68,7 +68,7 @@ fun MultiplicationTable(
                 .div(MAXIMUM_MULTIPLICAND.inc)
 
             val fontSize = fontSizeOf(
-                maxWidth = maxWidth.minus(Padding.extra.small),
+                maxWidth = maxWidth.minus(Padding.small),
                 maxHeight = height
             )
 
