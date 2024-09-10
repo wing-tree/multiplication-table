@@ -3,8 +3,6 @@
     <string name="ad_loading">Ad Loading…</string>
     <string name="app_name">Gugudan</string>
     <string name="check">Check</string>
-    <string name="get_ready">Get Ready</string>
-    <string name="go">Go!</string>
     <string name="home">Home</string>
     <string name="replay">Replay</string>
     <string name="quiz" translatable="false">QUIZ</string>
