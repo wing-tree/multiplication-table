@@ -22,6 +22,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import kotlinx.collections.immutable.persistentListOf
+import kotlinx.coroutines.delay
 import wing.tree.multiplication.table.R
 import wing.tree.multiplication.table.composable.MultiplicationTableButton
 import wing.tree.multiplication.table.extension.function.`is`
@@ -31,10 +32,12 @@ import wing.tree.multiplication.table.extension.function.not
 import wing.tree.multiplication.table.extension.function.verticalFadingEdge
 import wing.tree.multiplication.table.extension.property.`0`
 import wing.tree.multiplication.table.extension.property.`1`
+import wing.tree.multiplication.table.extension.property.`3`
+import wing.tree.multiplication.table.extension.property.hundreds
 import wing.tree.multiplication.table.extension.property.inc
 import wing.tree.multiplication.table.extension.property.paddingValues
-import wing.tree.multiplication.table.model.Action
 import wing.tree.multiplication.table.model.Question
+import wing.tree.multiplication.table.test.intent.TestEvent
 import wing.tree.multiplication.table.test.intent.TestState
 import wing.tree.multiplication.table.token.Padding
 import wing.tree.multiplication.table.token.Space
@@ -46,7 +49,7 @@ import wing.tree.multiplication.table.top.level.property.fillMaxWidth
 internal fun Test(
     state: TestState,
     widthSizeClass: WindowWidthSizeClass,
-    onAction: (Action) -> Unit,
+    onEvent: (TestEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val tag = state.tag
@@ -60,10 +63,9 @@ internal fun Test(
         )
     }
 
-    val onKeyboardAction: (Action.Keyboard) -> Unit = remember(state) {
-        { keyboardAction ->
+    val onKeyboardAction: (TestEvent.Keyboard) -> Unit = { keyboardAction ->
             when (keyboardAction) {
-                is Action.Keyboard.Next -> {
+                is TestEvent.Keyboard.Next -> {
                     if (test.count(Question::isAnswered) isLessThan NUMBER_OF_QUESTIONS) {
                         var index = test.withIndex().indexOfFirst { (index, value) ->
                             when {
@@ -85,7 +87,6 @@ internal fun Test(
                 }
             }
         }
-    }
 
     val scrollState = rememberScrollState()
 
@@ -100,6 +101,8 @@ internal fun Test(
 
         LaunchedEffect(isInProgress) {
             if (isInProgress) {
+                delay(Long.`3`.hundreds)
+
                 scrollState.animateScrollTo(value = Int.`0`)
 
                 focusRequesters.first().requestFocus()
@@ -148,54 +151,58 @@ internal fun Test(
             }
         }
 
-        Column(
-            modifier = fillMaxWidth.padding(vertical = Padding.small)
+        AnimatedVisibility(
+            visible = visible,
+            modifier = fillMaxWidth.padding(widthSizeClass.paddingValues)
         ) {
-            val style = typography.bodyMedium.merge(fontWeight = FontWeight.Bold)
-
-            AnimatedVisibility(
-                visible = isInProgress.not()
+            Column(
+                modifier = fillMaxWidth.padding(vertical = Padding.small)
             ) {
-                Column {
-                    MultiplicationTableButton(
-                        onClick = {
+                val style = typography.bodyMedium.merge(fontWeight = FontWeight.Bold)
 
+                AnimatedVisibility(
+                    visible = isInProgress.not(),
+                    modifier = fillMaxWidth
+                ) {
+                    Column {
+                        MultiplicationTableButton(
+                            onClick = {
+
+                            }
+                        ) {
+                            Text(
+                                text = stringResource(R.string.home),
+                                modifier = Modifier.align(Alignment.Center),
+                                style = style
+                            )
                         }
-                    ) {
-                        Text(
-                            text = stringResource(R.string.home),
-                            modifier = Modifier.align(Alignment.Center),
-                            style = style
-                        )
-                    }
 
-                    MultiplicationTableButton(
-                        onClick = {
+                        MultiplicationTableButton(
+                            onClick = {
 
+                            }
+                        ) {
+                            Text(
+                                text = stringResource(R.string.home),
+                                modifier = Modifier.align(Alignment.Center),
+                                style = style
+                            )
                         }
-                    ) {
-                        Text(
-                            text = stringResource(R.string.home),
-                            modifier = Modifier.align(Alignment.Center),
-                            style = style
-                        )
                     }
                 }
-            }
 
-            AnimatedVisibility(visible = visible) {
                 MultiplicationTableButton(
                     onClick = {
-                        val action = when (state) {
-                            is TestState.Completed -> Action.SolveAgain
+                        val event = when (state) {
+                            is TestState.Completed -> TestEvent.SolveAgain
                             else -> {
                                 focusManager.clearFocus()
 
-                                Action.Check
+                                TestEvent.Check
                             }
                         }
 
-                        onAction(action)
+                        onEvent(event)
                     },
                     modifier = Modifier
                         .focusRequester(focusRequesters.last())

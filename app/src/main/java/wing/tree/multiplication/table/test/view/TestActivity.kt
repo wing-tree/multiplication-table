@@ -25,7 +25,7 @@ import wing.tree.multiplication.table.extension.property.`7`
 import wing.tree.multiplication.table.extension.property.hundreds
 import wing.tree.multiplication.table.extension.property.isNotFinishing
 import wing.tree.multiplication.table.extension.property.twice
-import wing.tree.multiplication.table.model.Action
+import wing.tree.multiplication.table.test.intent.TestEvent
 import wing.tree.multiplication.table.test.intent.TestSideEffect
 import wing.tree.multiplication.table.test.view.composable.Test
 import wing.tree.multiplication.table.test.view.composable.TopBar
@@ -33,10 +33,10 @@ import wing.tree.multiplication.table.test.view.model.TestViewModel
 import wing.tree.multiplication.table.theme.MultiplicationTableTheme
 
 class TestActivity : ComponentActivity() {
-    private val onAction: (Action) -> Unit = {
+    private val onEvent: (TestEvent) -> Unit = {
         when (it) {
-            Action.Check -> viewModel.check()
-            Action.SolveAgain -> viewModel.solveAgain()
+            TestEvent.Check -> viewModel.check()
+            TestEvent.SolveAgain -> viewModel.solveAgain()
             else -> noOperations
         }
     }
@@ -93,7 +93,7 @@ class TestActivity : ComponentActivity() {
                     Test(
                         state = state,
                         widthSizeClass = widthSizeClass,
-                        onAction = onAction,
+                        onEvent = onEvent,
                         modifier = Modifier.padding(it)
                     )
                 }

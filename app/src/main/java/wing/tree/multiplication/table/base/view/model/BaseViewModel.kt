@@ -1,5 +1,6 @@
 package wing.tree.multiplication.table.base.view.model
 
+import android.annotation.SuppressLint
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -29,6 +30,7 @@ abstract class BaseViewModel<STATE, SIDE_EFFECT> : ViewModel() {
     private val `this`: BaseViewModel<STATE, SIDE_EFFECT> get() = this
     private val sideEffect = Channel<SIDE_EFFECT>()
 
+    @SuppressLint("ComposableNaming")
     @Composable
     fun collectSideEffect(
         state: Lifecycle.State = Lifecycle.State.STARTED,
