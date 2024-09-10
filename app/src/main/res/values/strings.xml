@@ -3,12 +3,15 @@
     <string name="ad_loading">Ad Loading…</string>
     <string name="app_name">Gugudan</string>
     <string name="check">Check</string>
+    <string name="get_ready">Get Ready</string>
+    <string name="go">Go!</string>
     <string name="home">Home</string>
     <string name="replay">Replay</string>
     <string name="quiz" translatable="false">QUIZ</string>
     <string name="score" translatable="false">Score</string>
     <string name="share_app">Share app</string>
-    <string name="solve_again">Solve again</string>
+    <string name="solve_again">Solve Again</string>
+    <string name="solve_new">Solve New</string>
     <string name="speed_quiz">Speed Quiz</string>
     <string name="test">Test</string>
     <string name="thank_you_for_your_valuable_review">Thank you for your valuable review</string>
