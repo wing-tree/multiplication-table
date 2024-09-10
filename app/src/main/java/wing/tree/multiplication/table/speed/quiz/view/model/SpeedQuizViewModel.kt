@@ -20,7 +20,7 @@ import wing.tree.multiplication.table.speed.quiz.state.SpeedQuizState
 class SpeedQuizViewModel(
     savedStateHandle: SavedStateHandle
 ) : BaseViewModel<SpeedQuizState, SpeedQuizSideEffect>() {
-    override val initialState: SpeedQuizState = SpeedQuizState.Ready
+    override val initialState: SpeedQuizState = SpeedQuizState.Preparing
 
     private val countdownTimer = object : CountdownTimer(
         millisecondsInFuture = millisecondsInFuture,
@@ -56,7 +56,10 @@ class SpeedQuizViewModel(
             }
 
             SpeedQuizAction.OnReady -> play()
-            SpeedQuizAction.Replay -> prepare()
+            SpeedQuizAction.SolveNew -> reduce {
+                SpeedQuizState.Preparing
+            }
+
             is SpeedQuizAction.Next -> with(state.value) {
                 if (this is SpeedQuizState.Play.Playing) {
                     speedQuiz.submit(action.question)
@@ -92,12 +95,6 @@ class SpeedQuizViewModel(
         }
 
         countdownTimer.start()
-    }
-
-    private fun prepare() {
-        reduce {
-            SpeedQuizState.Ready
-        }
     }
 
     companion object {

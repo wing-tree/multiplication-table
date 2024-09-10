@@ -140,11 +140,11 @@ internal fun Played(
 
             ElevatedButton(
                 onClick = {
-                    onAction(SpeedQuizAction.Replay)
+                    onAction(SpeedQuizAction.SolveNew)
                 },
                 modifier = fillMaxWidth
             ) {
-                Text(text = stringResource(R.string.replay))
+                Text(text = stringResource(R.string.solve_new))
             }
         }
     }

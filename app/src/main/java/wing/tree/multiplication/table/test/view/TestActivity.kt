@@ -111,9 +111,7 @@ class TestActivity : ComponentActivity() {
                                     viewModel.onEvent(TestEvent.Prepared)
                                 }
 
-                                CircularProgressIndicator(
-                                    strokeCap = StrokeCap.Round
-                                )
+                                CircularProgressIndicator(strokeCap = StrokeCap.Round)
                             }
                         }
                     }

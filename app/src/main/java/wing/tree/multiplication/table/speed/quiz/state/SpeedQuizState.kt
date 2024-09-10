@@ -1,7 +1,7 @@
 package wing.tree.multiplication.table.speed.quiz.state
 
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.setValue
 import wing.tree.multiplication.table.extension.property.`0`
 import wing.tree.multiplication.table.speed.quiz.model.SpeedQuiz
@@ -18,13 +18,13 @@ sealed interface SpeedQuizState {
         }
 
         data class Playing(override val speedQuiz: SpeedQuiz) : Play {
-            override var elapsedTime by mutableStateOf(Long.`0`)
+            override var elapsedTime by mutableLongStateOf(Long.`0`)
 
             fun finish() = Played(speedQuiz = speedQuiz)
         }
     }
 
-    data object Ready : SpeedQuizState {
+    data object Preparing : SpeedQuizState {
         override val elapsedTime = Long.`0`
     }
 }

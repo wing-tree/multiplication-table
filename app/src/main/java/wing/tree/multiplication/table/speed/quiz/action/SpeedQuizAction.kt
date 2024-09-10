@@ -7,5 +7,5 @@ sealed interface SpeedQuizAction {
 
     data object Home : SpeedQuizAction
     data object OnReady : SpeedQuizAction
-    data object Replay : SpeedQuizAction
+    data object SolveNew : SpeedQuizAction
 }

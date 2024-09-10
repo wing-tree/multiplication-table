@@ -27,7 +27,7 @@ import wing.tree.multiplication.table.speed.quiz.action.SpeedQuizAction
 import wing.tree.multiplication.table.speed.quiz.side.effect.SpeedQuizSideEffect
 import wing.tree.multiplication.table.speed.quiz.state.SpeedQuizState
 import wing.tree.multiplication.table.speed.quiz.view.composable.Play
-import wing.tree.multiplication.table.speed.quiz.view.composable.Ready
+import wing.tree.multiplication.table.speed.quiz.view.composable.Preparing
 import wing.tree.multiplication.table.speed.quiz.view.composable.TopBar
 import wing.tree.multiplication.table.speed.quiz.view.model.SpeedQuizViewModel
 import wing.tree.multiplication.table.theme.MultiplicationTableTheme
@@ -94,10 +94,14 @@ class SpeedQuizActivity : ComponentActivity() {
                         when (targetState) {
                             is SpeedQuizState.Play -> Play(
                                 state = targetState,
+                                modifier = fillMaxSize,
                                 onAction = viewModel::onAction
                             )
 
-                            is SpeedQuizState.Ready -> Ready(state = targetState) {
+                            is SpeedQuizState.Preparing -> Preparing(
+                                state = targetState,
+                                modifier = fillMaxSize
+                            ) {
                                 viewModel.onAction(action = SpeedQuizAction.OnReady)
                             }
                         }
