@@ -8,11 +8,16 @@ import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.window.Dialog
 import wing.tree.multiplication.table.composable.noOperations
 import wing.tree.multiplication.table.dialog.intent.DialogState
 import wing.tree.multiplication.table.dialog.model.Dialog
+import wing.tree.multiplication.table.extension.property.`4`
+import wing.tree.multiplication.table.extension.property.quarter
 import wing.tree.multiplication.table.token.Space
 import wing.tree.multiplication.table.top.level.property.fillMaxSize
 
@@ -38,7 +43,16 @@ internal fun ProgressDialog(
                     Text(
                         text = it,
                         color = colorScheme.inverseOnSurface,
-                        style = typography.bodyMedium.merge(fontWeight = FontWeight.Bold)
+                        style = typography.bodyMedium.merge(
+                            fontWeight = FontWeight.Bold,
+                            shadow = with(Float.`4`) {
+                                Shadow(
+                                    color = Color.Black.copy(alpha = Float.quarter),
+                                    offset = Offset(x = this, y = this),
+                                    blurRadius = this
+                                )
+                            }
+                        )
                     )
                 }
             }
