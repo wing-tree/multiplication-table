@@ -39,8 +39,8 @@ import wing.tree.multiplication.table.extension.property.fullyTransparent
 import wing.tree.multiplication.table.extension.property.intOrNull
 import wing.tree.multiplication.table.extension.property.threeQuarters
 import wing.tree.multiplication.table.extension.property.widestDigit
+import wing.tree.multiplication.table.keyboard.intent.KeyboardEvent
 import wing.tree.multiplication.table.model.Question
-import wing.tree.multiplication.table.test.intent.TestEvent
 import wing.tree.multiplication.table.test.intent.TestState
 import wing.tree.multiplication.table.theme.pastelGreen
 import wing.tree.multiplication.table.theme.pastelRed
@@ -57,7 +57,7 @@ internal fun Question(
     question: Question,
     tag: TestState.Tag,
     focusRequester: FocusRequester,
-    onKeyboardAction: (TestEvent.Keyboard) -> Unit,
+    onKeyboardEvent: (KeyboardEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
     ElevatedCard(
@@ -133,7 +133,7 @@ internal fun Question(
                         ),
                         keyboardActions = KeyboardActions(
                             onNext = {
-                                onKeyboardAction(TestEvent.Keyboard.Next(index))
+                                onKeyboardEvent(KeyboardEvent.Next(index))
                             }
                         ),
                         singleLine = true

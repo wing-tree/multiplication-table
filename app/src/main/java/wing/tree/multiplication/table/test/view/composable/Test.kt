@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
@@ -20,7 +19,6 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.delay
 import wing.tree.multiplication.table.R
@@ -36,6 +34,7 @@ import wing.tree.multiplication.table.extension.property.`3`
 import wing.tree.multiplication.table.extension.property.hundreds
 import wing.tree.multiplication.table.extension.property.inc
 import wing.tree.multiplication.table.extension.property.paddingValues
+import wing.tree.multiplication.table.keyboard.intent.KeyboardEvent
 import wing.tree.multiplication.table.model.Question
 import wing.tree.multiplication.table.test.intent.TestEvent
 import wing.tree.multiplication.table.test.intent.TestState
@@ -63,30 +62,30 @@ internal fun Test(
         )
     }
 
-    val onKeyboardAction: (TestEvent.Keyboard) -> Unit = { keyboardAction ->
-            when (keyboardAction) {
-                is TestEvent.Keyboard.Next -> {
-                    if (test.count(Question::isAnswered) isLessThan NUMBER_OF_QUESTIONS) {
-                        var index = test.withIndex().indexOfFirst { (index, value) ->
-                            when {
-                                index isLessThanOrEqualTo keyboardAction.index -> false
-                                else -> value.isUnanswered
-                            }
+    val onKeyboardEvent: (KeyboardEvent) -> Unit = { keyboardEvent ->
+        when (keyboardEvent) {
+            is KeyboardEvent.Next -> {
+                if (test.count(Question::isAnswered) isLessThan NUMBER_OF_QUESTIONS) {
+                    var index = test.withIndex().indexOfFirst { (index, value) ->
+                        when {
+                            index isLessThanOrEqualTo keyboardEvent.index -> false
+                            else -> value.isUnanswered
                         }
-
-                        if (index `is` INVALID_INDEX) {
-                            index = test.indexOfFirst(Question::isUnanswered)
-                        }
-
-                        if (index not INVALID_INDEX) {
-                            focusRequesters[index].requestFocus()
-                        }
-                    } else {
-                        focusRequesters.last().requestFocus()
                     }
+
+                    if (index `is` INVALID_INDEX) {
+                        index = test.indexOfFirst(Question::isUnanswered)
+                    }
+
+                    if (index not INVALID_INDEX) {
+                        focusRequesters[index].requestFocus()
+                    }
+                } else {
+                    focusRequesters.last().requestFocus()
                 }
             }
         }
+    }
 
     val scrollState = rememberScrollState()
 
@@ -133,7 +132,7 @@ internal fun Test(
                     question = question,
                     tag = tag,
                     focusRequester = focusRequesters[index],
-                    onKeyboardAction = onKeyboardAction,
+                    onKeyboardEvent = onKeyboardEvent,
                     modifier = fillMaxWidth.padding(widthSizeClass.paddingValues)
                 )
             }
@@ -158,8 +157,6 @@ internal fun Test(
             Column(
                 modifier = fillMaxWidth.padding(vertical = Padding.small)
             ) {
-                val style = typography.bodyMedium.merge(fontWeight = FontWeight.Bold)
-
                 AnimatedVisibility(
                     visible = isInProgress.not(),
                     modifier = fillMaxWidth
@@ -167,13 +164,12 @@ internal fun Test(
                     Column {
                         MultiplicationTableButton(
                             onClick = {
-
+                                onEvent(TestEvent.Click.Home)
                             }
                         ) {
                             Text(
                                 text = stringResource(R.string.home),
-                                modifier = Modifier.align(Alignment.Center),
-                                style = style
+                                modifier = Modifier.align(Alignment.Center)
                             )
                         }
 
@@ -184,8 +180,7 @@ internal fun Test(
                         ) {
                             Text(
                                 text = stringResource(R.string.home),
-                                modifier = Modifier.align(Alignment.Center),
-                                style = style
+                                modifier = Modifier.align(Alignment.Center)
                             )
                         }
                     }
@@ -194,11 +189,11 @@ internal fun Test(
                 MultiplicationTableButton(
                     onClick = {
                         val event = when (state) {
-                            is TestState.Completed -> TestEvent.SolveAgain
+                            is TestState.Completed -> TestEvent.Click.SolveAgain
                             else -> {
                                 focusManager.clearFocus()
 
-                                TestEvent.Check
+                                TestEvent.Click.Check
                             }
                         }
 
@@ -213,8 +208,7 @@ internal fun Test(
                             isInProgress -> stringResource(id = R.string.check)
                             else -> stringResource(id = R.string.solve_again)
                         },
-                        modifier = Modifier.align(Alignment.Center),
-                        style = style
+                        modifier = Modifier.align(Alignment.Center)
                     )
                 }
             }

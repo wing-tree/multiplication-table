@@ -11,6 +11,7 @@ import wing.tree.multiplication.table.extension.property.`7`
 import wing.tree.multiplication.table.extension.property.hundreds
 import wing.tree.multiplication.table.model.Key
 import wing.tree.multiplication.table.model.Question
+import wing.tree.multiplication.table.test.intent.TestEvent
 import wing.tree.multiplication.table.test.intent.TestSideEffect
 import wing.tree.multiplication.table.test.intent.TestState
 import wing.tree.multiplication.table.test.model.Test
@@ -22,7 +23,13 @@ class TestViewModel(savedStateHandle: SavedStateHandle) : BaseViewModel<TestStat
 
     override val initialState: TestState = TestState.InProgress(Test(start = start, endInclusive = endInclusive))
 
-    fun check() {
+    fun onEvent(event: TestEvent) {
+        when (event) {
+            is TestEvent.Click -> onClick(event)
+        }
+    }
+
+    private fun check() {
         reduce {
             when (it) {
                 is TestState.InProgress -> when {
@@ -45,7 +52,18 @@ class TestViewModel(savedStateHandle: SavedStateHandle) : BaseViewModel<TestStat
         }
     }
 
-    fun solveAgain() {
+    private fun onClick(event: TestEvent.Click) {
+        when (event) {
+            TestEvent.Click.Check -> check()
+            TestEvent.Click.Home -> viewModelScope.launch {
+                postSideEffect(TestSideEffect.Navigate.ToHome)
+            }
+
+            TestEvent.Click.SolveAgain -> solveAgain()
+        }
+    }
+
+    private fun solveAgain() {
         viewModelScope.launch {
             reduce {
                 when (it) {

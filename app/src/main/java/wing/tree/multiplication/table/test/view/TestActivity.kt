@@ -18,14 +18,12 @@ import kotlinx.coroutines.delay
 import wing.tree.multiplication.table.R
 import wing.tree.multiplication.table.ad.InterstitialAdLoader
 import wing.tree.multiplication.table.ad.composable.ProgressDialog
-import wing.tree.multiplication.table.composable.noOperations
 import wing.tree.multiplication.table.dialog.intent.DialogState
 import wing.tree.multiplication.table.dialog.model.Dialog
 import wing.tree.multiplication.table.extension.property.`7`
 import wing.tree.multiplication.table.extension.property.hundreds
 import wing.tree.multiplication.table.extension.property.isNotFinishing
 import wing.tree.multiplication.table.extension.property.twice
-import wing.tree.multiplication.table.test.intent.TestEvent
 import wing.tree.multiplication.table.test.intent.TestSideEffect
 import wing.tree.multiplication.table.test.view.composable.Test
 import wing.tree.multiplication.table.test.view.composable.TopBar
@@ -33,14 +31,6 @@ import wing.tree.multiplication.table.test.view.model.TestViewModel
 import wing.tree.multiplication.table.theme.MultiplicationTableTheme
 
 class TestActivity : ComponentActivity() {
-    private val onEvent: (TestEvent) -> Unit = {
-        when (it) {
-            TestEvent.Check -> viewModel.check()
-            TestEvent.SolveAgain -> viewModel.solveAgain()
-            else -> noOperations
-        }
-    }
-
     private val viewModel by viewModels<TestViewModel>()
 
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
@@ -59,7 +49,7 @@ class TestActivity : ComponentActivity() {
 
                 viewModel.collectSideEffect { sideEffect ->
                     when (sideEffect) {
-                        TestSideEffect.Home -> if (isNotFinishing) {
+                        TestSideEffect.Navigate.ToHome -> if (isNotFinishing) {
                             finish()
                         }
 
@@ -93,7 +83,7 @@ class TestActivity : ComponentActivity() {
                     Test(
                         state = state,
                         widthSizeClass = widthSizeClass,
-                        onEvent = onEvent,
+                        onEvent = viewModel::onEvent,
                         modifier = Modifier.padding(it)
                     )
                 }
