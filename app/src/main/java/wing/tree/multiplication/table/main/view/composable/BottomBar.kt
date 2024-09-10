@@ -8,7 +8,7 @@ import wing.tree.multiplication.table.R
 import wing.tree.multiplication.table.composable.Icon
 import wing.tree.multiplication.table.main.intent.MainAction
 import wing.tree.multiplication.table.test.view.composable.FloatingActionButton
-import wing.tree.multiplication.table.theme.ivory
+import wing.tree.multiplication.table.theme.honeydew
 
 @Composable
 internal fun BottomBar(
@@ -43,6 +43,6 @@ internal fun BottomBar(
                 }
             )
         },
-        containerColor = ivory
+        containerColor = honeydew
     )
 }
